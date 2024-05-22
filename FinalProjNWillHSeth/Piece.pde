@@ -17,4 +17,15 @@ abstract class Piece{
     yPos = y;
     this.team = team;
   }
+  
+  public boolean move(int[] coordinate){
+    if(isValidPosition(coordinate)){
+      xPos = coordinate[0];
+      yPos = coordinate[1];
+      
+    }
+    return false;
+  }
+  
+  public abstract boolean isValidPosition(int[] coordinates);
 }
