@@ -23,6 +23,7 @@ abstract class Piece{
       xPos = coordinate[0];
       yPos = coordinate[1];
       
+      return true;
     }
     return false;
   }
