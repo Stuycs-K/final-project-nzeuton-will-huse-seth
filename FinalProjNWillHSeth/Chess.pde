@@ -26,4 +26,9 @@ class Chess{
     board[7][7] = new Rook(7,7,true);
     playerOneTurn = true;
   }
+  
+  public Piece getPiece(x,y){
+    return board[y][x];
+  }
+    
 }
