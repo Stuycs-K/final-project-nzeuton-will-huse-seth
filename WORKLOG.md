@@ -11,11 +11,11 @@ info
 info
 
 
-## GROUP MEMBER 2
+## Seth
 
-### date x
+### 5/22
 
-info
+I worked on the constructor for the chess class, which includes initializing all the pieces to their correct starting place on the board.
 
 ### date y
 
