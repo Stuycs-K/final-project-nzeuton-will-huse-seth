@@ -47,7 +47,11 @@ class Chess{
     Piece ret = board[y][x];
     board[y][x] = null;
     return ret;
-  }
+    }
+    
+    public void setPiece(int x, int y, Piece s){
+      board[y][x] = s;
+    }
   
   
   
