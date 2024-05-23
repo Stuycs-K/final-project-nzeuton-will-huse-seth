@@ -12,10 +12,7 @@ class Bishop extends Piece {
     super(x, y, team);
   }
   
-  public boolean isValidPosition(int[] coordinate){
-    if(0 <= coordinate[0] && coordinate[0] <= 7 && 0 <= coordinate[1] && coordinate[1] <= 7){
-      return (coordinate[0] - xPos == coordinate[1] - yPos);
-    }
-    return false;
+  public boolean withinPieceRange(int x, int y){
+      return (x - xPos == y - yPos);
   }
 }
