@@ -60,6 +60,21 @@ class Chess{
     if(initial.isValidPosition(x,y)){
       done = initial.move(x,y);
     }
+    if(!done){
+      nextTurn();
+    }
+  }
+  
+  public void nextTurn(){
+    if(playerOneTurn){
+      playerOneTurn = false;
+    }else{
+      playerOneTurn = true;
+    }
+  }
+  
+  public boolean playerOneTurn(){
+    return playerOneTurn;
   }
     
 }
