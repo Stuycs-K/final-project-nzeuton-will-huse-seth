@@ -1,10 +1,10 @@
 # Work Log
 
-## GROUP MEMBER 1
+## Will
 
-### date x
+### 5/22
 
-info
+Finished setting up Piece class, some methods still pending. Finished main function for Bishop class.
 
 ### date y
 
