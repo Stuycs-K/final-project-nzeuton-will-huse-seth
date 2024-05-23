@@ -1,6 +1,7 @@
 class Chess{
   private Piece[][] board;
   private boolean playerOneTurn;
+  private Piece initial;
   
   public Chess(){
     board = new Piece[8][8];
@@ -27,8 +28,34 @@ class Chess{
     playerOneTurn = true;
   }
   
-  public Piece getPiece(x,y){
+  public Piece getPiece(int x,int y){
     return board[y][x];
+  }
+  
+  public boolean turnBeg(int x, int y){
+  
+    if(board[y][x] != null){
+      initial = board[y][x];
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  
+  public Piece removePiece(int x,int y){
+    Piece ret = board[y][x];
+    board[y][x] = null;
+    return ret;
+  }
+  
+  
+  
+  public boolean turnEnd(int x, int y){
+    boolean done = false;
+    if(initial.isValidPosition(x,y)){
+      done = initial.move(x,y);
+    }
   }
     
 }
