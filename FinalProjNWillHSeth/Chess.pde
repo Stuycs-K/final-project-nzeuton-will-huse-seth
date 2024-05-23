@@ -34,7 +34,7 @@ class Chess{
   
   public boolean turnBeg(int x, int y){
   
-    if(board[y][x] != null){
+    if(board[y][x] != null && board[y][x].getTeam() == playerOneTurn){
       initial = board[y][x];
       return true;
     }
