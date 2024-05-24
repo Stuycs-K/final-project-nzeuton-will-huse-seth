@@ -3,6 +3,7 @@ class Chess{
   private Piece[][] board;
   private boolean playerOneTurn;
   private Piece initial;
+  private boolean done;
   
   public Chess(){
     board = new Piece[8][8];
@@ -27,6 +28,7 @@ class Chess{
     board[0][7] = new Rook(7,0,false);
     board[7][7] = new Rook(7,7,true);
     playerOneTurn = true;
+    done = false;
   }
   
   public Piece getPiece(int x,int y){
@@ -59,13 +61,20 @@ class Chess{
   
   
   public boolean turnEnd(int x, int y){
-    boolean done = false;
+    boolean doneN = false;
     if(initial.isValidPosition(x,y)){
-      done = initial.move(x,y);
+      doneN = initial.move(x,y);
     }
-    if(!done){
+    if(!doneN){
       nextTurn();
     }
+    else{
+      done = doneN;
+    }
+  }
+  
+  public boolean isDone(){
+    return done;
   }
   
   public void nextTurn(){

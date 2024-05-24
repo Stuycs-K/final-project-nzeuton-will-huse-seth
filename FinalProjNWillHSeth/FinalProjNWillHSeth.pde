@@ -12,8 +12,10 @@ void setup(){
       square(50+i*50,50+j*50,50);
     }
   }
+  
 }
 
 void draw(){
-  
+  if(game.isDone()){
+    
 }
