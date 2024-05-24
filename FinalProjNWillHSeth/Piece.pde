@@ -49,6 +49,7 @@ abstract class Piece{
     xPos = x;
     yPos = y;
     Chess.setPiece(x, y, originalPiece);
+    return pieceAtLoc.getType().equals("King");
   }
   public boolean isValidPositon(int x, int y){
     Piece pieceAt = Chess.getPiece(x, y);
