@@ -1,7 +1,7 @@
 class Bishop extends Piece {
   private int xPos, yPos;
   private boolean team;
-  
+  private String type = "Bishop";
   public Bishop(){
     super();
   }

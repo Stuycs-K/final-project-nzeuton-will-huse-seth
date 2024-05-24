@@ -1,7 +1,7 @@
 abstract class Piece{
   private int xPos, yPos;
   private boolean team;
-  
+  private String type;
   public Piece(){
     xPos = 0;
     yPos = 0;
@@ -26,6 +26,9 @@ abstract class Piece{
   public int getY(){
     return yPos;
   }
+  public String getType(){
+    return type;
+  }
   public ArrayList<int[]> getValidPositions(){
     ArrayList<int[]> res = new ArrayList<int[]>();
     for(int r = 0; r <= 7; ++r){
@@ -37,13 +40,14 @@ abstract class Piece{
     }
     return res;
   }
-  public void move(int x, int y){
+  public boolean move(int x, int y){
     Piece pieceAtLoc = Chess.getPiece(x, y);
     Piece originalPiece = Chess.removePiece(xPos, yPos);
     if(pieceAtLoc != null){
       Chess.remove(x, y);
     }
-      
+    xPos = x;
+    yPos = y;
     Chess.setPiece(x, y, originalPiece);
   }
   public boolean isValidPositon(int x, int y){
