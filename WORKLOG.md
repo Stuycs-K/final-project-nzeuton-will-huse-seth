@@ -1,21 +1,21 @@
 # Work Log
 
-## GROUP MEMBER 1
+## Will
 
-### date x
+### 5/22
 
-info
+Finished setting up Piece class, some methods still pending. Finished main function for Bishop class.
 
-### date y
+### 5/23
 
-info
+Optimized isValidPosition() + changed and created many new Piece accessor methods and created new Piece subclasses for Queen and Rook.
 
 
-## GROUP MEMBER 2
+## Seth
 
-### date x
+### 5/22
 
-info
+I worked on the constructor for the chess class, which includes initializing all the pieces to their correct starting place on the board.
 
 ### date y
 
