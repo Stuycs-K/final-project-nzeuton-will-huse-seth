@@ -1,8 +1,9 @@
-boolean begTurn;
+boolean begTurn = true;
+Chess game;
 
 void setup(){
   size(500,500);
-  Chess game = new Chess();
+  game = new Chess();
   for(int i = 0; i < 8; i++){
     for(int j = 0; j < 8; j++){
       if((i+j)%2 == 0){
@@ -46,4 +47,15 @@ void mouseClicked(){
   }
 }
 
-void displayPiece(int xP, int yP, boolean team, String type)
+void displayPiece(int xP, int yP, boolean team, String type){
+  int x = xP*50+50;
+  int y = yP*50+50;
+  if(team){
+    fill(255,255,255);
+    text(type,x,y);
+  }
+  else{
+    fill(0,0,0);
+    text(type,x,y);
+  }
+}

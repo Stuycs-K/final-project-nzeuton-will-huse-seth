@@ -62,8 +62,10 @@ class Chess{
   
   public boolean turnEnd(int x, int y){
     boolean doneN = false;
+    boolean r = false;
     if(initial.isValidPosition(x,y)){
       doneN = initial.move(x,y);
+      r = true;
     }
     if(!doneN){
       nextTurn();
@@ -71,6 +73,7 @@ class Chess{
     else{
       done = doneN;
     }
+    return r;
   }
   
   public boolean isDone(){
