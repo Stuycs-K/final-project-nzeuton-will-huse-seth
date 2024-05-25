@@ -6,9 +6,9 @@
 
 Finished setting up Piece class, some methods still pending. Finished main function for Bishop class.
 
-### date y
+### 5/23
 
-info
+Optimized isValidPosition() + changed and created many new Piece accessor methods and created new Piece subclasses for Queen and Rook.
 
 
 ## Seth

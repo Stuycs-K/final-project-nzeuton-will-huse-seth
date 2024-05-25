@@ -2,7 +2,9 @@ abstract class Piece{
   private int xPos, yPos;
   private boolean team;
   private String type;
+
   private Chess board;
+
   public Piece(){
     xPos = 0;
     yPos = 0;
@@ -13,12 +15,14 @@ abstract class Piece{
     yPos = y;
     team = true;
   }
+
   public Piece(int x, int y, boolean team, Chess board, String type){
     xPos = x;
     yPos = y;
     this.team = team;
     this.board = board;
     this.type = type;
+
   }
   public boolean getTeam(){
     return team;
@@ -36,7 +40,9 @@ abstract class Piece{
     ArrayList<int[]> res = new ArrayList<int[]>();
     for(int r = 0; r <= 7; ++r){
       for(int c = 0; c<= 7; ++c){
+
         if(isValidPosition(c, r)){
+
           res.add(new int[]{c, r});
         }
       }
@@ -44,6 +50,7 @@ abstract class Piece{
     return res;
   }
   public boolean move(int x, int y){
+
     Piece pieceAtLoc = board.getPiece(x, y);
     boolean end = false;
     if(pieceAtLoc != null){
@@ -60,6 +67,7 @@ abstract class Piece{
   }
   public boolean isValidPosition(int x, int y){
     Piece pieceAt = board.getPiece(x, y);
+
     if(pieceAt != null){
       if(pieceAt.getTeam() == getTeam()){
         return false;
