@@ -36,6 +36,9 @@ abstract class Piece{
   public String getType(){
     return type;
   }
+  public Chess getBoard(){
+    return board;
+  }
   public ArrayList<int[]> getValidPositions(){
     ArrayList<int[]> res = new ArrayList<int[]>();
     for(int r = 0; r <= 7; ++r){

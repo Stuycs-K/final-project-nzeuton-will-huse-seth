@@ -53,22 +53,30 @@ void mouseClicked(){
       for(int j = 0; j < 8; j++){
         if(game.getPiece(j,i) != null){
           Piece p = game.getPiece(j,i);
-          displayPiece(j,i,p.getTeam(),p.getType());
+          displayPiece(p);
         }
       }
     }
   }
 }
 
-void displayPiece(int xP, int yP, boolean team, String type){
+void displayPiece(Piece p){
+  String type = p.getType();
+  boolean team = p.getTeam();
+  int xP = p.getX();
+  int yP = p.getY();
+  
   int x = xP*50+50;
-  int y = yP*50+50;
+  int y = yP*50+50; 
+  
   if(team){
     fill(0,255,0);
-    text(type,x + 5,y + 25);
   }
   else{
     fill(color(255, 0, 0));
-    text(type,x + 5,y + 25);
   }
+  text(type,x + 5,y + 10);
+  text(xP + " " + yP, x + 10, y + 20);
+  text(team + "", x + 10, y + 30);
+  text(xP + " " + yP, x + 10, y + 40);
 }

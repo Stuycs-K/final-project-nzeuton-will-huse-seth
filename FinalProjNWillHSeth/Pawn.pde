@@ -1,7 +1,7 @@
 class Pawn extends Piece {
   private int xPos, yPos;
   private boolean team;
-
+  private Chess board;
   public Pawn(){
     super();
   }
@@ -11,45 +11,40 @@ class Pawn extends Piece {
 
   public Pawn(int x, int y, boolean team, Chess board){
     super(x, y, team, board, "Pawn");
-
   }
   
   public boolean withinPieceRange(int x, int y){
-     if(!team){
-       if(xPos != x){
-         if(xPos - x == 1 || xPos - x == -1){
-           if(yPos - y == 1){
-             return true;
-           }
-           return false;
-         }
-         return false;
-       }
-       if(yPos - y != 1){
-         if(yPos == 6 && yPos - y == 2){
-           return true;
-         }
-         return false;
-       }
-       return true;
-     } else{
-       if(xPos != x){
-         if(xPos - x == 1 || xPos - x == -1){
-           if(yPos - y == -1){
-             return true;
-           }
-           return false;
-         }
-         return false;
-       }
-       if(yPos - y != -1){
-         if(yPos == 1 && yPos - y == -2){
-           return true;
-         }
-         return false;
-       }
-       return true;
+    Piece pAtXY = getBoard().getPiece(x, y);
+    boolean team = getTeam();
+    int startRow;
+    boolean dir;
+    if(team){
+      if(y >= getY()){
+        return false;
+      }
+      startRow = 6;
+    } else{
+      if(y<= getY()){
+        return false;
+      }
+      startRow = 1;
+    }
+   int disX = Math.abs(getX() - x);
+   int disY = Math.abs(getY() - y);
+   if(disX != 0){
+     if(disX == 1 && disY == 1 && pAtXY != null && pAtXY.getTeam() != team){
+         return true;
+     }
+     return false;
+   }
+   if(disY == 1 && pAtXY == null){
+     return true;
+   }
+   if(disY == 2 && getY() == startRow && pAtXY == null){
+     return true;
+   }
+   return false;
+     
   }
-}
 
 }
