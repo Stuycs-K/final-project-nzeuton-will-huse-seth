@@ -8,8 +8,8 @@ class King extends Piece {
   public King(int x, int y){
     super(x, y);
   }
-  public King(int x, int y, boolean team){
-    super(x, y, team);
+  public King(int x, int y, boolean team, Chess board){
+    super(x, y, team, board);
   }
   
   public boolean withinPieceRange(int x, int y){

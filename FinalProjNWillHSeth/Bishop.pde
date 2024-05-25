@@ -8,8 +8,8 @@ class Bishop extends Piece {
   public Bishop(int x, int y){
     super(x, y);
   }
-  public Bishop(int x, int y, boolean team){
-    super(x, y, team);
+  public Bishop(int x, int y, boolean team, Chess board){
+    super(x, y, team, board);
   }
   
   public boolean withinPieceRange(int x, int y){

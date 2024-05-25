@@ -8,8 +8,8 @@ class Knight extends Piece {
   public Knight(int x, int y){
     super(x, y);
   }
-  public Knight(int x, int y, boolean team){
-    super(x, y, team);
+  public Knight(int x, int y, boolean team, Chess board){
+    super(x, y, team, board);
   }
   
   public boolean withinPieceRange(int x, int y){

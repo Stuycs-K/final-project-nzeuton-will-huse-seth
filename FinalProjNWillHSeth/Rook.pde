@@ -8,8 +8,8 @@ class Rook extends Piece {
   public Rook(int x, int y){
     super(x, y);
   }
-  public Rook(int x, int y, boolean team){
-    super(x, y, team);
+  public Rook(int x, int y, boolean team, Chess board){
+    super(x, y, team, board);
   }
   
   public boolean withinPieceRange(int x, int y){
