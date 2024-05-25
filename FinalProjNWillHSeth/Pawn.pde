@@ -15,7 +15,7 @@ class Pawn extends Piece {
   }
   
   public boolean withinPieceRange(int x, int y){
-     if(team){
+     if(!team){
        if(xPos != x){
          if(xPos - x == 1 || xPos - x == -1){
            if(yPos - y == 1){

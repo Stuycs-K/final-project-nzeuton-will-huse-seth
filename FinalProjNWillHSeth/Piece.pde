@@ -69,16 +69,20 @@ abstract class Piece{
     Piece pieceAt = board.getPiece(x, y);
 
     if(pieceAt != null){
+      System.out.println("There is a piece at " + x + " " + y);
       if(pieceAt.getTeam() == getTeam()){
+        System.out.println("This is a same color piece");
         return false;
       }
     }
     if(x == xPos && y == yPos){
+      System.out.println("Cannot move to itself");
       return false;
     }
     if(0 <= x && x <= 7 && 0 <= y && y <= 7){
       return withinPieceRange(x, y);
     }
+    System.out.println("Out of board bounds");
     return false;
   }
   public abstract boolean withinPieceRange(int x, int y);

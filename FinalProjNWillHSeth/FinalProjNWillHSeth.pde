@@ -64,11 +64,11 @@ void displayPiece(int xP, int yP, boolean team, String type){
   int x = xP*50+50;
   int y = yP*50+50;
   if(team){
-    fill(255,255,255);
-    text(type,x,y);
+    fill(0,255,0);
+    text(type,x + 5,y + 25);
   }
   else{
-    fill(0,0,0);
-    text(type,x,y);
+    fill(color(255, 0, 0));
+    text(type,x + 5,y + 25);
   }
 }
