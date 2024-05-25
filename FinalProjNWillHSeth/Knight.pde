@@ -15,8 +15,8 @@ class Knight extends Piece {
   }
   
   public boolean withinPieceRange(int x, int y){
-     int xDis = xPos - x;
-     int yDis = yPos - y;
+     int xDis = getX() - x;
+     int yDis = getY() - y;
      if(xDis == 1 || xDis == -1){
        if(yDis == 2 || yDis == -2){
          return true;
