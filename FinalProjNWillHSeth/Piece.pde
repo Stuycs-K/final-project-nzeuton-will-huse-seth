@@ -45,6 +45,10 @@ abstract class Piece{
   }
   public boolean move(int x, int y){
     Piece pieceAtLoc = board.getPiece(x, y);
+    boolean end = false;
+    if(pieceAtLoc != null){
+      end = pieceAtLoc.getType().equals("King");
+    }
     Piece originalPiece = board.removePiece(xPos, yPos);
     if(pieceAtLoc != null){
       board.removePiece(x, y);
@@ -52,7 +56,7 @@ abstract class Piece{
     xPos = x;
     yPos = y;
     board.setPiece(x, y, originalPiece);
-    return pieceAtLoc.getType().equals("King");
+    return end;
   }
   public boolean isValidPosition(int x, int y){
     Piece pieceAt = board.getPiece(x, y);
