@@ -15,6 +15,6 @@ class Queen extends Piece {
   }
   
   public boolean withinPieceRange(int x, int y){
-    return ((x - xPos == y - yPos) || (x == xPos || y == yPos));
+    return ((x - getX() == y - getY()) || (x == getX() || y == getY()));
   }
 }

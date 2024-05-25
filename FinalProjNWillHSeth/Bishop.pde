@@ -15,6 +15,6 @@ class Bishop extends Piece {
   }
   
   public boolean withinPieceRange(int x, int y){
-      return (x - xPos == y - yPos);
+      return (Math.abs(x - getX()) == Math.abs(y - getY()));
   }
 }
