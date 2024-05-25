@@ -25,6 +25,10 @@ I worked on thinking through the logic with Will, which involved writing new acc
 
 I worked on more methods in the Chess class that better link it with Piece and then I started working on setup and mouseClicked.
 
+### 5/25
+
+I finished writing the game mechanics. Then, I merged my code so far with Will's and dealt with debugging and merge errors until the pieces showed up on the board in the correct spot. Some pieces move around, but not correctly yet.
+
 ### date y
 
 info
