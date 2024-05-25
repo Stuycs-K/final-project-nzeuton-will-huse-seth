@@ -1,15 +1,17 @@
 class Knight extends Piece {
   private int xPos, yPos;
   private boolean team;
-  private String type = "Knight";
+
   public Knight(){
     super();
   }
   public Knight(int x, int y){
     super(x, y);
   }
-  public Knight(int x, int y, boolean team){
-    super(x, y, team);
+
+  public Knight(int x, int y, boolean team, Chess board){
+    super(x, y, team, board,"Knight");
+
   }
   
   public boolean withinPieceRange(int x, int y){
