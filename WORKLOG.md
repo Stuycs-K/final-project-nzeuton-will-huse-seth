@@ -6,9 +6,9 @@
 
 Finished setting up Piece class, some methods still pending. Finished main function for Bishop class.
 
-### date y
+### 5/23
 
-info
+Optimized isValidPosition() + changed and created many new Piece accessor methods and created new Piece subclasses for Queen and Rook.
 
 
 ## Seth
@@ -16,6 +16,18 @@ info
 ### 5/22
 
 I worked on the constructor for the chess class, which includes initializing all the pieces to their correct starting place on the board.
+
+### 5/23
+
+I worked on thinking through the logic with Will, which involved writing new accessor methods and figuring out more efficient ways to implement this. I also wrote more of the chess class, including the methods that modify the board and facilitate the turns.
+
+### 5/24
+
+I worked on more methods in the Chess class that better link it with Piece and then I started working on setup and mouseClicked.
+
+### 5/25
+
+I finished writing the game mechanics. Then, I merged my code so far with Will's and dealt with debugging and merge errors until the pieces showed up on the board in the correct spot. Some pieces move around, but not correctly yet.
 
 ### date y
 
