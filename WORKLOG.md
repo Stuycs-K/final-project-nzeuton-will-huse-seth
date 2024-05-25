@@ -21,6 +21,10 @@ I worked on the constructor for the chess class, which includes initializing all
 
 I worked on thinking through the logic with Will, which involved writing new accessor methods and figuring out more efficient ways to implement this. I also wrote more of the chess class, including the methods that modify the board and facilitate the turns.
 
+### 5/24
+
+I worked on more methods in the Chess class that better link it with Piece and then I started working on setup and mouseClicked.
+
 ### date y
 
 info
