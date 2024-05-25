@@ -10,6 +10,13 @@ Finished setting up Piece class, some methods still pending. Finished main funct
 
 Optimized isValidPosition() + changed and created many new Piece accessor methods and created new Piece subclasses for Queen and Rook.
 
+### 5/24
+
+Created the logic for moving pawns and knights
+
+### 5/25
+
+Fixed the logic for moving pawns, fixed a bug present in all Piece subclasses
 
 ## Seth
 

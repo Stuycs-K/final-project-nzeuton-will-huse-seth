@@ -25,6 +25,8 @@ void draw(){
 
 void mouseClicked(){
   background(150);
+  fill(255, 255, 255);
+  text(game.playerOneTurn() + "", 0, 20);
   for(int i = 0; i < 8; i++){
     for(int j = 0; j < 8; j++){
       if((i+j)%2 == 0){
@@ -58,6 +60,8 @@ void mouseClicked(){
       }
     }
   }
+  fill(255, 255, 255);
+  text(game.playerOneTurn() + "", 0, 20);
 }
 
 void displayPiece(Piece p){
@@ -79,4 +83,6 @@ void displayPiece(Piece p){
   text(xP + " " + yP, x + 10, y + 20);
   text(team + "", x + 10, y + 30);
   text(xP + " " + yP, x + 10, y + 40);
+  
+  
 }
