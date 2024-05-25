@@ -1,4 +1,4 @@
-/*
+
 class Chess{
   private Piece[][] board;
   private boolean playerOneTurn;
@@ -90,4 +90,3 @@ class Chess{
   }
     
 }
-*/

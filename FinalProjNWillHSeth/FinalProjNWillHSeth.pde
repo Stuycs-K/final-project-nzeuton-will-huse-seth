@@ -35,5 +35,15 @@ void mouseClicked(){
         begTurn = true;
       }
     }
+    for(int i = 0; i < 8; i++){
+      for(int j = 0; j < 8; j++){
+        if(game.getPiece(j,i) != null){
+          Piece p = game.getPiece(j,i);
+          displayPiece(j,i,p.getTeam(),p.getType());
+        }
+      }
+    }
   }
 }
+
+void displayPiece(int xP, int yP, boolean team, String type)
