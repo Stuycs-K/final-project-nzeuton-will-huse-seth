@@ -13,11 +13,12 @@ abstract class Piece{
     yPos = y;
     team = true;
   }
-  public Piece(int x, int y, boolean team, Chess board){
+  public Piece(int x, int y, boolean team, Chess board, String type){
     xPos = x;
     yPos = y;
     this.team = team;
     this.board = board;
+    this.type = type;
   }
   public boolean getTeam(){
     return team;

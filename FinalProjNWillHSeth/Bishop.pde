@@ -1,7 +1,6 @@
 class Bishop extends Piece {
   private int xPos, yPos;
   private boolean team;
-  private String type = "Bishop";
   public Bishop(){
     super();
   }
@@ -9,7 +8,7 @@ class Bishop extends Piece {
     super(x, y);
   }
   public Bishop(int x, int y, boolean team, Chess board){
-    super(x, y, team, board);
+    super(x, y, team, board, "Bishop");
   }
   
   public boolean withinPieceRange(int x, int y){

@@ -1,7 +1,6 @@
 class Rook extends Piece {
   private int xPos, yPos;
   private boolean team;
-  private String type = "Rook";
   public Rook(){
     super();
   }
@@ -9,7 +8,7 @@ class Rook extends Piece {
     super(x, y);
   }
   public Rook(int x, int y, boolean team, Chess board){
-    super(x, y, team, board);
+    super(x, y, team, board, "Rook");
   }
   
   public boolean withinPieceRange(int x, int y){
