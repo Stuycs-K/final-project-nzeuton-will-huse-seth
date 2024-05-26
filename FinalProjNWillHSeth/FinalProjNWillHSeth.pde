@@ -11,7 +11,7 @@ void setup(){
         fill(255,255,255);
       }
       else{
-        fill(0,0,0);
+        fill(0,255,0);
       }
       square(50+i*50,50+j*50,50);
     }
@@ -26,14 +26,15 @@ void draw(){
 void mouseClicked(){
   background(150);
   fill(255, 255, 255);
-  text(game.playerOneTurn() + "", 0, 20);
+  if(game.playerOneTurn()) text("white turn", 0, 20);
+  else text("black turn", 0, 20);
   for(int i = 0; i < 8; i++){
     for(int j = 0; j < 8; j++){
       if((i+j)%2 == 0){
         fill(255,255,255);
       }
       else{
-        fill(0,0,0);
+        fill(0,255,0);
       }
       square(50+i*50,50+j*50,50);
     }
@@ -49,6 +50,8 @@ void mouseClicked(){
           fill(0,0,255);
           square(50+pos[0]*50,50+pos[1]*50,50);
         }
+        fill(255,127,0);
+        square(50*x+50,50*y+50,50);
       }
     }
     else{
@@ -69,19 +72,28 @@ void mouseClicked(){
   fill(0,0,0);
   square(0,0,50);
   fill(255, 255, 255);
-  text(game.playerOneTurn() + "", 0, 20);
+  if(game.playerOneTurn()) text("white turn", 0, 20);
+  else text("black turn", 0, 20);
 }
 
 void displayPiece(Piece p){
+  /*
   String type = p.getType();
-  boolean team = p.getTeam();
+  String team;
+  if(p.getTeam()){
+    team = "white";
+  }
+  else{
+    team = "black";
+  }
+  */
   int xP = p.getX();
   int yP = p.getY();
   
   int x = xP*50+50;
   int y = yP*50+50; 
-  
-  if(team){
+  /*
+  if(team.equals("white")){
     fill(0,255,0);
   }
   else{
@@ -91,6 +103,59 @@ void displayPiece(Piece p){
   text(xP + " " + yP, x + 10, y + 20);
   text(team + "", x + 10, y + 30);
   text(xP + " " + yP, x + 10, y + 40);
+  */
+  if(p.getTeam()){
+    if(p.getType().equals("Bishop")){
+      PImage piece = loadImage("Chess_blt60.png");
+      image(piece,x,y,50,50);
+    }
+    if(p.getType().equals("King")){
+      PImage piece = loadImage("Chess_klt60.png");
+      image(piece,x,y,50,50);
+    }
+    if(p.getType().equals("Knight")){
+      PImage piece = loadImage("Chess_nlt60.png");
+      image(piece,x,y,50,50);
+    }
+    if(p.getType().equals("Pawn")){
+      PImage piece = loadImage("Chess_plt60.png");
+      image(piece,x,y,50,50);
+    }
+    if(p.getType().equals("Queen")){
+      PImage piece = loadImage("Chess_qlt60.png");
+      image(piece,x,y,50,50);
+    }
+    if(p.getType().equals("Rook")){
+      PImage piece = loadImage("Chess_rlt60.png");
+      image(piece,x,y,50,50);
+    }
+  }
+  else{
+    if(p.getType().equals("Bishop")){
+      PImage piece = loadImage("Chess_bdt60.png");
+      image(piece,x,y,50,50);
+    }
+    if(p.getType().equals("King")){
+      PImage piece = loadImage("Chess_kdt60.png");
+      image(piece,x,y,50,50);
+    }
+    if(p.getType().equals("Knight")){
+      PImage piece = loadImage("Chess_ndt60.png");
+      image(piece,x,y,50,50);
+    }
+    if(p.getType().equals("Pawn")){
+      PImage piece = loadImage("Chess_pdt60.png");
+      image(piece,x,y,50,50);
+    }
+    if(p.getType().equals("Queen")){
+      PImage piece = loadImage("Chess_qdt60.png");
+      image(piece,x,y,50,50);
+    }
+    if(p.getType().equals("Rook")){
+      PImage piece = loadImage("Chess_rdt60.png");
+      image(piece,x,y,50,50);
+    }
+  }
   
   
 }
