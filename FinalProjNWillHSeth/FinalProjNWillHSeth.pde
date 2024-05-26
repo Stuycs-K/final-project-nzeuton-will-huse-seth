@@ -59,6 +59,7 @@ void mouseClicked(){
         begTurn = true;
       }
       begTurn = true;
+      
     }
     for(int i = 0; i < 8; i++){
       for(int j = 0; j < 8; j++){
@@ -68,12 +69,61 @@ void mouseClicked(){
         }
       }
     }
+    if(game.isDone()){
+        done();
+      }
+  }
+  else{
+    done();
   }
   fill(0,0,0);
   square(0,0,50);
   fill(255, 255, 255);
   if(game.playerOneTurn()) text("white turn", 0, 20);
   else text("black turn", 0, 20);
+}
+
+void done(){
+  fill(255,255,255);
+    rect(100,100,300,200);
+    fill(0,0,0);
+    textSize(50);
+    if(game.playerOneTurn()) text("White Wins!",130,150);
+    else text("Black Wins!",130,150);
+    textSize(30);
+    text("Press any key",170,200);
+    text("to restart.",180,250);
+    textSize(12);
+}
+
+void keyPressed(){
+  if(game != null && game.isDone()){
+    game = new Chess();
+    for(int i = 0; i < 8; i++){
+      for(int j = 0; j < 8; j++){
+        if((i+j)%2 == 0){
+          fill(255,255,255);
+        }
+        else{
+          fill(0,255,0);
+        }
+        square(50+i*50,50+j*50,50);
+      }
+    }
+    for(int i = 0; i < 8; i++){
+      for(int j = 0; j < 8; j++){
+        if(game.getPiece(j,i) != null){
+          Piece p = game.getPiece(j,i);
+          displayPiece(p);
+        }
+      }
+    }
+    fill(0,0,0);
+  square(0,0,50);
+  fill(255, 255, 255);
+  text("white turn", 0, 20);
+  }
+  
 }
 
 void displayPiece(Piece p){
