@@ -79,7 +79,7 @@ void mouseClicked(){
     done();
   }
   fill(0,0,0);
-  square(0,0,50);
+  square(0,0,SQUARE_SIZE);
   fill(255, 255, 255);
   if(game.playerOneTurn()) text("white turn", 0, 20);
   else text("black turn", 0, 20);
@@ -112,7 +112,7 @@ void keyPressed(){
       }
     }
     fill(0,0,0);
-  square(0,0,50);
+  square(0,0,SQUARE_SIZE);
   fill(255, 255, 255);
   text("white turn", 0, 20);
   }
@@ -133,8 +133,8 @@ void displayPiece(Piece p){
   int xP = p.getX();
   int yP = p.getY();
   
-  int x = xP*50+50;
-  int y = yP*50+50; 
+  int x = xP*SQUARE_SIZE+SQUARE_SIZE;
+  int y = yP*SQUARE_SIZE+SQUARE_SIZE; 
   /*
   if(team.equals("white")){
     fill(0,255,0);
@@ -147,58 +147,6 @@ void displayPiece(Piece p){
   text(team + "", x + 10, y + 30);
   text(xP + " " + yP, x + 10, y + 40);
   */
-  if(p.getTeam()){
-    if(p.getType().equals("Bishop")){
-      PImage piece = loadImage("Chess_blt60.png");
-      image(piece,x,y,50,50);
-    }
-    if(p.getType().equals("King")){
-      PImage piece = loadImage("Chess_klt60.png");
-      image(piece,x,y,50,50);
-    }
-    if(p.getType().equals("Knight")){
-      PImage piece = loadImage("Chess_nlt60.png");
-      image(piece,x,y,50,50);
-    }
-    if(p.getType().equals("Pawn")){
-      PImage piece = loadImage("Chess_plt60.png");
-      image(piece,x,y,50,50);
-    }
-    if(p.getType().equals("Queen")){
-      PImage piece = loadImage("Chess_qlt60.png");
-      image(piece,x,y,50,50);
-    }
-    if(p.getType().equals("Rook")){
-      PImage piece = loadImage("Chess_rlt60.png");
-      image(piece,x,y,50,50);
-    }
-  }
-  else{
-    if(p.getType().equals("Bishop")){
-      PImage piece = loadImage("Chess_bdt60.png");
-      image(piece,x,y,50,50);
-    }
-    if(p.getType().equals("King")){
-      PImage piece = loadImage("Chess_kdt60.png");
-      image(piece,x,y,50,50);
-    }
-    if(p.getType().equals("Knight")){
-      PImage piece = loadImage("Chess_ndt60.png");
-      image(piece,x,y,50,50);
-    }
-    if(p.getType().equals("Pawn")){
-      PImage piece = loadImage("Chess_pdt60.png");
-      image(piece,x,y,50,50);
-    }
-    if(p.getType().equals("Queen")){
-      PImage piece = loadImage("Chess_qdt60.png");
-      image(piece,x,y,50,50);
-    }
-    if(p.getType().equals("Rook")){
-      PImage piece = loadImage("Chess_rdt60.png");
-      image(piece,x,y,50,50);
-    }
-  }
-  
+  image(p.getImage(p.getTeam()), x, y, SQUARE_SIZE, SQUARE_SIZE);
   
 }

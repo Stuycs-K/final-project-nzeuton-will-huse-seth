@@ -80,5 +80,6 @@ abstract class Piece{
     return false;
   }
   public abstract boolean withinPieceRange(int x, int y);
+  public abstract PImage getImage(boolean team);
   
 }

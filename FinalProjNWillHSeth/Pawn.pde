@@ -46,5 +46,9 @@ class Pawn extends Piece {
    return false;
      
   }
+  public PImage getImage(boolean t){
+    PImage piece = t ? loadImage("Chess_plt60.png") : loadImage("Chess_pdt60.png");
+    return piece;
+  }
 
 }
