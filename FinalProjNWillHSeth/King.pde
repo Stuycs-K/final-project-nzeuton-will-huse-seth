@@ -15,6 +15,6 @@ class King extends Piece {
   }
   
   public boolean withinPieceRange(int x, int y){
-    return (x - getX() <= 1 && y - getY() <= 1);
+    return (Math.abs(x - getX()) <= 1 && Math.abs(y - getY()) <= 1);
   }
 }
