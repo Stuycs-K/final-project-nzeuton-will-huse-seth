@@ -38,7 +38,7 @@ I finished writing the game mechanics. Then, I merged my code so far with Will's
 
 ### 5/26
 
-I fixed a turn skip error. Then, I enabled a feature where a player can see valid positions a piece can go to once they select it. Then, I fixed valid position code for King, Rook, Bishop, and Queen. This should be a working bare bones version of Chess now.
+I fixed a turn skip error. Then, I enabled a feature where a player can see valid positions a piece can go to once they select it. Then, I fixed valid position code for King, Rook, Bishop, and Queen. I also added images for all the pieces. This should be a working bare bones version of Chess now.
 
 ### date y
 
