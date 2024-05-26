@@ -61,8 +61,6 @@ void mouseClicked(){
       }
     }
   }
-  fill(0,0,0);
-  square(0,0,50);
   fill(255, 255, 255);
   text(game.playerOneTurn() + "", 0, 20);
 }
