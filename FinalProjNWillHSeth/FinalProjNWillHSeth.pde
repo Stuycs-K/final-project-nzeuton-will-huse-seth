@@ -44,6 +44,11 @@ void mouseClicked(){
     if(begTurn && x >=0 && x < 8 && y >= 0 && y < 8){
       if(game.turnBeg(x,y)){
         begTurn = false;
+        ArrayList<int[]> validPos = game.getPiece(x,y).getValidPositions();
+        for(int[] pos : validPos){
+          fill(0,0,255);
+          square(50+pos[0]*50,50+pos[1]*50,50);
+        }
       }
     }
     else{
