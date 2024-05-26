@@ -36,6 +36,10 @@ I worked on more methods in the Chess class that better link it with Piece and t
 
 I finished writing the game mechanics. Then, I merged my code so far with Will's and dealt with debugging and merge errors until the pieces showed up on the board in the correct spot. Some pieces move around, but not correctly yet.
 
+### 5/26
+
+I fixed a turn skip error. Then, I enabled a feature where a player can see valid positions a piece can go to once they select it. Then, I fixed valid position code for King, Rook, Bishop, and Queen. This should be a working bare bones version of Chess now.
+
 ### date y
 
 info
