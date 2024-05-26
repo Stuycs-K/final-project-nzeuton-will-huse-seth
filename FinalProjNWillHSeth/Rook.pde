@@ -43,4 +43,8 @@ class Rook extends Piece {
       return false;
     }
   }
+  public PImage getImage(boolean t){
+    PImage piece = t ? loadImage("Chess_rlt60.png") : loadImage("Chess_rdt60.png");
+    return piece;
+  }
 }
