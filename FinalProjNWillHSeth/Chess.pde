@@ -69,7 +69,7 @@ class Chess{
     } else{
       System.out.println("Position: " + x + ", " + y + " is not valid for " + initial.getType() + " at " + initial.getX() + " " + initial.getY());
     }
-    if(!doneN){
+    if(!doneN && r){
       nextTurn();
     }
     else{
