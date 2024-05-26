@@ -112,14 +112,8 @@ void keyPressed(){
         square(50+i*50,50+j*50,50);
       }
     }
-    for(int i = 0; i < 8; i++){
-      for(int j = 0; j < 8; j++){
-        if(game.getPiece(j,i) != null){
-          Piece p = game.getPiece(j,i);
-          displayPiece(p);
-        }
-      }
-    }
+    drawSquares(SQUARE_SIZE, WHITE, BLACK);
+  begTurn = true;
     fill(0,0,0);
   square(0,0,50);
   fill(255, 255, 255);
