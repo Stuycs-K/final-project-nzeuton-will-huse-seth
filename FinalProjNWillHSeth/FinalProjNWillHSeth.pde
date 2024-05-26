@@ -101,19 +101,16 @@ void done(){
 void keyPressed(){
   if(game != null && game.isDone()){
     game = new Chess();
-    for(int i = 0; i < 8; i++){
-      for(int j = 0; j < 8; j++){
-        if((i+j)%2 == 0){
-          fill(255,255,255);
-        }
-        else{
-          fill(0,255,0);
-        }
-        square(50+i*50,50+j*50,50);
-      }
-    }
     drawSquares(SQUARE_SIZE, WHITE, BLACK);
   begTurn = true;
+  for(int i = 0; i < 8; i++){
+      for(int j = 0; j < 8; j++){
+        if(game.getPiece(j,i) != null){
+          Piece p = game.getPiece(j,i);
+          displayPiece(p);
+        }
+      }
+    }
     fill(0,0,0);
   square(0,0,50);
   fill(255, 255, 255);
