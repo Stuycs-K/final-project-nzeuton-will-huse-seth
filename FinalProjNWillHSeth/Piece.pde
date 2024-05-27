@@ -73,8 +73,32 @@ abstract class Piece{
     if(pieceAt != null && pieceAt.getTeam() == getTeam()){
       return false;
     }
+
     if(0 <= x && x <= 7 && 0 <= y && y <= 7){
-      return withinPieceRange(x, y);
+      if(withinPieceRange(x, y)){
+        Piece original = board.removePiece(this.getX(), this.getY());
+        board.setPiece(x, y, this);
+        if(board.inCheck(team)){
+          board.removePiece(x, y);
+          if(pieceAt != null){
+            board.setPiece(x, y, pieceAt);
+          }
+          board.setPiece(original.getX(), original.getY(), original);
+          return false;
+        }
+        else{
+          board.removePiece(x, y);
+          if(pieceAt != null){
+            board.setPiece(x, y, pieceAt);
+          }
+          board.setPiece(original.getX(), original.getY(), original);
+          return true;
+        }
+                
+        
+      
+      }
+      return false;
     }
     System.out.println("Out of board bounds");
     return false;
