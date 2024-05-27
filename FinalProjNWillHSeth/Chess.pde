@@ -93,5 +93,26 @@ class Chess{
   public boolean playerOneTurn(){
     return playerOneTurn;
   }
-    
+  public boolean inCheck(boolean team){
+     Piece king = new King();
+     for(int r = 0; r < 8; ++r){
+       for(int c = 0; c<8; ++c){
+         Piece curr = getPiece(c, r);
+         if(curr != null && curr.getTeam() == team && curr.getType().equals("King")){
+           king = curr;
+           break;
+         }
+       }
+     }
+     
+     for(int r = 0; r < 8; ++r){
+       for(int c = 0; c<8; ++c){
+         Piece curr = getPiece(c, r);
+         if(curr != null && curr.getTeam() != team && curr.isValidPosition(king.getX(), king.getY())){
+           return true;
+         }
+       }
+     }
+     return false;
+  }
 }
