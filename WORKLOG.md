@@ -18,6 +18,10 @@ Created the logic for moving pawns and knights
 
 Fixed the logic for moving pawns, fixed a bug present in all Piece subclasses
 
+### 5/26
+
+I changed the color pallette of our chess game, and improved the way we retreive the images of each piece. I began working on creating check detection, which almost entirely works.
+
 ## Seth
 
 ### 5/22
