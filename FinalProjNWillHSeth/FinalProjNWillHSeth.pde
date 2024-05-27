@@ -79,10 +79,13 @@ void mouseClicked(){
     done();
   }
   fill(0,0,0);
-  square(0,0,SQUARE_SIZE);
+  rect(0,0,100, SQUARE_SIZE);
   fill(255, 255, 255);
   if(game.playerOneTurn()) text("white turn", 0, 20);
   else text("black turn", 0, 20);
+  
+  text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
+  text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
 }
 
 void done(){

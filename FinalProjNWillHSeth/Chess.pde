@@ -4,7 +4,7 @@ class Chess{
   private boolean playerOneTurn;
   private Piece initial;
   private boolean done;
-  
+
   public Chess(){
     board = new Piece[8][8];
     for(int i = 0; i < 8; i++){
@@ -34,7 +34,7 @@ class Chess{
   public Piece getPiece(int x,int y){
     return board[y][x];
   }
-  
+ 
   public boolean turnBeg(int x, int y){
   if(x < 0 || x > 7 || y < 0 || y > 7){
     return false;
@@ -95,6 +95,7 @@ class Chess{
   }
   public boolean inCheck(boolean team){
      Piece king = new King();
+     
      for(int r = 0; r < 8; ++r){
        for(int c = 0; c<8; ++c){
          Piece curr = getPiece(c, r);
@@ -108,7 +109,7 @@ class Chess{
      for(int r = 0; r < 8; ++r){
        for(int c = 0; c<8; ++c){
          Piece curr = getPiece(c, r);
-         if(curr != null && curr.getTeam() != team && curr.isValidPosition(king.getX(), king.getY())){
+         if(curr != null && curr.getTeam() != team && curr.withinPieceRange(king.getX(), king.getY())){
            return true;
          }
        }

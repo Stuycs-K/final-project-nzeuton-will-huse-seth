@@ -33,6 +33,16 @@ abstract class Piece{
   public int getY(){
     return yPos;
   }
+  public int setX(int x){
+    int temp = xPos;
+    xPos = x;
+    return temp;
+  }
+  public int setY(int y){
+    int temp = yPos;
+    yPos = y;
+    return temp;
+  }
   public String getType(){
     return type;
   }
@@ -68,41 +78,42 @@ abstract class Piece{
     board.setPiece(x, y, originalPiece);
     return end;
   }
-  public boolean isValidPosition(int x, int y){
-    Piece pieceAt = board.getPiece(x, y);
-    if(pieceAt != null && pieceAt.getTeam() == getTeam()){
-      return false;
+  public boolean isValidPosition(int x, int y) {
+    if (x < 0 || x > 7 || y < 0 || y > 7) {
+        System.out.println("Out of board bounds");
+        return false;
     }
 
-    if(0 <= x && x <= 7 && 0 <= y && y <= 7){
-      if(withinPieceRange(x, y)){
-        Piece original = board.removePiece(this.getX(), this.getY());
-        board.setPiece(x, y, this);
-        if(board.inCheck(team)){
-          board.removePiece(x, y);
-          if(pieceAt != null){
-            board.setPiece(x, y, pieceAt);
-          }
-          board.setPiece(original.getX(), original.getY(), original);
-          return false;
-        }
-        else{
-          board.removePiece(x, y);
-          if(pieceAt != null){
-            board.setPiece(x, y, pieceAt);
-          }
-          board.setPiece(original.getX(), original.getY(), original);
-          return true;
-        }
-                
-        
-      
-      }
-      return false;
+    Piece pieceAt = board.getPiece(x, y);
+    if (pieceAt != null && (pieceAt.getTeam() == getTeam() || pieceAt.getType().equals("King"))) {
+        return false;
     }
-    System.out.println("Out of board bounds");
+
+    if (withinPieceRange(x, y)) {
+      int originalX = getX();
+      int originalY = getY();
+      Piece pieceAtDestination = getBoard().getPiece(x, y);
+  
+      Piece originalPiece = getBoard().removePiece(originalX, originalY);
+      setX(x);
+      setY(y);
+      
+      getBoard().setPiece(x, y, this);
+  
+      boolean isInCheck = getBoard().inCheck(getTeam());
+  
+      setX(originalX);
+      setY(originalY);
+      getBoard().setPiece(originalX, originalY, originalPiece);
+      getBoard().setPiece(x, y, pieceAtDestination);
+  
+      return !isInCheck;
+    }
+
     return false;
-  }
+}
+
+
   public abstract boolean withinPieceRange(int x, int y);
   public abstract PImage getImage(boolean team);
   
