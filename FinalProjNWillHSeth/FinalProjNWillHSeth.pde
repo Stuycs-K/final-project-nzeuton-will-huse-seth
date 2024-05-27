@@ -1,6 +1,6 @@
 boolean begTurn = true;
 Chess game;
-int SQUARE_SIZE = 10;
+int SQUARE_SIZE = 50;
 color WHITE = color(236,236,214);
 color BLACK = color(116,148,84);
 color VALID_HIGHLIGHT = color(0, 0, 255, 100);

@@ -116,4 +116,17 @@ class Chess{
      }
      return false;
   }
+  public boolean inMate(boolean team){
+   int moves = 0;
+    for(int r = 0; r<8; ++r){
+     for(int c = 0; c<8; ++c){
+       Piece p = getPiece(c, r);
+       if(p != null && p.getTeam() == team){
+         moves += p.getValidPositions().size();
+       }  
+     }
+    }
+    return moves == 0;
+  }
+  
 }

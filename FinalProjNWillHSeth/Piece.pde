@@ -76,7 +76,7 @@ abstract class Piece{
     xPos = x;
     yPos = y;
     board.setPiece(x, y, originalPiece);
-    return end;
+    return getBoard().inMate(!getTeam());
   }
   public boolean isValidPosition(int x, int y) {
     if (x < 0 || x > 7 || y < 0 || y > 7) {
