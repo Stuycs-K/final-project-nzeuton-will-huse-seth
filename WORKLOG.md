@@ -25,6 +25,10 @@ I changed the color pallette of our chess game, and improved the way we retreive
 =======
 I changed the color pallette of our chess game, and improved the way we retreive the images of each piece. I began working on creating check detection, which almost entirely works. I also replaced some repetitive code with helper methods and created more variables to clean up the main program.
 >>>>>>> main
+
+### 5/27
+I added check detection and added checkmate detection. We should now have a completed MVP.
+
 ## Seth
 
 ### 5/22
