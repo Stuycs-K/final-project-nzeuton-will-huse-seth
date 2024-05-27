@@ -1,6 +1,6 @@
 boolean begTurn = true;
 Chess game;
-int SQUARE_SIZE = 50;
+int SQUARE_SIZE = 10;
 color WHITE = color(236,236,214);
 color BLACK = color(116,148,84);
 color VALID_HIGHLIGHT = color(0, 0, 255, 100);
@@ -39,8 +39,8 @@ void mouseClicked(){
   else text("black turn", 0, 20);
   drawSquares(SQUARE_SIZE, WHITE, BLACK);
   if(!game.isDone()){
-    int x = (mouseX-50)/50;
-    int y = (mouseY-50)/50;
+    int x = (mouseX-SQUARE_SIZE)/SQUARE_SIZE;
+    int y = (mouseY-SQUARE_SIZE)/SQUARE_SIZE;
     if(begTurn && x >=0 && x < 8 && y >= 0 && y < 8){
       if(game.turnBeg(x,y)){
         begTurn = false;
