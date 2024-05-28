@@ -1,5 +1,9 @@
 class Pawn extends Piece {
-  public boolean passantable= false;
+  private int xPos, yPos;
+  private boolean team;
+  private Chess board;
+  
+  private boolean passantable = false;
   public Pawn(){
     super();
   }
@@ -10,12 +14,11 @@ class Pawn extends Piece {
   public Pawn(int x, int y, boolean team, Chess board){
     super(x, y, team, board, "Pawn");
   }
-  public boolean getPassant(){
-    return passantable;
-  }
-  public boolean setPassant(boolean passantable){
+  public void setPassantable(boolean passantable){
     this.passantable = passantable;
-    return true;  
+  }
+  public int[] getPassant(){
+    
   }
   public boolean withinPieceRange(int x, int y){
     Piece pAtXY = getBoard().getPiece(x, y);

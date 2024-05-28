@@ -73,6 +73,21 @@ abstract class Piece{
     if(pieceAtLoc != null){
       board.removePiece(x, y);
     }
+    if(getType().equals("Pawn")){
+      if(Math.abs(y - yPos) > 1){
+        Piece lPawn = null;
+        Piece rPawn = null;
+        try{
+          lPawn = getBoard().getPiece(x - 1, y);
+        } catch(Exception e){}
+        try{
+          rPawn = getBoard().getPiece(x + 1, y);
+        } catch(Exception e){}
+        if(lPawn != null && lPawn.getTeam() != getTeam()){
+           this.setPassant(true);
+        }
+      }
+    }
     xPos = x;
     yPos = y;
     board.setPiece(x, y, originalPiece);
@@ -116,5 +131,5 @@ abstract class Piece{
 
   public abstract boolean withinPieceRange(int x, int y);
   public abstract PImage getImage(boolean team);
-  
+  public abstract boolean setPassant(boolean passant); 
 }
