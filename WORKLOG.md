@@ -18,6 +18,12 @@ Created the logic for moving pawns and knights
 
 Fixed the logic for moving pawns, fixed a bug present in all Piece subclasses
 
+### 5/26
+I changed the color pallette of our chess game, and improved the way we retreive the images of each piece. I began working on creating check detection, which almost entirely works. I also replaced some repetitive code with helper methods and created more variables to clean up the main program.
+
+### 5/27
+I added check detection and added checkmate detection. We should now have a completed MVP.
+
 ## Seth
 
 ### 5/22
@@ -40,6 +46,6 @@ I finished writing the game mechanics. Then, I merged my code so far with Will's
 
 I fixed a turn skip error. Then, I enabled a feature where a player can see valid positions a piece can go to once they select it. Then, I fixed valid position code for King, Rook, Bishop, and Queen. I also added images for all the pieces. This should be a working bare bones version of Chess now.
 
-### date y
+### 5/27
 
-info
+I added labels to the board and integrated them with the error system to improve the user experience.

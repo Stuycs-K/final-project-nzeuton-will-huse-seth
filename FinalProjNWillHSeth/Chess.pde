@@ -4,7 +4,7 @@ class Chess{
   private boolean playerOneTurn;
   private Piece initial;
   private boolean done;
-  
+
   public Chess(){
     board = new Piece[8][8];
     for(int i = 0; i < 8; i++){
@@ -34,7 +34,7 @@ class Chess{
   public Piece getPiece(int x,int y){
     return board[y][x];
   }
-  
+ 
   public boolean turnBeg(int x, int y){
   if(x < 0 || x > 7 || y < 0 || y > 7){
     return false;
@@ -67,7 +67,7 @@ class Chess{
       doneN = initial.move(x,y);
       r = true;
     } else{
-      System.out.println("Position: " + x + ", " + y + " is not valid for " + initial.getType() + " at " + initial.getX() + " " + initial.getY());
+      System.out.println("Position: " + ((char)(x+97)) +  (8-y) + " is not valid for " + initial.getType() + " at " + ((char)(97+initial.getX())) + (8-initial.getY()));
     }
     if(!doneN && r){
       nextTurn();
@@ -93,5 +93,40 @@ class Chess{
   public boolean playerOneTurn(){
     return playerOneTurn;
   }
-    
+  public boolean inCheck(boolean team){
+     Piece king = new King();
+     
+     for(int r = 0; r < 8; ++r){
+       for(int c = 0; c<8; ++c){
+         Piece curr = getPiece(c, r);
+         if(curr != null && curr.getTeam() == team && curr.getType().equals("King")){
+           king = curr;
+           break;
+         }
+       }
+     }
+     
+     for(int r = 0; r < 8; ++r){
+       for(int c = 0; c<8; ++c){
+         Piece curr = getPiece(c, r);
+         if(curr != null && curr.getTeam() != team && curr.withinPieceRange(king.getX(), king.getY())){
+           return true;
+         }
+       }
+     }
+     return false;
+  }
+  public boolean inMate(boolean team){
+   int moves = 0;
+    for(int r = 0; r<8; ++r){
+     for(int c = 0; c<8; ++c){
+       Piece p = getPiece(c, r);
+       if(p != null && p.getTeam() == team){
+         moves += p.getValidPositions().size();
+       }  
+     }
+    }
+    return moves == 0;
+  }
+  
 }

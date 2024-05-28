@@ -58,4 +58,8 @@ class Queen extends Piece {
         return false;
       }
   }
+  public PImage getImage(boolean t){
+    PImage piece = t ? loadImage("Chess_qlt60.png") : loadImage("Chess_qdt60.png");
+    return piece;
+  }
 }
