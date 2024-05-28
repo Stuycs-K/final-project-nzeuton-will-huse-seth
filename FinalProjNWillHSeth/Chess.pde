@@ -67,7 +67,7 @@ class Chess{
       doneN = initial.move(x,y);
       r = true;
     } else{
-      System.out.println("Position: " + x + ", " + y + " is not valid for " + initial.getType() + " at " + initial.getX() + " " + initial.getY());
+      System.out.println("Position: " + ((char)(x+97)) +  (8-y) + " is not valid for " + initial.getType() + " at " + ((char)(97+initial.getX())) + (8-initial.getY()));
     }
     if(!doneN && r){
       nextTurn();
