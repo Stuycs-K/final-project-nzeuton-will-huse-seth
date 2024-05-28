@@ -1,22 +1,51 @@
 # Work Log
 
-## GROUP MEMBER 1
+## Will
 
-### date x
+### 5/22
 
-info
+Finished setting up Piece class, some methods still pending. Finished main function for Bishop class.
 
-### date y
+### 5/23
 
-info
+Optimized isValidPosition() + changed and created many new Piece accessor methods and created new Piece subclasses for Queen and Rook.
 
+### 5/24
 
-## GROUP MEMBER 2
+Created the logic for moving pawns and knights
 
-### date x
+### 5/25
 
-info
+Fixed the logic for moving pawns, fixed a bug present in all Piece subclasses
 
-### date y
+### 5/26
+I changed the color pallette of our chess game, and improved the way we retreive the images of each piece. I began working on creating check detection, which almost entirely works. I also replaced some repetitive code with helper methods and created more variables to clean up the main program.
 
-info
+### 5/27
+I added check detection and added checkmate detection. We should now have a completed MVP.
+
+## Seth
+
+### 5/22
+
+I worked on the constructor for the chess class, which includes initializing all the pieces to their correct starting place on the board.
+
+### 5/23
+
+I worked on thinking through the logic with Will, which involved writing new accessor methods and figuring out more efficient ways to implement this. I also wrote more of the chess class, including the methods that modify the board and facilitate the turns.
+
+### 5/24
+
+I worked on more methods in the Chess class that better link it with Piece and then I started working on setup and mouseClicked.
+
+### 5/25
+
+I finished writing the game mechanics. Then, I merged my code so far with Will's and dealt with debugging and merge errors until the pieces showed up on the board in the correct spot. Some pieces move around, but not correctly yet.
+
+### 5/26
+
+I fixed a turn skip error. Then, I enabled a feature where a player can see valid positions a piece can go to once they select it. Then, I fixed valid position code for King, Rook, Bishop, and Queen. I also added images for all the pieces. This should be a working bare bones version of Chess now.
+
+### 5/27
+
+I added labels to the board and integrated them with the error system to improve the user experience.
