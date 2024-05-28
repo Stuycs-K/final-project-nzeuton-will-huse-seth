@@ -1,6 +1,5 @@
 class Queen extends Piece {
-  private int xPos, yPos;
-  private boolean team;
+
 
   public Queen(){
     super();

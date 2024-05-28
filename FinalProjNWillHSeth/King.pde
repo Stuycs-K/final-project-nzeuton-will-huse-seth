@@ -1,6 +1,5 @@
 class King extends Piece {
-  private int xPos, yPos;
-  private boolean team;
+
 
   public King(){
     super();

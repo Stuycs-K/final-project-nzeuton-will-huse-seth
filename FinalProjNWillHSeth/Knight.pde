@@ -1,6 +1,5 @@
 class Knight extends Piece {
-  private int xPos, yPos;
-  private boolean team;
+
 
   public Knight(){
     super();
