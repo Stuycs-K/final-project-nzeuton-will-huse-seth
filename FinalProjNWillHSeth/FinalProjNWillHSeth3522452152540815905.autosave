@@ -29,16 +29,6 @@ void drawSquares(int size, color white, color black){
       }
       square(size+i*size,size+j*size,size);
     }
-    textSize(30);
-    text(8-i+"",30,90+50*i);
-    if(i%2 == 0){
-        fill(white);
-      }
-      else{
-        fill(black);
-      }
-    text(Character.toString( (char) i+97),i*50+70,480);
-    textSize(12);
   }
 }
   
@@ -89,13 +79,10 @@ void mouseClicked(){
     done();
   }
   fill(0,0,0);
-  rect(0,0,100, SQUARE_SIZE);
+  square(0,0,SQUARE_SIZE);
   fill(255, 255, 255);
   if(game.playerOneTurn()) text("white turn", 0, 20);
   else text("black turn", 0, 20);
-  
-  text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
-  text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
 }
 
 void done(){
