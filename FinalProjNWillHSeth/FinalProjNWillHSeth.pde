@@ -129,6 +129,9 @@ void keyPressed(){
   fill(255, 255, 255);
   text("white turn", 0, 20);
   }
+  if(key == 'c'){
+    game = new Chess(0);
+  }
   
 }
 
