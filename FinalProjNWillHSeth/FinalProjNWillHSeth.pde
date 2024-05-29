@@ -132,6 +132,9 @@ void keyPressed(){
   if(key == 'c'){
     game = new Chess(0);
   }
+  if(key == 'e'){
+    game = new Chess(1);
+  }
   
 }
 
