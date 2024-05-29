@@ -31,6 +31,41 @@ class Chess{
     done = false;
   }
   
+  public Chess(int n){
+    if(n == 0){
+      board = new Piece[8][8];
+      board[0][0] = new Rook(0,0,false,this);
+      board[0][5] = new Rook(5,0,false, this);
+      board[0][6] = new King(6,0,false,this);
+      board[1][0] = new Pawn(0,1,false,this);
+      board[1][1] = new Bishop(1,1,false,this);
+      board[1][3] = new Pawn(3,1,false,this);
+      board[1][4] = new Queen(4,1,false,this);
+      board[1][7] = new Pawn(7,1,false,this);
+      board[2][1] = new Bishop(1,2,false,this);
+      board[2][3] = new Knight(3,2,true,this);
+      board[2][4] = new Pawn(4,2,false,this);
+      board[2][5] = new Pawn(5,2,true,this);
+      board[3][2] = new Knight(2,3,false,this);
+      board[3][4] = new Bishop(4,3,true,this);
+      board[3][5] = new Pawn(5,3,false,this);
+      board[4][7] = new Pawn(7,4,true,this);
+      board[6][0] = new Pawn(0,6,true,this);
+      board[6][1] = new Pawn(1,6,true,this);
+      board[6][2] = new Pawn(2,6,true,this);
+      board[6][4] = new Queen(4,6,true,this);
+      board[6][5] = new Pawn(5,6,true,this);
+      board[7][2] = new King(2,7,true,this);
+      board[7][3] = new Rook(3,7,true,this);
+      board[7][6] = new Rook(6,7,true,this);
+      playerOneTurn = true;
+      done = false;
+      
+    }
+    
+    
+  }
+  
   public Piece getPiece(int x,int y){
     return board[y][x];
   }
