@@ -53,3 +53,7 @@ I added labels to the board and integrated them with the error system to improve
 ### 5/28
 
 I removed unnecessary variables in several subclasses and created a demo class for our MVP. I also made the square identification labels smaller and less invasive and I started updating our documentation in our project proposal, since we changed some methods from our original plans (added new ones, moved some).
+
+### 5/29
+
+I began to update our UML diagram to reflect changes in our implementation.
