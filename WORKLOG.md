@@ -56,4 +56,4 @@ I removed unnecessary variables in several subclasses and created a demo class f
 
 ### 5/29
 
-I began to update our UML diagram to reflect changes in our implementation.
+I began to update our UML diagram to reflect changes in our implementation. I also made a keybind for a position that is one move away from a checkmate.
