@@ -24,6 +24,8 @@ I changed the color pallette of our chess game, and improved the way we retreive
 ### 5/27
 I added check detection and added checkmate detection. We should now have a completed MVP.
 
+### 5/28
+I began working on implementing special moves like en passant.
 ## Seth
 
 ### 5/22
