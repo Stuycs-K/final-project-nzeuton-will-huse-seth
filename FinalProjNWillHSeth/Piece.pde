@@ -2,7 +2,7 @@ abstract class Piece{
   private int xPos, yPos;
   private boolean team;
   private String type;
-
+  public boolean special = false;
   private Chess board;
 
   public Piece(){
@@ -84,8 +84,12 @@ abstract class Piece{
           rPawn = getBoard().getPiece(x + 1, y);
         } catch(Exception e){}
         if(lPawn != null && lPawn.getTeam() != getTeam()){
-           this.setPassant(true);
+           this.setSpecial(true);
         }
+        if(rPawn != null && rPawn.getTeam() != getTeam()){
+           this.setSpecial(true);
+        }
+        System.out.println("Moved to passantable location? " + getSpecial());
       }
     }
     xPos = x;
@@ -131,5 +135,6 @@ abstract class Piece{
 
   public abstract boolean withinPieceRange(int x, int y);
   public abstract PImage getImage(boolean team);
-  public abstract boolean setPassant(boolean passant); 
+  public abstract void setSpecial(boolean passant);
+  public abstract boolean getSpecial();
 }
