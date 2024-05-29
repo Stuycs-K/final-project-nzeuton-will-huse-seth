@@ -37,7 +37,7 @@ class Chess{
       board[0][0] = new Rook(0,0,false,this);
       board[0][5] = new Rook(5,0,false, this);
       board[0][6] = new King(6,0,false,this);
-      board[1][0] = new Pawn(0,1,false,this);
+      board[5][6] = new Pawn(6, 5,false,this);
       board[1][1] = new Bishop(1,1,false,this);
       board[1][3] = new Pawn(3,1,false,this);
       board[1][4] = new Queen(4,1,false,this);
