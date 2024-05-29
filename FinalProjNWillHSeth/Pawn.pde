@@ -1,7 +1,5 @@
 class Pawn extends Piece {
-  private int xPos, yPos;
-  private boolean team;
-  private Chess board;
+
   public Pawn(){
     super();
   }

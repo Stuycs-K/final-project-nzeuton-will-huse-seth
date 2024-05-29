@@ -1,6 +1,5 @@
 class Rook extends Piece {
-  private int xPos, yPos;
-  private boolean team;
+
 
   public Rook(){
     super();
