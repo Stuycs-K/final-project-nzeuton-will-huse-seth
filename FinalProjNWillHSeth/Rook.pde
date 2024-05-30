@@ -4,15 +4,11 @@ class Rook extends Piece {
   public Rook(){
     super();
   }
-  public Rook(int x, int y){
-    super(x, y);
-  }
 
   public Rook(int x, int y, boolean team, Chess board){
     super(x, y, team, board, "Rook");
 
   }
-  
   public boolean withinPieceRange(int x, int y){
     if (x == getX()){
       boolean unobstructed = true;

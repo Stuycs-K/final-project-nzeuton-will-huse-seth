@@ -3,16 +3,14 @@ class King extends Piece {
 
   public King(){
     super();
+    setSpecial(true);
   }
-  public King(int x, int y){
-    super(x, y);
-  }
+
 
   public King(int x, int y, boolean team, Chess board){
     super(x, y, team, board, "King");
-
+    setSpecial(true);
   }
-  
   public boolean withinPieceRange(int x, int y){
     return (Math.abs(x - getX()) <= 1 && Math.abs(y - getY()) <= 1);
   }

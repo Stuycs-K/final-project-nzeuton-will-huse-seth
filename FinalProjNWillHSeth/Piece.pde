@@ -2,7 +2,7 @@ abstract class Piece{
   private int xPos, yPos;
   private boolean team;
   private String type;
-
+  public boolean special = false;
   private Chess board;
 
   public Piece(){
@@ -10,11 +10,7 @@ abstract class Piece{
     yPos = 0;
     team = true;
   }
-  public Piece(int x, int y){
-    xPos = x;
-    yPos = y;
-    team = true;
-  }
+  
 
   public Piece(int x, int y, boolean team, Chess board, String type){
     xPos = x;
@@ -63,7 +59,7 @@ abstract class Piece{
     return res;
   }
   public boolean move(int x, int y){
-
+    boolean pieceExisted = false;
     Piece pieceAtLoc = board.getPiece(x, y);
     boolean end = false;
     if(pieceAtLoc != null){
@@ -72,6 +68,38 @@ abstract class Piece{
     Piece originalPiece = board.removePiece(xPos, yPos);
     if(pieceAtLoc != null){
       board.removePiece(x, y);
+      pieceExisted = true;
+    }
+    for(int r = 0; r<8; ++r){
+      for(int c = 0; c<8; ++c){
+        Piece p = getBoard().getPiece(c, r);
+        if(p != null && p.getType().equals("Pawn")){
+          p.setSpecial(false);
+        }
+      }
+    }
+    if(getType().equals("Pawn")){
+      if(Math.abs(y - yPos) == 1 && Math.abs(x - xPos) == 1 && !pieceExisted){
+        Piece sidePiece = getBoard().getPiece(x, getTeam() ? y + 1 : y - 1);
+        getBoard().setPiece(x, y, getBoard().removePiece(sidePiece.getX(), sidePiece.getY()));
+      }
+      if(Math.abs(y - yPos) > 1){
+        Piece lPawn = null;
+        Piece rPawn = null;
+        try{
+          lPawn = getBoard().getPiece(x - 1, y);
+        } catch(Exception e){}
+        try{
+          rPawn = getBoard().getPiece(x + 1, y);
+        } catch(Exception e){}
+        if(lPawn != null && lPawn.getTeam() != getTeam()){
+           this.setSpecial(true);
+        }
+        if(rPawn != null && rPawn.getTeam() != getTeam()){
+           this.setSpecial(true);
+        }
+        System.out.println("Moved to passantable location? " + getSpecial());
+      }
     }
     xPos = x;
     yPos = y;
@@ -116,5 +144,10 @@ abstract class Piece{
 
   public abstract boolean withinPieceRange(int x, int y);
   public abstract PImage getImage(boolean team);
-  
+  public void setSpecial(boolean passant){
+    special = passant;
+  }
+  public boolean getSpecial(){
+    return special;
+  }
 }

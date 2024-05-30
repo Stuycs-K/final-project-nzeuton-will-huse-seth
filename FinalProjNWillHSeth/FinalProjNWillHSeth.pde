@@ -29,15 +29,15 @@ void drawSquares(int size, color white, color black){
       }
       square(size+i*size,size+j*size,size);
     }
-    textSize(30);
-    text(8-i+"",30,90+50*i);
+    textSize(12);
+    text(8-i+"",53,62+50*i);
     if(i%2 == 0){
         fill(white);
       }
       else{
         fill(black);
       }
-    text(Character.toString( (char) i+97),i*50+70,480);
+    text(Character.toString( (char) i+97),i*50+93,447);
     textSize(12);
   }
 }
@@ -129,6 +129,12 @@ void keyPressed(){
   fill(255, 255, 255);
   text("white turn", 0, 20);
   }
+  if(key == 'c'){
+    game = new Chess(0);
+  }
+  if(key == 'e'){
+    game = new Chess(1);
+  }
   
 }
 
@@ -161,5 +167,6 @@ void displayPiece(Piece p){
   text(xP + " " + yP, x + 10, y + 40);
   */
   image(p.getImage(p.getTeam()), x, y, SQUARE_SIZE, SQUARE_SIZE);
-  
+  fill(255, 0, 0);
+  text(p.getSpecial() + "", x, y + 20);
 }

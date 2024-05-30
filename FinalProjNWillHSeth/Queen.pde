@@ -4,15 +4,11 @@ class Queen extends Piece {
   public Queen(){
     super();
   }
-  public Queen(int x, int y){
-    super(x, y);
-  }
 
   public Queen(int x, int y, boolean team, Chess board){
     super(x, y, team, board, "Queen");
 
   }
-  
   public boolean withinPieceRange(int x, int y){
     if (x == getX()){
       boolean unobstructed = true;
