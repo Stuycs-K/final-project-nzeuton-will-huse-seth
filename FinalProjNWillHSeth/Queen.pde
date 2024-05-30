@@ -4,9 +4,6 @@ class Queen extends Piece {
   public Queen(){
     super();
   }
-  public Queen(int x, int y){
-    super(x, y);
-  }
 
   public Queen(int x, int y, boolean team, Chess board){
     super(x, y, team, board, "Queen");

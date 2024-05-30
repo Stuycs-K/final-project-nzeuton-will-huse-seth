@@ -4,9 +4,6 @@ class Rook extends Piece {
   public Rook(){
     super();
   }
-  public Rook(int x, int y){
-    super(x, y);
-  }
 
   public Rook(int x, int y, boolean team, Chess board){
     super(x, y, team, board, "Rook");

@@ -10,11 +10,7 @@ abstract class Piece{
     yPos = 0;
     team = true;
   }
-  public Piece(int x, int y){
-    xPos = x;
-    yPos = y;
-    team = true;
-  }
+  
 
   public Piece(int x, int y, boolean team, Chess board, String type){
     xPos = x;
@@ -63,7 +59,7 @@ abstract class Piece{
     return res;
   }
   public boolean move(int x, int y){
-
+    boolean pieceExisted = false;
     Piece pieceAtLoc = board.getPiece(x, y);
     boolean end = false;
     if(pieceAtLoc != null){
@@ -72,6 +68,7 @@ abstract class Piece{
     Piece originalPiece = board.removePiece(xPos, yPos);
     if(pieceAtLoc != null){
       board.removePiece(x, y);
+      pieceExisted = true;
     }
     for(int r = 0; r<8; ++r){
       for(int c = 0; c<8; ++c){
@@ -82,6 +79,10 @@ abstract class Piece{
       }
     }
     if(getType().equals("Pawn")){
+      if(Math.abs(y - yPos) == 1 && Math.abs(x - xPos) == 1 && !pieceExisted){
+        Piece sidePiece = getBoard().getPiece(x, getTeam() ? y + 1 : y - 1);
+        getBoard().setPiece(x, y, getBoard().removePiece(sidePiece.getX(), sidePiece.getY()));
+      }
       if(Math.abs(y - yPos) > 1){
         Piece lPawn = null;
         Piece rPawn = null;

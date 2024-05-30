@@ -2,9 +2,6 @@ class Pawn extends Piece {
   public Pawn(){
     super();
   }
-  public Pawn(int x, int y){
-    super(x, y);
-  }
 
   public Pawn(int x, int y, boolean team, Chess board){
     super(x, y, team, board, "Pawn");
@@ -30,7 +27,7 @@ class Pawn extends Piece {
    int disY = Math.abs(getY() - y);
    Piece sidePiece = getBoard().getPiece(x, getTeam() ? y + 1 : y - 1); 
    if(disX == 1 && disY == 1 && sidePiece != null && sidePiece.getTeam() != getTeam() && sidePiece.getSpecial()){
-     getBoard().setPiece(x, y, getBoard().removePiece(sidePiece.getX(), sidePiece.getY()));
+     
      System.out.println(sidePiece.getSpecial());
      return true;  
    }

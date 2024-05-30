@@ -4,9 +4,6 @@ class Bishop extends Piece {
   public Bishop(){
     super();
   }
-  public Bishop(int x, int y){
-    super(x, y);
-  }
 
   public Bishop(int x, int y, boolean team, Chess board){
     super(x, y, team, board, "Bishop");
