@@ -12,8 +12,6 @@ class Queen extends Piece {
     super(x, y, team, board, "Queen");
 
   }
-  public boolean getSpecial(){return false;}
-  public void setSpecial(boolean value){}
   public boolean withinPieceRange(int x, int y){
     if (x == getX()){
       boolean unobstructed = true;

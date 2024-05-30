@@ -12,8 +12,6 @@ class Bishop extends Piece {
     super(x, y, team, board, "Bishop");
 
   }
-  public boolean getSpecial(){return false;}
-  public void setSpecial(boolean value){}
   public boolean withinPieceRange(int x, int y){
       if ((Math.abs(x - getX()) == Math.abs(y - getY()))){
         boolean unobstructed = true;

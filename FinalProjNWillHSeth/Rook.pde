@@ -12,12 +12,6 @@ class Rook extends Piece {
     super(x, y, team, board, "Rook");
 
   }
-  public boolean getSpecial(){
-    return special;
-  }
-  public void setSpecial(boolean castleable){
-    this.special = castleable; 
-  }
   public boolean withinPieceRange(int x, int y){
     if (x == getX()){
       boolean unobstructed = true;

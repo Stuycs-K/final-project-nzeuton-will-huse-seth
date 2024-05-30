@@ -73,6 +73,14 @@ abstract class Piece{
     if(pieceAtLoc != null){
       board.removePiece(x, y);
     }
+    for(int r = 0; r<8; ++r){
+      for(int c = 0; c<8; ++c){
+        Piece p = getBoard().getPiece(c, r);
+        if(p != null && p.getType().equals("Pawn")){
+          p.setSpecial(false);
+        }
+      }
+    }
     if(getType().equals("Pawn")){
       if(Math.abs(y - yPos) > 1){
         Piece lPawn = null;
@@ -135,6 +143,10 @@ abstract class Piece{
 
   public abstract boolean withinPieceRange(int x, int y);
   public abstract PImage getImage(boolean team);
-  public abstract void setSpecial(boolean passant);
-  public abstract boolean getSpecial();
+  public void setSpecial(boolean passant){
+    special = passant;
+  }
+  public boolean getSpecial(){
+    return special;
+  }
 }

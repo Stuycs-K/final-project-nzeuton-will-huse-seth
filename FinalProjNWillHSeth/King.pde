@@ -14,12 +14,6 @@ class King extends Piece {
     super(x, y, team, board, "King");
     setSpecial(true);
   }
-  public boolean getSpecial(){
-    return special;
-  }
-  public void setSpecial(boolean castleable){
-    this.special = castleable; 
-  }
   public boolean withinPieceRange(int x, int y){
     return (Math.abs(x - getX()) <= 1 && Math.abs(y - getY()) <= 1);
   }

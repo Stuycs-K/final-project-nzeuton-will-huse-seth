@@ -12,8 +12,7 @@ class Knight extends Piece {
     super(x, y, team, board,"Knight");
 
   }
-  public boolean getSpecial(){return false;}
-  public void setSpecial(boolean value){}
+
   public boolean withinPieceRange(int x, int y){
      int xDis = getX() - x;
      int yDis = getY() - y;

@@ -9,12 +9,7 @@ class Pawn extends Piece {
   public Pawn(int x, int y, boolean team, Chess board){
     super(x, y, team, board, "Pawn");
   }
-  public boolean getSpecial(){
-    return special;
-  }
-  public void setSpecial(boolean passantable){
-    this.special = passantable; 
-  }
+
   public boolean withinPieceRange(int x, int y){
     Piece pAtXY = getBoard().getPiece(x, y);
     boolean team = getTeam();
@@ -33,33 +28,27 @@ class Pawn extends Piece {
     }
    int disX = Math.abs(getX() - x);
    int disY = Math.abs(getY() - y);
-   Piece pU;
-   if(getX() - 1 < 0){
-     pU = null;
-     System.out.println("out of bounds");
-   } else{
-     pU = getBoard().getPiece(getX() - 1, y);
+   Piece sidePiece = getBoard().getPiece(x, getTeam() ? y + 1 : y - 1); 
+   if(disX == 1 && disY == 1 && sidePiece != null && sidePiece.getTeam() != getTeam() && sidePiece.getSpecial()){
+     getBoard().setPiece(x, y, getBoard().removePiece(sidePiece.getX(), sidePiece.getY()));
+     System.out.println(sidePiece.getSpecial());
+     return true;  
    }
-   if(pU != null){
-     
-   
-   }
-   //Piece pU = getBoard().getPiece(x, y - 1);
    if(disX != 0){
-     //System.out.println("Attempting " + x + " " + y);
-     //System.out.println("disX " + disX);
-     //System.out.println("disY " + disY);
-     System.out.println(pU == null);
-     if(pU != null){
-     System.out.println(pU.getType().equals("Pawn"));
-     System.out.println(pU.getSpecial());
-     }
-     if(pU != null && pU.getType().equals("Pawn") && pU.getSpecial()){
+     ////System.out.println("Attempting " + x + " " + y);
+     ////System.out.println("disX " + disX);
+     ////System.out.println("disY " + disY);
+     //System.out.println(pU == null);
+     //if(pU != null){
+     //System.out.println(pU.getType().equals("Pawn"));
+     //System.out.println(pU.getSpecial());
+     //}
+     //if(pU != null && pU.getType().equals("Pawn") && pU.getSpecial()){
        
-       System.out.println(pU.getType());
-       return true;
+     //  System.out.println(pU.getType());
+     //  return true;
        
-     }
+     //}
      if(disX == 1 && disY == 1 && pAtXY != null && pAtXY.getTeam() != team){
          return true;
      }
