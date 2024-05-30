@@ -26,6 +26,9 @@ I added check detection and added checkmate detection. We should now have a comp
 
 ### 5/28
 I began working on implementing special moves like en passant.
+
+### 5/29
+I continued to work on en passant and made some progress. En passant still has issues and a new pawn issue was found to do as a result of en passanting.
 ## Seth
 
 ### 5/22
