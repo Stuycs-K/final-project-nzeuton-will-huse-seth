@@ -28,7 +28,7 @@ class Pawn extends Piece {
    Piece sidePiece = getBoard().getPiece(x, getTeam() ? y + 1 : y - 1); 
    if(disX == 1 && disY == 1 && sidePiece != null && sidePiece.getTeam() != getTeam() && sidePiece.getSpecial()){
      
-     System.out.println(sidePiece.getSpecial());
+     //System.out.println(sidePiece.getSpecial());
      return true;  
    }
    if(disX != 0){
