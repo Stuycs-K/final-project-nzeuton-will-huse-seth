@@ -66,8 +66,9 @@ abstract class Piece{
       end = pieceAtLoc.getType().equals("King");
     }
     Piece originalPiece = board.removePiece(xPos, yPos);
+    Piece removed = null;
     if(pieceAtLoc != null){
-      board.removePiece(x, y);
+      removed = board.removePiece(x, y);
       pieceExisted = true;
     }
     for(int r = 0; r<8; ++r){
@@ -78,6 +79,11 @@ abstract class Piece{
         }
       }
     }
+    
+    if((getType().equals("King") || getType().equals("Rook"))&& getSpecial()){
+      setSpecial(false);
+    }
+    
     if(getType().equals("Pawn")){
       if(Math.abs(y - yPos) == 1 && Math.abs(x - xPos) == 1 && !pieceExisted){
         Piece sidePiece = getBoard().getPiece(x, getTeam() ? y + 1 : y - 1);
@@ -101,10 +107,27 @@ abstract class Piece{
         System.out.println("Moved to passantable location? " + getSpecial());
       }
     }
+    if(pieceAtLoc != null && originalPiece.getType().equals("King") && pieceAtLoc.getType().equals("Rook")){
+      int kX = pieceAtLoc.getX() == 7 ? 6 : 2;
+      int rX = pieceAtLoc.getX() == 7 ? 5 : 3;
+      getBoard().setPiece(kX, y, originalPiece);
+      if(removed != null){
+        
+      getBoard().setPiece(rX, y, removed);
+      }  
+      xPos = kX;
+      yPos = y;
+      pieceAtLoc.setX(rX);
+      pieceAtLoc.setY(y);
+      pieceAtLoc.setSpecial(false);
+  } else{
+    
     xPos = x;
     yPos = y;
     board.setPiece(x, y, originalPiece);
-    return getBoard().inMate(!getTeam());
+    
+  }
+  return getBoard().inMate(!getTeam());
   }
   public boolean isValidPosition(int x, int y) {
     if (x < 0 || x > 7 || y < 0 || y > 7) {
@@ -114,8 +137,11 @@ abstract class Piece{
 
     Piece pieceAt = board.getPiece(x, y);
     if (pieceAt != null && (pieceAt.getTeam() == getTeam() || pieceAt.getType().equals("King"))) {
+      if(!(getType().equals("King") && pieceAt.getType().equals("Rook") && getSpecial() && pieceAt.getSpecial())){
+        
         return false;
-    }
+      }  
+  }
 
     if (withinPieceRange(x, y)) {
       int originalX = getX();

@@ -57,7 +57,7 @@ void mouseClicked(){
         ArrayList<int[]> validPos = game.getPiece(x,y).getValidPositions();
         for(int[] pos : validPos){
           fill(VALID_HIGHLIGHT);
-          if(game.getPiece(pos[0], pos[1]) != null){
+          if(game.getPiece(pos[0], pos[1]) != null && game.getPiece(pos[0], pos[1]).getTeam() != game.playerOneTurn()){
             fill(TAKE_HIGHLIGHT);  
           }
           square(SQUARE_SIZE+pos[0]*SQUARE_SIZE,SQUARE_SIZE+pos[1]*SQUARE_SIZE,SQUARE_SIZE);
@@ -168,5 +168,5 @@ void displayPiece(Piece p){
   */
   image(p.getImage(p.getTeam()), x, y, SQUARE_SIZE, SQUARE_SIZE);
   fill(255, 0, 0);
-  //text(p.getSpecial() + "", x, y + 20);
+  text(p.getSpecial() + "", x, y + 20);
 }
