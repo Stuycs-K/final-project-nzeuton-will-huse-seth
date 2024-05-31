@@ -92,7 +92,7 @@ void mouseClicked(){
     }
     else{
       if(game.turnEnd(x,y)){
-        if(game.getPiece(x,y).getType().equals("Pawn") && (y == 0) || (y == 7)){
+        if(game.getPiece(x,y).getType().equals("Pawn") && ((y == 0) || (y == 7))){
        //game.getPiece(x,y).promotion(x,y,"Queen"); 
        prox = x;
        proy = y;
