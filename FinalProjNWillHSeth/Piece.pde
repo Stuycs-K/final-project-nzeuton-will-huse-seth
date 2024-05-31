@@ -11,6 +11,7 @@ abstract class Piece{
     team = true;
   }
   
+  
 
   public Piece(int x, int y, boolean team, Chess board, String type){
     xPos = x;
@@ -141,6 +142,20 @@ abstract class Piece{
     return false;
 }
 
+public void promotion(int x, int y, String type){
+  if(type.equals("Queen")){
+    board.setPiece(x,y,new Queen(x,y,team,board));
+  }
+  if(type.equals("Knight")){
+    board.setPiece(x,y,new Knight(x,y,team,board));
+  }
+  if(type.equals("Rook")){
+    board.setPiece(x,y,new Rook(x,y,team,board));
+  }
+  if(type.equals("Bishop")){
+    board.setPiece(x,y,new Bishop(x,y,team,board));
+  }
+}
 
   public abstract boolean withinPieceRange(int x, int y);
   public abstract PImage getImage(boolean team);

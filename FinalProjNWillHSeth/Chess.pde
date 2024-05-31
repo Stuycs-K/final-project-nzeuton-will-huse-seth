@@ -127,6 +127,9 @@ class Chess{
     if(initial.isValidPosition(x,y)){
       doneN = initial.move(x,y);
       r = true;
+      if(board[y][x].getType().equals("Pawn") && (y == 0) || (y == 7)){
+       board[y][x].promotion(x,y,"Queen"); 
+      }
     } else{
       System.out.println("Position: " + ((char)(x+97)) +  (8-y) + " is not valid for " + initial.getType() + " at " + ((char)(97+initial.getX())) + (8-initial.getY()));
     }
