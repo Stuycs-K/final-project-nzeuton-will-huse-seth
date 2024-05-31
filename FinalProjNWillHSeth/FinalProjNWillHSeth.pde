@@ -50,6 +50,7 @@ void drawSquares(int size, color white, color black){
     text("Knight",0,250);
   }
 void mouseClicked(){
+  if(promotion){
   int mX = mouseX/50;
   int mY = mouseY/50;
   if(mX == 0 && mY == 1){
@@ -63,6 +64,8 @@ void mouseClicked(){
   }
   if(mX == 0 && mY == 4){
     game.getPiece(prox,proy).promotion(prox,proy,"Knight");
+  }
+   promotion = false;
   }
   background(150);
   fill(255, 255, 255);
@@ -93,6 +96,7 @@ void mouseClicked(){
        //game.getPiece(x,y).promotion(x,y,"Queen"); 
        prox = x;
        proy = y;
+       promotion = true;
        displayOptions();
       }
         begTurn = true;
