@@ -32,6 +32,9 @@ I continued to work on en passant and made some progress. En passant still has i
 
 ### 5/30
 I completed en passant. 
+
+### 5/31
+I started working on castling. It works except a player can currently castle themself into a check.
 ## Seth
 
 ### 5/22
