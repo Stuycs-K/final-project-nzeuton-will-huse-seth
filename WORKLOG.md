@@ -29,6 +29,9 @@ I began working on implementing special moves like en passant.
 
 ### 5/29
 I continued to work on en passant and made some progress. En passant still has issues and a new pawn issue was found to do as a result of en passanting.
+
+### 5/30
+I completed en passant. 
 ## Seth
 
 ### 5/22
