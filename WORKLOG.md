@@ -65,4 +65,4 @@ I began to update our UML diagram to reflect changes in our implementation. I al
 
 ### 5/30
 
-I conntinued to update our UML diagram.
+I conntinued to update our UML diagram. I also pushed the latest working version of our code to the demo branch.
