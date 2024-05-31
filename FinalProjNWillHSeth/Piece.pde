@@ -98,7 +98,7 @@ abstract class Piece{
         if(rPawn != null && rPawn.getTeam() != getTeam()){
            this.setSpecial(true);
         }
-        System.out.println("Moved to passantable location? " + getSpecial());
+        //System.out.println("Moved to passantable location? " + getSpecial());
       }
     }
     xPos = x;
