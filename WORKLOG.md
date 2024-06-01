@@ -70,3 +70,7 @@ I conntinued to update our UML diagram. I also pushed the latest working version
 ### 5/31
 
 I implemented a bare bones version of pawn promotion. I also pushed the latest working version to demo.
+
+### 6/1
+
+I made pawn promotion mandatory, fixed several bugs with it, and then improved the UI by showing the images of the pieces as options for promotion rather than just text.
