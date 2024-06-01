@@ -24,6 +24,11 @@ I changed the color pallette of our chess game, and improved the way we retreive
 ### 5/27
 I added check detection and added checkmate detection. We should now have a completed MVP.
 
+### 5/28
+I began working on implementing special moves like en passant.
+
+### 5/29
+I continued to work on en passant and made some progress. En passant still has issues and a new pawn issue was found to do as a result of en passanting.
 ## Seth
 
 ### 5/22
@@ -57,3 +62,15 @@ I removed unnecessary variables in several subclasses and created a demo class f
 ### 5/29
 
 I began to update our UML diagram to reflect changes in our implementation. I also made a keybind for a position that is one move away from a checkmate.
+
+### 5/30
+
+I conntinued to update our UML diagram. I also pushed the latest working version of our code to the demo branch.
+
+### 5/31
+
+I implemented a bare bones version of pawn promotion. I also pushed the latest working version to demo.
+
+### 6/1
+
+I made pawn promotion mandatory, fixed several bugs with it, and then improved the UI by showing the images of the pieces as options for promotion rather than just text.

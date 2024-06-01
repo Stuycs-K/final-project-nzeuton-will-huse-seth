@@ -37,7 +37,7 @@ class Chess{
       board[0][0] = new Rook(0,0,false,this);
       board[0][5] = new Rook(5,0,false, this);
       board[0][6] = new King(6,0,false,this);
-      board[1][0] = new Pawn(0,1,false,this);
+      board[5][6] = new Pawn(6, 5,false,this);
       board[1][1] = new Bishop(1,1,false,this);
       board[1][3] = new Pawn(3,1,false,this);
       board[1][4] = new Queen(4,1,false,this);
@@ -62,7 +62,33 @@ class Chess{
       done = false;
       
     }
-    
+    if(n == 1){
+      board = new Piece[8][8];
+    for(int i = 0; i < 8; i++){
+      board[1][i] = new Pawn(i,1,false,this);
+      board[6][i] = new Pawn(i,6,true,this);
+    }
+    board[6][4] = null;
+    board[3][4] = new Pawn(4, 3, true, this);
+    board[0][0] = new Rook(0,0,false,this);
+    board[7][0] = new Rook(0,7,true,this);
+    board[0][1] = new Knight(1,0,false,this);
+    board[7][1] = new Knight(1,7,true,this);
+    board[0][2] = new Bishop(2,0,false,this);
+    board[7][2] = new Bishop(2,7,true,this);
+    board[0][3] = new Queen(3,0,false,this);
+    board[7][3] = new Queen(3,7,true,this);
+    board[0][4] = new King(4,0,false,this);
+    board[7][4] = new King(4,7,true,this);
+    board[0][5] = new Bishop(5,0,false,this);
+    board[7][5] = new Bishop(5,7,true,this);
+    board[0][6] = new Knight(6,0,false,this);
+    board[7][6] = new Knight(6,7,true,this);
+    board[0][7] = new Rook(7,0,false,this);
+    board[7][7] = new Rook(7,7,true,this);
+      playerOneTurn = false;
+
+    }
     
   }
   
@@ -101,6 +127,11 @@ class Chess{
     if(initial.isValidPosition(x,y)){
       doneN = initial.move(x,y);
       r = true;
+      /*
+      if(board[y][x].getType().equals("Pawn") && (y == 0) || (y == 7)){
+       board[y][x].promotion(x,y,"Queen"); 
+      }
+      */
     } else{
       System.out.println("Position: " + ((char)(x+97)) +  (8-y) + " is not valid for " + initial.getType() + " at " + ((char)(97+initial.getX())) + (8-initial.getY()));
     }
