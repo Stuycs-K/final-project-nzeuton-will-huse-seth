@@ -49,29 +49,62 @@ void drawSquares(int size, color white, color black){
     text("Rook",0,200);
     text("Knight",0,250);
   }
-void mouseClicked(){
-  if(promotion){
-  int mX = mouseX/50;
-  int mY = mouseY/50;
-  if(mX == 0 && mY == 1){
-    game.getPiece(prox,proy).promotion(prox,proy,"Queen");
-  }
-  if(mX == 0 && mY == 2){
-    game.getPiece(prox,proy).promotion(prox,proy,"Bishop");
-  }
-  if(mX == 0 && mY == 3){
-    game.getPiece(prox,proy).promotion(prox,proy,"Rook");
-  }
-  if(mX == 0 && mY == 4){
-    game.getPiece(prox,proy).promotion(prox,proy,"Knight");
-  }
-   promotion = false;
-  }
-  background(150);
+  
+  void displayEv(){
+     background(150);
   fill(255, 255, 255);
   if(game.playerOneTurn()) text("white turn", 0, 20);
   else text("black turn", 0, 20);
   drawSquares(SQUARE_SIZE, WHITE, BLACK);
+  for(int i = 0; i < 8; i++){
+      for(int j = 0; j < 8; j++){
+        if(game.getPiece(j,i) != null){
+          Piece p = game.getPiece(j,i);
+          displayPiece(p);
+        }
+      }
+    }
+    fill(0,0,0);
+  rect(0,0,100, SQUARE_SIZE);
+  fill(255, 255, 255);
+  if(game.playerOneTurn()) text("white turn", 0, 20);
+  else text("black turn", 0, 20);
+  
+  text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
+  text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
+  }
+void mouseClicked(){
+  if(promotion){
+    
+  int mX = mouseX/50;
+  int mY = mouseY/50;
+  if(mX == 0 && mY == 1){
+    game.getPiece(prox,proy).promotion(prox,proy,"Queen");
+    promotion = false;
+  }
+  if(mX == 0 && mY == 2){
+    game.getPiece(prox,proy).promotion(prox,proy,"Bishop");
+    promotion = false;
+  }
+  if(mX == 0 && mY == 3){
+    game.getPiece(prox,proy).promotion(prox,proy,"Rook");
+    promotion = false;
+  }
+  if(mX == 0 && mY == 4){
+    game.getPiece(prox,proy).promotion(prox,proy,"Knight");
+    promotion = false;
+  }
+ 
+   displayEv();
+   displayOptions();
+  }
+  else{
+    background(150);
+  fill(255, 255, 255);
+  if(game.playerOneTurn()) text("white turn", 0, 20);
+  else text("black turn", 0, 20);
+  drawSquares(SQUARE_SIZE, WHITE, BLACK);
+
   if(!game.isDone()){
     int x = (mouseX-SQUARE_SIZE)/SQUARE_SIZE;
     int y = (mouseY-SQUARE_SIZE)/SQUARE_SIZE;
@@ -119,6 +152,7 @@ void mouseClicked(){
   else{
     done();
   }
+ 
   fill(0,0,0);
   rect(0,0,100, SQUARE_SIZE);
   fill(255, 255, 255);
@@ -127,6 +161,8 @@ void mouseClicked(){
   
   text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
   text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
+  
+  }
 }
 
 void done(){
