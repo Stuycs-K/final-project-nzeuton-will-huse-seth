@@ -44,11 +44,21 @@ void drawSquares(int size, color white, color black){
   }
 }
   void displayOptions(){
-    text("Queen",0,100);
-    text("Bishop",0,150);
-    text("Rook",0,200);
-    text("Knight",0,250);
-  }
+    if(game.playerOneTurn()){
+      //black's promotion
+      image(loadImage("Chess_qdt60.png"),0,50,50,50);
+      image(loadImage("Chess_bdt60.png"),0,100,50,50);
+      image(loadImage("Chess_rdt60.png"),0,150,50,50);
+      image(loadImage("Chess_ndt60.png"),0,200,50,50);
+    }
+    else{
+      image(loadImage("Chess_qlt60.png"),0,50,50,50);
+      image(loadImage("Chess_blt60.png"),0,100,50,50);
+      image(loadImage("Chess_rlt60.png"),0,150,50,50);
+      image(loadImage("Chess_nlt60.png"),0,200,50,50);
+    }
+
+ }
   
   void displayEv(){
      background(150);
@@ -72,6 +82,10 @@ void drawSquares(int size, color white, color black){
   
   text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
   text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
+  
+  if(promotion){
+    displayOptions();
+  }
   }
 void mouseClicked(){
   if(promotion){
@@ -96,7 +110,7 @@ void mouseClicked(){
   }
  
    displayEv();
-   displayOptions();
+
   }
   else{
     background(150);
