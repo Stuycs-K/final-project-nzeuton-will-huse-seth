@@ -67,7 +67,7 @@ void drawSquares(int size, color white, color black){
     fill(0,0,0);
   rect(0,0,100, SQUARE_SIZE);
   fill(255, 255, 255);
-  if(game.playerOneTurn()) text("white turn", 0, 20);
+  if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 0, 20);
   else text("black turn", 0, 20);
   
   text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
@@ -156,7 +156,7 @@ void mouseClicked(){
   fill(0,0,0);
   rect(0,0,100, SQUARE_SIZE);
   fill(255, 255, 255);
-  if(game.playerOneTurn()) text("white turn", 0, 20);
+  if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 0, 20);
   else text("black turn", 0, 20);
   
   text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
