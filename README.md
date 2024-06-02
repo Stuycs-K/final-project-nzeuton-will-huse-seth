@@ -9,6 +9,6 @@ c - checkmate detection demonstration
 
 e - en passant demonstration
 
-t - castling demonstration
+t - castling demonstration (to be added)
 
-p - pawn promotion demonstration
+p - pawn promotion demonstration (to be added)
