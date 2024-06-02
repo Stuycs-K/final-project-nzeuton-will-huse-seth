@@ -190,6 +190,15 @@ void done(){
     text("Press any key",170,200);
     text("to restart.",180,250);
     textSize(12);
+    
+    fill(0,0,0);
+  rect(0,0,100, SQUARE_SIZE);
+  fill(255, 255, 255);
+  if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 0, 20);
+  else text("black turn", 0, 20);
+  
+  text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
+  text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
 }
 
 void keyPressed(){
@@ -209,6 +218,15 @@ void keyPressed(){
   square(0,0,SQUARE_SIZE);
   fill(255, 255, 255);
   text("white turn", 0, 20);
+  
+  fill(0,0,0);
+  rect(0,0,100, SQUARE_SIZE);
+  fill(255, 255, 255);
+  if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 0, 20);
+  else text("black turn", 0, 20);
+  
+  text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
+  text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
   }
   if(key == 'c'){
     game = new Chess(0);
