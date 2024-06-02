@@ -6,6 +6,8 @@ color BLACK = color(116,148,84);
 color VALID_HIGHLIGHT = color(0, 0, 255, 100);
 color SELECTED_HIGHLIGHT = color(255, 255, 0, 100);
 color TAKE_HIGHLIGHT = color(255, 0, 0, 100);
+boolean promotion = false;
+int prox,proy;
 void setup(){
   size(500,500);
   background(150);
@@ -41,13 +43,82 @@ void drawSquares(int size, color white, color black){
     textSize(12);
   }
 }
+  void displayOptions(){
+    if(game.playerOneTurn()){
+      //black's promotion
+      image(loadImage("Chess_qdt60.png"),0,50,50,50);
+      image(loadImage("Chess_bdt60.png"),0,100,50,50);
+      image(loadImage("Chess_rdt60.png"),0,150,50,50);
+      image(loadImage("Chess_ndt60.png"),0,200,50,50);
+    }
+    else{
+      image(loadImage("Chess_qlt60.png"),0,50,50,50);
+      image(loadImage("Chess_blt60.png"),0,100,50,50);
+      image(loadImage("Chess_rlt60.png"),0,150,50,50);
+      image(loadImage("Chess_nlt60.png"),0,200,50,50);
+    }
+
+ }
   
-void mouseClicked(){
-  background(150);
+  void displayEv(){
+     background(150);
   fill(255, 255, 255);
   if(game.playerOneTurn()) text("white turn", 0, 20);
   else text("black turn", 0, 20);
   drawSquares(SQUARE_SIZE, WHITE, BLACK);
+  for(int i = 0; i < 8; i++){
+      for(int j = 0; j < 8; j++){
+        if(game.getPiece(j,i) != null){
+          Piece p = game.getPiece(j,i);
+          displayPiece(p);
+        }
+      }
+    }
+    fill(0,0,0);
+  rect(0,0,100, SQUARE_SIZE);
+  fill(255, 255, 255);
+  if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 0, 20);
+  else text("black turn", 0, 20);
+  
+  text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
+  text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
+  
+  if(promotion){
+    displayOptions();
+  }
+  }
+void mouseClicked(){
+  if(promotion){
+    
+  int mX = mouseX/50;
+  int mY = mouseY/50;
+  if(mX == 0 && mY == 1){
+    game.getPiece(prox,proy).promotion(prox,proy,"Queen");
+    promotion = false;
+  }
+  if(mX == 0 && mY == 2){
+    game.getPiece(prox,proy).promotion(prox,proy,"Bishop");
+    promotion = false;
+  }
+  if(mX == 0 && mY == 3){
+    game.getPiece(prox,proy).promotion(prox,proy,"Rook");
+    promotion = false;
+  }
+  if(mX == 0 && mY == 4){
+    game.getPiece(prox,proy).promotion(prox,proy,"Knight");
+    promotion = false;
+  }
+ 
+   displayEv();
+
+  }
+  else{
+    background(150);
+  fill(255, 255, 255);
+  if(game.playerOneTurn()) text("white turn", 0, 20);
+  else text("black turn", 0, 20);
+  drawSquares(SQUARE_SIZE, WHITE, BLACK);
+
   if(!game.isDone()){
     int x = (mouseX-SQUARE_SIZE)/SQUARE_SIZE;
     int y = (mouseY-SQUARE_SIZE)/SQUARE_SIZE;
@@ -68,6 +139,13 @@ void mouseClicked(){
     }
     else{
       if(game.turnEnd(x,y)){
+        if(game.getPiece(x,y).getType().equals("Pawn") && ((y == 0) || (y == 7))){
+       //game.getPiece(x,y).promotion(x,y,"Queen"); 
+       prox = x;
+       proy = y;
+       promotion = true;
+       displayOptions();
+      }
         begTurn = true;
       }
       begTurn = true;
@@ -88,14 +166,17 @@ void mouseClicked(){
   else{
     done();
   }
+ 
   fill(0,0,0);
   rect(0,0,100, SQUARE_SIZE);
   fill(255, 255, 255);
-  if(game.playerOneTurn()) text("white turn", 0, 20);
+  if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 0, 20);
   else text("black turn", 0, 20);
   
   text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
   text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
+  
+  }
 }
 
 void done(){
@@ -109,6 +190,15 @@ void done(){
     text("Press any key",170,200);
     text("to restart.",180,250);
     textSize(12);
+    
+    fill(0,0,0);
+  rect(0,0,100, SQUARE_SIZE);
+  fill(255, 255, 255);
+  if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 0, 20);
+  else text("black turn", 0, 20);
+  
+  text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
+  text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
 }
 
 void keyPressed(){
@@ -128,6 +218,15 @@ void keyPressed(){
   square(0,0,SQUARE_SIZE);
   fill(255, 255, 255);
   text("white turn", 0, 20);
+  
+  fill(0,0,0);
+  rect(0,0,100, SQUARE_SIZE);
+  fill(255, 255, 255);
+  if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 0, 20);
+  else text("black turn", 0, 20);
+  
+  text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
+  text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
   }
   if(key == 'c'){
     game = new Chess(0);

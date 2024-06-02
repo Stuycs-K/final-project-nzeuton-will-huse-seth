@@ -4,3 +4,11 @@ THIS DOCUMENT IS REQUIRED
 ## Group Info
 ## Overview
 ## Instructions
+### Keybind Instructions
+c - checkmate detection demonstration
+
+e - en passant demonstration
+
+t - castling demonstration (to be added)
+
+p - pawn promotion demonstration (to be added)

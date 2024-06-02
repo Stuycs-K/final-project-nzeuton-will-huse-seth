@@ -37,7 +37,7 @@ class Chess{
       board[0][0] = new Rook(0,0,false,this);
       board[0][5] = new Rook(5,0,false, this);
       board[0][6] = new King(6,0,false,this);
-      board[5][6] = new Pawn(6, 5,false,this);
+      //board[5][6] = new Pawn(6, 5,false,this);
       board[1][1] = new Bishop(1,1,false,this);
       board[1][3] = new Pawn(3,1,false,this);
       board[1][4] = new Queen(4,1,false,this);
@@ -127,6 +127,11 @@ class Chess{
     if(initial.isValidPosition(x,y)){
       doneN = initial.move(x,y);
       r = true;
+      /*
+      if(board[y][x].getType().equals("Pawn") && (y == 0) || (y == 7)){
+       board[y][x].promotion(x,y,"Queen"); 
+      }
+      */
     } else{
       System.out.println("Position: " + ((char)(x+97)) +  (8-y) + " is not valid for " + initial.getType() + " at " + ((char)(97+initial.getX())) + (8-initial.getY()));
     }
