@@ -139,7 +139,7 @@ void mouseClicked(){
     }
     else{
       if(game.turnEnd(x,y)){
-        if(game.getPiece(x,y).getType().equals("Pawn") && ((y == 0) || (y == 7))){
+        if(game.getPiece(x, y) != null && game.getPiece(x,y).getType().equals("Pawn") && ((y == 0) || (y == 7))){
        //game.getPiece(x,y).promotion(x,y,"Queen"); 
        prox = x;
        proy = y;
@@ -251,5 +251,5 @@ void displayPiece(Piece p){
   */
   image(p.getImage(p.getTeam()), x, y, SQUARE_SIZE, SQUARE_SIZE);
   fill(255, 0, 0);
-  text(p.getSpecial() + "", x, y + 20);
+  //text(p.getSpecial() + "", x, y + 20);
 }
