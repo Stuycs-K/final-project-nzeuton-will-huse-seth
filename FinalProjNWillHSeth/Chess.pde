@@ -89,7 +89,50 @@ class Chess{
       playerOneTurn = false;
 
     }
-    
+    if(n == 2){
+      board = new Piece[8][8];
+      board[0][0] = new Rook(0,0,false,this);
+      board[0][7] = new Rook(7,0,false, this);
+      board[0][4] = new King(4,0,false,this);
+      
+      board[1][0] = new Pawn(0,1,false,this);
+      board[1][1] = new Pawn(1,1,false,this);
+      board[1][2] = new Pawn(2,1,false,this);
+      board[1][4] = new Queen(4,1,false,this);
+      board[1][5] = new Pawn(5,1,false,this);
+      board[1][6] = new Bishop(6,1,false,this);
+      board[1][7] = new Pawn(7,1,false,this);
+      
+      board[2][2] = new Knight(2,2,false,this);
+      board[2][3] = new Pawn(3,2,false,this);
+      board[2][5] = new Knight(5,2,false,this);
+      board[2][6] = new Pawn(6,2,false,this);
+      
+      board[3][4] = new Pawn(4,3,false,this);
+      
+      board[4][2] = new Pawn(2,4,true,this);
+      board[4][4] = new Pawn(4,4,true,this);
+      board[4][6] = new Pawn(6,4,false,this);
+      
+      board[5][2] = new Knight(2,5,true,this);
+      board[5][3] = new Pawn(3,5,true,this);
+      board[5][5] = new Knight(5,5,true,this);
+      
+      board[6][0] = new Pawn(0,6,true,this);
+      board[6][1] = new Pawn(1,6,true,this);
+      board[6][2] = new Pawn(2,6,true,this);
+      board[6][3] = new Bishop(3,6,true,this);
+      board[6][4] = new Queen(4,6,true,this);
+      board[6][5] = new Pawn(5,6,true,this);
+      board[6][6] = new Pawn(6,6,true,this);
+      board[6][7] = new Pawn(7,6,true,this);
+      
+      board[7][0] = new Rook(0,7,true,this);
+      board[7][4] = new King(4,7,true,this);
+      board[7][7] = new Pawn(7,7,true,this);
+      playerOneTurn = true;
+      done = false;
+    }
   }
   
   public Piece getPiece(int x,int y){
@@ -127,6 +170,11 @@ class Chess{
     if(initial.isValidPosition(x,y)){
       doneN = initial.move(x,y);
       r = true;
+      /*
+      if(board[y][x].getType().equals("Pawn") && (y == 0) || (y == 7)){
+       board[y][x].promotion(x,y,"Queen"); 
+      }
+      */
     } else{
       System.out.println("Position: " + ((char)(x+97)) +  (8-y) + " is not valid for " + initial.getType() + " at " + ((char)(97+initial.getX())) + (8-initial.getY()));
     }
