@@ -131,7 +131,7 @@ class Chess{
       board[7][4] = new King(4,7,true,this);
       board[7][7] = new Pawn(7,7,true,this);
       playerOneTurn = true;
-      done = false;
+      //done = false;
     }
   }
   

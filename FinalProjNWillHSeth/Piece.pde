@@ -150,62 +150,63 @@ abstract class Piece{
       Piece pieceAtDestination = getBoard().getPiece(x, y);
   
       Piece originalPiece = getBoard().removePiece(originalX, originalY);
-      if(pieceAtDestination != null && pieceAtDestination.getTeam() == getTeam()){
-        if(getBoard().inCheck(getTeam())){
-          return false;
-        }
+      if(pieceAtDestination != null && pieceAtDestination.getTeam() == getTeam() && pieceAtDestination.getType().equals("Rook")){
         if(x == 0){
           setX(2);
-          getBoard().setPiece(x, y, this);
+          getBoard().setPiece(2, y, this);
   
           boolean isInCheck = getBoard().inCheck(getTeam());
       
           setX(originalX);
           setY(originalY);
           getBoard().setPiece(originalX, originalY, originalPiece);
-          getBoard().setPiece(x, y, pieceAtDestination);
+          getBoard().removePiece(2, y);
           if(isInCheck){
             return false;
           }
           setX(3);
-          getBoard().setPiece(x, y, this);
+          getBoard().setPiece(3, y, this);
   
           isInCheck = getBoard().inCheck(getTeam());
       
           setX(originalX);
           setY(originalY);
           getBoard().setPiece(originalX, originalY, originalPiece);
-          getBoard().setPiece(x, y, pieceAtDestination);
+          getBoard().removePiece(3, y);
+          //getBoard().setPiece(x, y, pieceAtDestination);
           return !isInCheck;
         }
         if(x==7){
           setX(5);
-          getBoard().setPiece(x, y, this);
+          getBoard().setPiece(5, y, this);
   
           boolean isInCheck = getBoard().inCheck(getTeam());
       
           setX(originalX);
           setY(originalY);
           getBoard().setPiece(originalX, originalY, originalPiece);
-          getBoard().setPiece(x, y, pieceAtDestination);
+          getBoard().removePiece(5, y);
+          //getBoard().setPiece(5, y, pieceAtDestination);
           if(isInCheck){
             return false;
           }
           setX(6);
-          getBoard().setPiece(x, y, this);
+          getBoard().setPiece(6, y, this);
   
           isInCheck = getBoard().inCheck(getTeam());
       
           setX(originalX);
           setY(originalY);
           getBoard().setPiece(originalX, originalY, originalPiece);
-          getBoard().setPiece(x, y, pieceAtDestination);
+          getBoard().removePiece(6, y);
+          //getBoard().setPiece(x, y, pieceAtDestination);
           return !isInCheck;
         }
       } else{
         
       setX(x);
       }
+      //setX(x);
       setY(y);
       
       getBoard().setPiece(x, y, this);
@@ -215,7 +216,14 @@ abstract class Piece{
       setX(originalX);
       setY(originalY);
       getBoard().setPiece(originalX, originalY, originalPiece);
+      if(pieceAtDestination != null){
+        if(pieceAtDestination.getTeam() != getTeam()){
+          getBoard().setPiece(x, y, pieceAtDestination);
+        }
+      } else{
+        
       getBoard().setPiece(x, y, pieceAtDestination);
+      }
   
       return !isInCheck;
     }
