@@ -29,6 +29,12 @@ I began working on implementing special moves like en passant.
 
 ### 5/29
 I continued to work on en passant and made some progress. En passant still has issues and a new pawn issue was found to do as a result of en passanting.
+
+### 5/30
+I completed en passant. 
+
+### 5/31
+I started working on castling. It works except a player can currently castle themself into a check.
 ## Seth
 
 ### 5/22
