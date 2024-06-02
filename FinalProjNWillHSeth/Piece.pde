@@ -150,7 +150,7 @@ abstract class Piece{
       Piece pieceAtDestination = getBoard().getPiece(x, y);
   
       Piece originalPiece = getBoard().removePiece(originalX, originalY);
-      if(pieceAtDestination != null && pieceAtDestination.getTeam() == getTeam()){
+      if(!getBoard().inCheck(getTeam()) && pieceAtDestination != null && pieceAtDestination.getTeam() == getTeam()){
         if(x == 0){
           setX(2);
           getBoard().setPiece(x, y, this);
