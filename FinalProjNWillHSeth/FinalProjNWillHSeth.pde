@@ -7,8 +7,9 @@ color VALID_HIGHLIGHT = color(0, 0, 255, 100);
 color SELECTED_HIGHLIGHT = color(255, 255, 0, 100);
 color TAKE_HIGHLIGHT = color(255, 0, 0, 100);
 boolean promotion = false;
-int prox,proy;
+int prox,proy,x,y;
 boolean pressing = false;
+Piece moving = null;
 void setup(){
   size(500,500);
   background(150);
@@ -27,10 +28,31 @@ void mouseReleased(){
     
   mouseClicked();
   pressing = false;
+  moving = null;
   }
 }
 void draw(){
-
+  if(pressing && moving != null && game.getPiece(x,y) != null){
+    displayEv();
+    
+    ArrayList<int[]> validPos = game.getPiece(x,y).getValidPositions();
+        for(int[] pos : validPos){
+          fill(VALID_HIGHLIGHT);
+          if(game.getPiece(pos[0], pos[1]) != null && game.getPiece(pos[0], pos[1]).getTeam() != game.playerOneTurn()){
+            fill(TAKE_HIGHLIGHT);  
+          }
+          square(SQUARE_SIZE+pos[0]*SQUARE_SIZE,SQUARE_SIZE+pos[1]*SQUARE_SIZE,SQUARE_SIZE);
+        }
+        fill(SELECTED_HIGHLIGHT);
+        square(SQUARE_SIZE*x+SQUARE_SIZE,SQUARE_SIZE*y+SQUARE_SIZE,SQUARE_SIZE);
+    
+    if(game.playerOneTurn()){
+      image(moving.getImage(true),mouseX-20,mouseY-20,50,50);
+    }
+    else{
+      image(moving.getImage(false),mouseX-20,mouseY-20,50,50);
+    }
+  }
 }
 void drawSquares(int size, color white, color black){
   noStroke();
@@ -145,11 +167,12 @@ void mouseClicked(){
   drawSquares(SQUARE_SIZE, WHITE, BLACK);
 
   if(!game.isDone()){
-    int x = (mouseX-SQUARE_SIZE)/SQUARE_SIZE;
-    int y = (mouseY-SQUARE_SIZE)/SQUARE_SIZE;
+     x = (mouseX-SQUARE_SIZE)/SQUARE_SIZE;
+     y = (mouseY-SQUARE_SIZE)/SQUARE_SIZE;
     if(begTurn && x >=0 && x < 8 && y >= 0 && y < 8){
       if(game.turnBeg(x,y)){
         begTurn = false;
+        moving = game.getMoving();
         ArrayList<int[]> validPos = game.getPiece(x,y).getValidPositions();
         for(int[] pos : validPos){
           fill(VALID_HIGHLIGHT);

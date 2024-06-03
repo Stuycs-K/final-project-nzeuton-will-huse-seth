@@ -2,7 +2,7 @@
 class Chess{
   private Piece[][] board;
   private boolean playerOneTurn;
-  private Piece initial;
+  private Piece initial = null;
   private boolean done;
   private ArrayList<Piece> whiteCapt = new ArrayList<Piece>();
   private ArrayList<Piece> blackCapt = new ArrayList<Piece>();
@@ -137,12 +137,17 @@ class Chess{
     }
   }
   
+  public Piece getMoving(){
+    return initial;
+  }
+  
   public Piece getPiece(int x,int y){
     return board[y][x];
   }
  
   public boolean turnBeg(int x, int y){
   if(x < 0 || x > 7 || y < 0 || y > 7){
+    initial = null;
     return false;
   }
     if(board[y][x] != null && board[y][x].getTeam() == playerOneTurn){
@@ -150,6 +155,7 @@ class Chess{
       return true;
     }
     else{
+      initial = null;
       return false;
     }
   }
@@ -201,7 +207,7 @@ class Chess{
     else{
       done = doneN;
     }
- 
+ initial = null;
     return r;
   }
   
