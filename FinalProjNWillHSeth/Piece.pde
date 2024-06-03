@@ -141,7 +141,7 @@ abstract class Piece{
     
     return null;
   }
-    if(getBoard().inMate(!getTeam())){
+    if(getBoard().inMate(!getTeam()) != 0){
       return new King();
     }
     else{
