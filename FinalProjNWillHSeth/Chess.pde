@@ -4,6 +4,8 @@ class Chess{
   private boolean playerOneTurn;
   private Piece initial;
   private boolean done;
+  private ArrayList<Piece> whiteCapt = new ArrayList<Piece>();
+  private ArrayList<Piece> blackCapt = new ArrayList<Piece>();
 
   public Chess(){
     board = new Piece[8][8];
@@ -162,13 +164,19 @@ class Chess{
       board[y][x] = s;
     }
   
-  
+  public ArrayList<Piece> getWhiteCapt(){
+    return whiteCapt;
+  }
+  public ArrayList<Piece> getBlackCapt(){
+    return blackCapt;
+  }
   
   public boolean turnEnd(int x, int y){
     boolean doneN = false;
     boolean r = false;
+    Piece p = null;
     if(initial.isValidPosition(x,y)){
-      doneN = initial.move(x,y);
+      p = initial.move(x,y);
       r = true;
       /*
       if(board[y][x].getType().equals("Pawn") && (y == 0) || (y == 7)){
@@ -178,12 +186,22 @@ class Chess{
     } else{
       System.out.println("Position: " + ((char)(x+97)) +  (8-y) + " is not valid for " + initial.getType() + " at " + ((char)(97+initial.getX())) + (8-initial.getY()));
     }
+    if(p != null){
+      if(playerOneTurn){
+        whiteCapt.add(p);
+      }else{
+        blackCapt.add(p);
+      }
+      doneN = p.getType().equals("King");
+    }
+    
     if(!doneN && r){
       nextTurn();
     }
     else{
       done = doneN;
     }
+ 
     return r;
   }
   
