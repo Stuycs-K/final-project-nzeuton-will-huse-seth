@@ -138,7 +138,7 @@ abstract class Piece{
 
     Piece pieceAt = board.getPiece(x, y);
     if (pieceAt != null && (pieceAt.getTeam() == getTeam() || pieceAt.getType().equals("King"))) {
-      if(!(getType().equals("King") && pieceAt.getType().equals("Rook") && getSpecial() && pieceAt.getSpecial())){
+      if(!(!getBoard().inCheck(getTeam()) && getType().equals("King") && pieceAt.getType().equals("Rook") && getSpecial() && pieceAt.getSpecial())){
         
         return false;
       }  
