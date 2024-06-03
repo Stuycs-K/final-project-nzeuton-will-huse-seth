@@ -4,6 +4,8 @@ class Chess{
   private boolean playerOneTurn;
   private Piece initial;
   private boolean done;
+  private ArrayList<Piece> whiteCapt = new ArrayList<Piece>();
+  private ArrayList<Piece> blackCapt = new ArrayList<Piece>();
 
   public Chess(){
     board = new Piece[8][8];
@@ -119,12 +121,17 @@ class Chess{
       board[y][x] = s;
     }
   
-  
+  public ArrayList<Piece> getWhiteCapt(){
+    return whiteCapt;
+  }
+  public ArrayList<Piece> getBlackCapt(){
+    return blackCapt;
+  }
   
   public boolean turnEnd(int x, int y){
     boolean doneN = false;
     boolean r = false;
-    Piece p = new Pawn();
+    Piece p = null;
     if(initial.isValidPosition(x,y)){
       p = initial.move(x,y);
       r = true;
@@ -143,6 +150,13 @@ class Chess{
     }
     else{
       done = doneN;
+    }
+    if(p != null && !doneN){
+      if(playerOneTurn){
+        whiteCapt.add(p);
+      }else{
+        blackCapt.add(p);
+      }
     }
     return r;
   }
