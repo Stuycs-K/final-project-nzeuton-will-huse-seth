@@ -275,6 +275,7 @@ void keyPressed(){
         }
       }
     }
+    /*
     fill(0,0,0);
   square(0,0,SQUARE_SIZE);
   fill(255, 255, 255);
@@ -288,6 +289,8 @@ void keyPressed(){
   
   text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
   text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
+  */
+  displayEv();
   }
   if(key == 'c'){
     game = new Chess(0);
