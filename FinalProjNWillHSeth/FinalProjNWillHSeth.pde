@@ -32,7 +32,7 @@ void mouseReleased(){
   }
 }
 void draw(){
-  if(pressing && moving != null && game.getPiece(x,y) != null){
+  if(pressing && moving != null && game.getPiece(x,y) != null && (game.getPiece(x,y).getTeam() == game.playerOneTurn())){
     displayEv();
     
     ArrayList<int[]> validPos = game.getPiece(x,y).getValidPositions();
