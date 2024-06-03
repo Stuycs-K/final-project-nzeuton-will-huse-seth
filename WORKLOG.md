@@ -87,4 +87,4 @@ Since castling didn't work, I spent a lot of time reverting commits on main. I m
 
 ### 6/3
 
-I added a feature that shows all captured pieces on the side that captured them and made it work with all captures, including en pessant captures.
+I added a feature that shows all captured pieces on the side that captured them and made it work with all captures, including en pessant captures. I also added a dragging pieces feature that allows players to drag pieces instead of clicking on the squares twice.
