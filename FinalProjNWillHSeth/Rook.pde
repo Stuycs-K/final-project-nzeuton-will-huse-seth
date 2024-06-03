@@ -3,11 +3,12 @@ class Rook extends Piece {
 
   public Rook(){
     super();
+    setSpecial(true);
   }
 
   public Rook(int x, int y, boolean team, Chess board){
     super(x, y, team, board, "Rook");
-
+    setSpecial(true);
   }
   public boolean withinPieceRange(int x, int y){
     if (x == getX()){

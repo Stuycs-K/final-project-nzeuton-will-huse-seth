@@ -140,7 +140,7 @@ void mouseClicked(){
         ArrayList<int[]> validPos = game.getPiece(x,y).getValidPositions();
         for(int[] pos : validPos){
           fill(VALID_HIGHLIGHT);
-          if(game.getPiece(pos[0], pos[1]) != null){
+          if(game.getPiece(pos[0], pos[1]) != null && game.getPiece(pos[0], pos[1]).getTeam() != game.playerOneTurn()){
             fill(TAKE_HIGHLIGHT);  
           }
           square(SQUARE_SIZE+pos[0]*SQUARE_SIZE,SQUARE_SIZE+pos[1]*SQUARE_SIZE,SQUARE_SIZE);
@@ -151,7 +151,7 @@ void mouseClicked(){
     }
     else{
       if(game.turnEnd(x,y)){
-        if(game.getPiece(x,y).getType().equals("Pawn") && ((y == 0) || (y == 7))){
+        if(game.getPiece(x, y) != null && game.getPiece(x,y).getType().equals("Pawn") && ((y == 0) || (y == 7))){
        //game.getPiece(x,y).promotion(x,y,"Queen"); 
        prox = x;
        proy = y;
@@ -258,7 +258,9 @@ void keyPressed(){
   if(key == 'e'){
     game = new Chess(1);
   }
-  
+  if(key == 't'){
+    game = new Chess(2);
+  }
 }
 
 void displayPiece(Piece p){
