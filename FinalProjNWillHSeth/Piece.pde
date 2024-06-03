@@ -67,6 +67,7 @@ abstract class Piece{
     Piece pieceAtLoc = board.getPiece(x, y);
     Piece remP = null;
     boolean end = false;
+    Piece pR = null;
     if(pieceAtLoc != null){
       end = pieceAtLoc.getType().equals("King");
     }
@@ -86,7 +87,8 @@ abstract class Piece{
     if(getType().equals("Pawn")){
       if(Math.abs(y - yPos) == 1 && Math.abs(x - xPos) == 1 && !pieceExisted){
         Piece sidePiece = getBoard().getPiece(x, getTeam() ? y + 1 : y - 1);
-        getBoard().setPiece(x, y, getBoard().removePiece(sidePiece.getX(), sidePiece.getY()));
+         pR = getBoard().removePiece(sidePiece.getX(), sidePiece.getY());
+        getBoard().setPiece(x, y, pR );
       }
       if(Math.abs(y - yPos) > 1){
         Piece lPawn = null;
@@ -114,7 +116,9 @@ abstract class Piece{
       return new King();
     }
     else{
-
+      if(remP == null && pR != null){
+        return pR;
+      }
       return remP;
     }
     //return getBoard().inMate(!getTeam());
