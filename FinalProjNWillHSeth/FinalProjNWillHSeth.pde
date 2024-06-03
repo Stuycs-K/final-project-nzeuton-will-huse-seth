@@ -86,6 +86,18 @@ void drawSquares(int size, color white, color black){
   if(promotion){
     displayOptions();
   }
+  
+  ArrayList<Piece> whiteCapt = game.getWhiteCapt();
+  
+  for(int i = 0; i < whiteCapt.size(); i++){
+    image(whiteCapt.get(i).getImage(false),i*25+100,470,25,25);
+  }
+  
+  ArrayList<Piece> blackCapt = game.getBlackCapt();
+  
+  for(int i = 0; i < blackCapt.size(); i++){
+    image(blackCapt.get(i).getImage(true),i*25+100,10,25,25);
+  }
   }
 void mouseClicked(){
   if(promotion){
@@ -179,13 +191,13 @@ void mouseClicked(){
   ArrayList<Piece> whiteCapt = game.getWhiteCapt();
   
   for(int i = 0; i < whiteCapt.size(); i++){
-    image(whiteCapt.get(i).getImage(false),i*30+100,470,30,30);
+    image(whiteCapt.get(i).getImage(false),i*25+100,470,25,25);
   }
   
   ArrayList<Piece> blackCapt = game.getBlackCapt();
   
   for(int i = 0; i < blackCapt.size(); i++){
-    image(blackCapt.get(i).getImage(true),i*30+100,10,30,30);
+    image(blackCapt.get(i).getImage(true),i*25+100,10,25,25);
   }
      
   }

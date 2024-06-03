@@ -143,21 +143,22 @@ class Chess{
     } else{
       System.out.println("Position: " + ((char)(x+97)) +  (8-y) + " is not valid for " + initial.getType() + " at " + ((char)(97+initial.getX())) + (8-initial.getY()));
     }
-    if(p != null)
-    doneN = p.getType().equals("King");
+    if(p != null){
+      if(playerOneTurn){
+        whiteCapt.add(p);
+      }else{
+        blackCapt.add(p);
+      }
+      doneN = p.getType().equals("King");
+    }
+    
     if(!doneN && r){
       nextTurn();
     }
     else{
       done = doneN;
     }
-    if(p != null && !doneN){
-      if(playerOneTurn){
-        whiteCapt.add(p);
-      }else{
-        blackCapt.add(p);
-      }
-    }
+ 
     return r;
   }
   

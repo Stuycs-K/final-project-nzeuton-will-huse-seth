@@ -65,14 +65,14 @@ abstract class Piece{
   public Piece move(int x, int y){
     boolean pieceExisted = false;
     Piece pieceAtLoc = board.getPiece(x, y);
-    Piece remP;
+    Piece remP = null;
     boolean end = false;
     if(pieceAtLoc != null){
       end = pieceAtLoc.getType().equals("King");
     }
     Piece originalPiece = board.removePiece(xPos, yPos);
     if(pieceAtLoc != null){
-      board.removePiece(x, y);
+      remP = board.removePiece(x, y);
       pieceExisted = true;
     }
     for(int r = 0; r<8; ++r){
@@ -108,12 +108,13 @@ abstract class Piece{
     }
     xPos = x;
     yPos = y;
-    remP = board.removePiece(x,y);
+    //remP = board.removePiece(x,y);
     board.setPiece(x, y, originalPiece);
     if(getBoard().inMate(!getTeam())){
       return new King();
     }
     else{
+
       return remP;
     }
     //return getBoard().inMate(!getTeam());
