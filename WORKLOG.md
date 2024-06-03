@@ -78,3 +78,7 @@ I made pawn promotion mandatory, fixed several bugs with it, and then improved t
 ### 6/2
 
 Since castling didn't work, I spent a lot of time reverting commits on main. I made some slight UI improvements on my own end and pushed pawn promotion to demo. Castling will not make the demo.
+
+### 6/3
+
+I added a feature that shows all captured pieces on the side that captured them and made it work with all captures, including en pessant captures.
