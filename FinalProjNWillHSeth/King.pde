@@ -3,6 +3,7 @@ class King extends Piece {
 
   public King(){
     super();
+    setType("King");
     setSpecial(true);
   }
 

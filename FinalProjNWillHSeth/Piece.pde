@@ -46,6 +46,9 @@ abstract class Piece{
   public Chess getBoard(){
     return board;
   }
+  public void setType(String type){
+    this.type = type;
+  }
   public ArrayList<int[]> getValidPositions(){
     ArrayList<int[]> res = new ArrayList<int[]>();
     for(int r = 0; r <= 7; ++r){
@@ -59,9 +62,10 @@ abstract class Piece{
     }
     return res;
   }
-  public boolean move(int x, int y){
+  public Piece move(int x, int y){
     boolean pieceExisted = false;
     Piece pieceAtLoc = board.getPiece(x, y);
+    Piece remP;
     boolean end = false;
     if(pieceAtLoc != null){
       end = pieceAtLoc.getType().equals("King");
@@ -104,8 +108,15 @@ abstract class Piece{
     }
     xPos = x;
     yPos = y;
+    remP = board.removePiece(x,y);
     board.setPiece(x, y, originalPiece);
-    return getBoard().inMate(!getTeam());
+    if(getBoard().inMate(!getTeam())){
+      return new King();
+    }
+    else{
+      return remP;
+    }
+    //return getBoard().inMate(!getTeam());
   }
   public boolean isValidPosition(int x, int y) {
     if (x < 0 || x > 7 || y < 0 || y > 7) {

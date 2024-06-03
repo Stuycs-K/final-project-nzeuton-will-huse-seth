@@ -124,8 +124,9 @@ class Chess{
   public boolean turnEnd(int x, int y){
     boolean doneN = false;
     boolean r = false;
+    Piece p = new Pawn();
     if(initial.isValidPosition(x,y)){
-      doneN = initial.move(x,y);
+      p = initial.move(x,y);
       r = true;
       /*
       if(board[y][x].getType().equals("Pawn") && (y == 0) || (y == 7)){
@@ -135,6 +136,8 @@ class Chess{
     } else{
       System.out.println("Position: " + ((char)(x+97)) +  (8-y) + " is not valid for " + initial.getType() + " at " + ((char)(97+initial.getX())) + (8-initial.getY()));
     }
+    if(p != null)
+    doneN = p.getType().equals("King");
     if(!doneN && r){
       nextTurn();
     }
