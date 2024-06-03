@@ -142,12 +142,18 @@ class Chess{
   }
   
   public Piece getPiece(int x,int y){
+    if(x < 0 || x > 7 || y < 0 || y > 7){
+      return null;
+    }
+    else{
+      
     return board[y][x];
+    }
   }
  
   public boolean turnBeg(int x, int y){
   if(x < 0 || x > 7 || y < 0 || y > 7){
-    initial = null;
+    
     return false;
   }
     if(board[y][x] != null && board[y][x].getTeam() == playerOneTurn){
@@ -155,7 +161,7 @@ class Chess{
       return true;
     }
     else{
-      initial = null;
+      
       return false;
     }
   }
@@ -181,7 +187,7 @@ class Chess{
     boolean doneN = false;
     boolean r = false;
     Piece p = null;
-    if(initial.isValidPosition(x,y)){
+    if(initial != null && initial.isValidPosition(x,y)){
       p = initial.move(x,y);
       r = true;
       /*
@@ -190,6 +196,7 @@ class Chess{
       }
       */
     } else{
+      if(initial != null)
       System.out.println("Position: " + ((char)(x+97)) +  (8-y) + " is not valid for " + initial.getType() + " at " + ((char)(97+initial.getX())) + (8-initial.getY()));
     }
     if(p != null){
@@ -249,7 +256,7 @@ class Chess{
      }
      return false;
   }
-  public boolean inMate(boolean team){
+  public int inMate(boolean team){
    int moves = 0;
     for(int r = 0; r<8; ++r){
      for(int c = 0; c<8; ++c){
@@ -259,7 +266,10 @@ class Chess{
        }  
      }
     }
-    return moves == 0;
+    if(moves == 0){
+      return inCheck(team) ? 2 : 1;
+    }
+    return 0;
   }
   
 }

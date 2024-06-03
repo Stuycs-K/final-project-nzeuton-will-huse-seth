@@ -32,7 +32,7 @@ void mouseReleased(){
   }
 }
 void draw(){
-  if(pressing && moving != null && game.getPiece(x,y) != null){
+  if(pressing && moving != null && game.getPiece(x,y) != null && (game.getPiece(x,y).getTeam() == game.playerOneTurn())){
     displayEv();
     
     ArrayList<int[]> validPos = game.getPiece(x,y).getValidPositions();
@@ -244,7 +244,8 @@ void done(){
     rect(100,100,300,200);
     fill(0,0,0);
     textSize(50);
-    if(game.playerOneTurn()) text("White Wins!",130,150);
+    if(game.inMate(!game.playerOneTurn()) == 1) text("Stalemate",130,150);
+    else if(game.playerOneTurn()) text("White Wins!",130,150);
     else text("Black Wins!",130,150);
     textSize(30);
     text("Press any key",170,200);
