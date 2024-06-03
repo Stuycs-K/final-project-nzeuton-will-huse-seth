@@ -267,5 +267,5 @@ void displayPiece(Piece p){
   */
   image(p.getImage(p.getTeam()), x, y, SQUARE_SIZE, SQUARE_SIZE);
   fill(255, 0, 0);
-  text(p.getSpecial() + "", x, y + 20);
+  //text(p.getSpecial() + "", x, y + 20);
 }
