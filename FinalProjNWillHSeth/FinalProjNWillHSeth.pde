@@ -8,6 +8,7 @@ color SELECTED_HIGHLIGHT = color(255, 255, 0, 100);
 color TAKE_HIGHLIGHT = color(255, 0, 0, 100);
 boolean promotion = false;
 int prox,proy;
+boolean pressing = false;
 void setup(){
   size(500,500);
   background(150);
@@ -15,7 +16,19 @@ void setup(){
   drawSquares(SQUARE_SIZE, WHITE, BLACK);
   begTurn = true;
 }
-
+void mouseDragged(){
+  if(!pressing){
+    pressing = true;
+  mouseClicked();
+  }
+}
+void mouseReleased(){
+  if(pressing){
+    
+  mouseClicked();
+  pressing = false;
+  }
+}
 void draw(){
 
 }
