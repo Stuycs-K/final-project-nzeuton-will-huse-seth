@@ -74,9 +74,10 @@ abstract class Piece{
     Piece originalPiece = board.removePiece(xPos, yPos);
     Piece removed = null;
     if(pieceAtLoc != null){
-
+      //if(pieceAtLoc.getTeam() != getTeam()){
+        
       remP = board.removePiece(x, y);
-
+      
       pieceExisted = true;
     }
     for(int r = 0; r<8; ++r){
@@ -120,9 +121,9 @@ abstract class Piece{
       int kX = pieceAtLoc.getX() == 7 ? 6 : 2;
       int rX = pieceAtLoc.getX() == 7 ? 5 : 3;
       getBoard().setPiece(kX, y, originalPiece);
-      if(removed != null){
+      if(remP != null){
         
-      getBoard().setPiece(rX, y, removed);
+      getBoard().setPiece(rX, y, remP);
       }  
       xPos = kX;
       yPos = y;
@@ -135,6 +136,10 @@ abstract class Piece{
     yPos = y;
     //remP = board.removePiece(x,y);
     board.setPiece(x, y, originalPiece);
+  }
+  if(remP != null && getType().equals("King") && remP.getType().equals("Rook") && remP.getTeam() == getTeam()){
+    
+    return null;
   }
     if(getBoard().inMate(!getTeam())){
       return new King();
