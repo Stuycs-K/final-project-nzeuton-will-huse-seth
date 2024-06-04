@@ -2,8 +2,10 @@
 class Chess{
   private Piece[][] board;
   private boolean playerOneTurn;
-  private Piece initial;
+  private Piece initial = null;
   private boolean done;
+  private ArrayList<Piece> whiteCapt = new ArrayList<Piece>();
+  private ArrayList<Piece> blackCapt = new ArrayList<Piece>();
 
   public Chess(){
     board = new Piece[8][8];
@@ -135,12 +137,23 @@ class Chess{
     }
   }
   
+  public Piece getMoving(){
+    return initial;
+  }
+  
   public Piece getPiece(int x,int y){
+    if(x < 0 || x > 7 || y < 0 || y > 7){
+      return null;
+    }
+    else{
+      
     return board[y][x];
+    }
   }
  
   public boolean turnBeg(int x, int y){
   if(x < 0 || x > 7 || y < 0 || y > 7){
+    
     return false;
   }
     if(board[y][x] != null && board[y][x].getTeam() == playerOneTurn){
@@ -148,6 +161,7 @@ class Chess{
       return true;
     }
     else{
+      
       return false;
     }
   }
@@ -162,13 +176,19 @@ class Chess{
       board[y][x] = s;
     }
   
-  
+  public ArrayList<Piece> getWhiteCapt(){
+    return whiteCapt;
+  }
+  public ArrayList<Piece> getBlackCapt(){
+    return blackCapt;
+  }
   
   public boolean turnEnd(int x, int y){
     boolean doneN = false;
     boolean r = false;
-    if(initial.isValidPosition(x,y)){
-      doneN = initial.move(x,y);
+    Piece p = null;
+    if(initial != null && initial.isValidPosition(x,y)){
+      p = initial.move(x,y);
       r = true;
       /*
       if(board[y][x].getType().equals("Pawn") && (y == 0) || (y == 7)){
@@ -176,14 +196,25 @@ class Chess{
       }
       */
     } else{
+      if(initial != null)
       System.out.println("Position: " + ((char)(x+97)) +  (8-y) + " is not valid for " + initial.getType() + " at " + ((char)(97+initial.getX())) + (8-initial.getY()));
     }
+    if(p != null){
+      if(playerOneTurn){
+        whiteCapt.add(p);
+      }else{
+        blackCapt.add(p);
+      }
+      doneN = p.getType().equals("King");
+    }
+    
     if(!doneN && r){
       nextTurn();
     }
     else{
       done = doneN;
     }
+ initial = null;
     return r;
   }
   
@@ -225,7 +256,7 @@ class Chess{
      }
      return false;
   }
-  public boolean inMate(boolean team){
+  public int inMate(boolean team){
    int moves = 0;
     for(int r = 0; r<8; ++r){
      for(int c = 0; c<8; ++c){
@@ -235,7 +266,10 @@ class Chess{
        }  
      }
     }
-    return moves == 0;
+    if(moves == 0){
+      return inCheck(team) ? 2 : 1;
+    }
+    return 0;
   }
   
 }

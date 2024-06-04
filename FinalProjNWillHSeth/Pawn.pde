@@ -1,6 +1,7 @@
 class Pawn extends Piece {
   public Pawn(){
     super();
+    setType("Pawn");
   }
 
   public Pawn(int x, int y, boolean team, Chess board){

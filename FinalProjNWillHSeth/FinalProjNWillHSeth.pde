@@ -7,7 +7,9 @@ color VALID_HIGHLIGHT = color(0, 0, 255, 100);
 color SELECTED_HIGHLIGHT = color(255, 255, 0, 100);
 color TAKE_HIGHLIGHT = color(255, 0, 0, 100);
 boolean promotion = false;
-int prox,proy;
+int prox,proy,x,y;
+boolean pressing = false;
+Piece moving = null;
 void setup(){
   size(500,500);
   background(150);
@@ -15,9 +17,42 @@ void setup(){
   drawSquares(SQUARE_SIZE, WHITE, BLACK);
   begTurn = true;
 }
-
+void mouseDragged(){
+  if(!pressing){
+    pressing = true;
+  mouseClicked();
+  }
+}
+void mouseReleased(){
+  if(pressing){
+    
+  mouseClicked();
+  pressing = false;
+  moving = null;
+  }
+}
 void draw(){
-
+  if(pressing && moving != null && game.getPiece(x,y) != null && (game.getPiece(x,y).getTeam() == game.playerOneTurn())){
+    displayEv();
+    
+    ArrayList<int[]> validPos = game.getPiece(x,y).getValidPositions();
+        for(int[] pos : validPos){
+          fill(VALID_HIGHLIGHT);
+          if(game.getPiece(pos[0], pos[1]) != null && game.getPiece(pos[0], pos[1]).getTeam() != game.playerOneTurn()){
+            fill(TAKE_HIGHLIGHT);  
+          }
+          square(SQUARE_SIZE+pos[0]*SQUARE_SIZE,SQUARE_SIZE+pos[1]*SQUARE_SIZE,SQUARE_SIZE);
+        }
+        fill(SELECTED_HIGHLIGHT);
+        square(SQUARE_SIZE*x+SQUARE_SIZE,SQUARE_SIZE*y+SQUARE_SIZE,SQUARE_SIZE);
+    
+    if(game.playerOneTurn()){
+      image(moving.getImage(true),mouseX-20,mouseY-20,50,50);
+    }
+    else{
+      image(moving.getImage(false),mouseX-20,mouseY-20,50,50);
+    }
+  }
 }
 void drawSquares(int size, color white, color black){
   noStroke();
@@ -86,6 +121,18 @@ void drawSquares(int size, color white, color black){
   if(promotion){
     displayOptions();
   }
+  
+  ArrayList<Piece> whiteCapt = game.getWhiteCapt();
+  
+  for(int i = 0; i < whiteCapt.size(); i++){
+    image(whiteCapt.get(i).getImage(false),i*25+100,470,25,25);
+  }
+  
+  ArrayList<Piece> blackCapt = game.getBlackCapt();
+  
+  for(int i = 0; i < blackCapt.size(); i++){
+    image(blackCapt.get(i).getImage(true),i*25+100,10,25,25);
+  }
   }
 void mouseClicked(){
   if(promotion){
@@ -120,11 +167,12 @@ void mouseClicked(){
   drawSquares(SQUARE_SIZE, WHITE, BLACK);
 
   if(!game.isDone()){
-    int x = (mouseX-SQUARE_SIZE)/SQUARE_SIZE;
-    int y = (mouseY-SQUARE_SIZE)/SQUARE_SIZE;
+     x = (mouseX-SQUARE_SIZE)/SQUARE_SIZE;
+     y = (mouseY-SQUARE_SIZE)/SQUARE_SIZE;
     if(begTurn && x >=0 && x < 8 && y >= 0 && y < 8){
       if(game.turnBeg(x,y)){
         begTurn = false;
+        moving = game.getMoving();
         ArrayList<int[]> validPos = game.getPiece(x,y).getValidPositions();
         for(int[] pos : validPos){
           fill(VALID_HIGHLIGHT);
@@ -176,6 +224,18 @@ void mouseClicked(){
   text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
   text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
   
+  ArrayList<Piece> whiteCapt = game.getWhiteCapt();
+  
+  for(int i = 0; i < whiteCapt.size(); i++){
+    image(whiteCapt.get(i).getImage(false),i*25+100,470,25,25);
+  }
+  
+  ArrayList<Piece> blackCapt = game.getBlackCapt();
+  
+  for(int i = 0; i < blackCapt.size(); i++){
+    image(blackCapt.get(i).getImage(true),i*25+100,10,25,25);
+  }
+     
   }
 }
 
@@ -184,7 +244,8 @@ void done(){
     rect(100,100,300,200);
     fill(0,0,0);
     textSize(50);
-    if(game.playerOneTurn()) text("White Wins!",130,150);
+    if(game.inMate(!game.playerOneTurn()) == 1) text("Stalemate",130,150);
+    else if(game.playerOneTurn()) text("White Wins!",130,150);
     else text("Black Wins!",130,150);
     textSize(30);
     text("Press any key",170,200);
@@ -214,6 +275,7 @@ void keyPressed(){
         }
       }
     }
+    /*
     fill(0,0,0);
   square(0,0,SQUARE_SIZE);
   fill(255, 255, 255);
@@ -227,6 +289,8 @@ void keyPressed(){
   
   text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
   text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
+  */
+  displayEv();
   }
   if(key == 'c'){
     game = new Chess(0);

@@ -83,3 +83,11 @@ I implemented a bare bones version of pawn promotion. I also pushed the latest w
 ### 6/1
 
 I made pawn promotion mandatory, fixed several bugs with it, and then improved the UI by showing the images of the pieces as options for promotion rather than just text.
+
+### 6/2
+
+Since castling didn't work, I spent a lot of time reverting commits on main. I made some slight UI improvements on my own end and pushed pawn promotion to demo. Castling will not make the demo.
+
+### 6/3
+
+I added a feature that shows all captured pieces on the side that captured them and made it work with all captures, including en pessant captures. I also added a dragging pieces feature that allows players to drag pieces instead of clicking on the squares twice.

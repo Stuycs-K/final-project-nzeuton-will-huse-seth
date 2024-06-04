@@ -46,6 +46,9 @@ abstract class Piece{
   public Chess getBoard(){
     return board;
   }
+  public void setType(String type){
+    this.type = type;
+  }
   public ArrayList<int[]> getValidPositions(){
     ArrayList<int[]> res = new ArrayList<int[]>();
     for(int r = 0; r <= 7; ++r){
@@ -59,17 +62,22 @@ abstract class Piece{
     }
     return res;
   }
-  public boolean move(int x, int y){
+  public Piece move(int x, int y){
     boolean pieceExisted = false;
     Piece pieceAtLoc = board.getPiece(x, y);
+    Piece remP = null;
     boolean end = false;
+    Piece pR = null;
     if(pieceAtLoc != null){
       end = pieceAtLoc.getType().equals("King");
     }
     Piece originalPiece = board.removePiece(xPos, yPos);
     Piece removed = null;
     if(pieceAtLoc != null){
-      removed = board.removePiece(x, y);
+      //if(pieceAtLoc.getTeam() != getTeam()){
+        
+      remP = board.removePiece(x, y);
+      
       pieceExisted = true;
     }
     for(int r = 0; r<8; ++r){
@@ -88,7 +96,8 @@ abstract class Piece{
     if(getType().equals("Pawn")){
       if(Math.abs(y - yPos) == 1 && Math.abs(x - xPos) == 1 && !pieceExisted){
         Piece sidePiece = getBoard().getPiece(x, getTeam() ? y + 1 : y - 1);
-        getBoard().setPiece(x, y, getBoard().removePiece(sidePiece.getX(), sidePiece.getY()));
+         pR = getBoard().removePiece(sidePiece.getX(), sidePiece.getY());
+        getBoard().setPiece(x, y, pR );
       }
       if(Math.abs(y - yPos) > 1){
         Piece lPawn = null;
@@ -112,9 +121,9 @@ abstract class Piece{
       int kX = pieceAtLoc.getX() == 7 ? 6 : 2;
       int rX = pieceAtLoc.getX() == 7 ? 5 : 3;
       getBoard().setPiece(kX, y, originalPiece);
-      if(removed != null){
+      if(remP != null){
         
-      getBoard().setPiece(rX, y, removed);
+      getBoard().setPiece(rX, y, remP);
       }  
       xPos = kX;
       yPos = y;
@@ -125,10 +134,24 @@ abstract class Piece{
     
     xPos = x;
     yPos = y;
+    //remP = board.removePiece(x,y);
     board.setPiece(x, y, originalPiece);
-    
   }
-  return getBoard().inMate(!getTeam());
+  if(remP != null && getType().equals("King") && remP.getType().equals("Rook") && remP.getTeam() == getTeam()){
+    
+    return null;
+  }
+    if(getBoard().inMate(!getTeam()) != 0){
+      return new King();
+    }
+    else{
+      if(remP == null && pR != null){
+        return pR;
+      }
+      return remP;
+    }
+
+  
   }
   public boolean isValidPosition(int x, int y) {
     if (x < 0 || x > 7 || y < 0 || y > 7) {
