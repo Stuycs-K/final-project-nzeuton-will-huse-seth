@@ -1,3 +1,10 @@
+import processing.sound.SoundFile;
+
+SoundFile move;
+SoundFile take;
+SoundFile game_end;
+SoundFile check;
+
 boolean begTurn = true;
 Chess game;
 int SQUARE_SIZE = 50;
@@ -10,12 +17,18 @@ boolean promotion = false;
 int prox,proy,x,y;
 boolean pressing = false;
 Piece moving = null;
+
 void setup(){
   size(500,500);
   background(150);
   game = new Chess();
   drawSquares(SQUARE_SIZE, WHITE, BLACK);
   begTurn = true;
+  
+  move = new SoundFile(this, "assets/sounds/move.mp3");
+  take = new SoundFile(this, "assets/sounds/capture.mp3");
+  game_end = new SoundFile(this,"assets/sounds/game_end.mp3");
+  check = new SoundFile(this,"assets/sounds/move-check.mp3");
 }
 void mouseDragged(){
   if(!pressing){
@@ -240,6 +253,7 @@ void mouseClicked(){
 }
 
 void done(){
+  game_end.play();
   fill(255,255,255);
     rect(100,100,300,200);
     fill(0,0,0);

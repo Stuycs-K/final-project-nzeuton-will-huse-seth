@@ -188,7 +188,9 @@ class Chess{
     boolean r = false;
     Piece p = null;
     if(initial != null && initial.isValidPosition(x,y)){
-      p = initial.move(x,y);
+      p = initial.move(x,y); 
+      if(p == null) move.play(); else take.play();
+      if(inCheck(!playerOneTurn())) check.play();
       r = true;
       /*
       if(board[y][x].getType().equals("Pawn") && (y == 0) || (y == 7)){
