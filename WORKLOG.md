@@ -35,6 +35,12 @@ I completed en passant.
 
 ### 5/31
 I started working on castling. It works except a player can currently castle themself into a check.
+
+### 6/2
+I created a castling keybind for the demo. I fixed castling so that players cannot castle into or across a check and also cannot castle when in check.
+
+### 6/3
+I finished castling to adapt it to work with the new aesthetic changes Seth made. I also added stalemate detection.
 ## Seth
 
 ### 5/22
@@ -88,3 +94,7 @@ Since castling didn't work, I spent a lot of time reverting commits on main. I m
 ### 6/3
 
 I added a feature that shows all captured pieces on the side that captured them and made it work with all captures, including en pessant captures. I also added a dragging pieces feature that allows players to drag pieces instead of clicking on the squares twice.
+
+### 6/4
+
+I fixed a visual bug with moving pieces.

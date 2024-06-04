@@ -28,7 +28,7 @@ class Knight extends Piece {
      return false;
   }
   public PImage getImage(boolean t){
-    PImage piece = t ? loadImage("Chess_nlt60.png") : loadImage("Chess_ndt60.png");
+    PImage piece = t ? loadImage("assets/images/Chess_nlt60.png") : loadImage("assets/images/Chess_ndt60.png");
     return piece;
   }
 }
