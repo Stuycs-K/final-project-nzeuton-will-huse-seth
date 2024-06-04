@@ -94,16 +94,16 @@ void drawSquares(int size, color white, color black){
   void displayOptions(){
     if(game.playerOneTurn()){
       //black's promotion
-      image(loadImage("Chess_qdt60.png"),0,50,50,50);
-      image(loadImage("Chess_bdt60.png"),0,100,50,50);
-      image(loadImage("Chess_rdt60.png"),0,150,50,50);
-      image(loadImage("Chess_ndt60.png"),0,200,50,50);
+      image(loadImage("assets/images/Chess_qdt60.png"),0,50,50,50);
+      image(loadImage("assets/images/Chess_bdt60.png"),0,100,50,50);
+      image(loadImage("assets/images/Chess_rdt60.png"),0,150,50,50);
+      image(loadImage("assets/images/Chess_ndt60.png"),0,200,50,50);
     }
     else{
-      image(loadImage("Chess_qlt60.png"),0,50,50,50);
-      image(loadImage("Chess_blt60.png"),0,100,50,50);
-      image(loadImage("Chess_rlt60.png"),0,150,50,50);
-      image(loadImage("Chess_nlt60.png"),0,200,50,50);
+      image(loadImage("assets/images/Chess_qlt60.png"),0,50,50,50);
+      image(loadImage("assets/images/Chess_blt60.png"),0,100,50,50);
+      image(loadImage("assets/images/Chess_rlt60.png"),0,150,50,50);
+      image(loadImage("assets/images/Chess_nlt60.png"),0,200,50,50);
     }
 
  }
