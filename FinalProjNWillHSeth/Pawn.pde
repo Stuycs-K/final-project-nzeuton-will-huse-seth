@@ -62,7 +62,7 @@ class Pawn extends Piece {
      
   }
   public PImage getImage(boolean t){
-    PImage piece = t ? loadImage("Chess_plt60.png") : loadImage("Chess_pdt60.png");
+    PImage piece = t ? loadImage("assets/images/Chess_plt60.png") : loadImage("assets/images/Chess_pdt60.png");
     return piece;
   }
 

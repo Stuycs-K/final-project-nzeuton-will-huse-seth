@@ -32,7 +32,7 @@ class Bishop extends Piece {
   }
   
   public PImage getImage(boolean t){
-    PImage piece = t ? loadImage("Chess_blt60.png") : loadImage("Chess_bdt60.png");
+    PImage piece = t ? loadImage("assets/images/Chess_blt60.png") : loadImage("assets/images/Chess_bdt60.png");
     return piece;
   }
 }
