@@ -38,6 +38,9 @@ I started working on castling. It works except a player can currently castle the
 
 ### 6/2
 I created a castling keybind for the demo. I fixed castling so that players cannot castle into or across a check and also cannot castle when in check.
+
+### 6/3
+I finished castling to adapt it to work with the new aesthetic changes Seth made. I also added stalemate detection.
 ## Seth
 
 ### 5/22
