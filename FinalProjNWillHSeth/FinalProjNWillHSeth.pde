@@ -17,14 +17,16 @@ boolean promotion = false;
 int prox,proy,x,y;
 boolean pressing = false;
 Piece moving = null;
+boolean inMenu;
 
 void setup(){
   
   size(500,500);
   background(150);
-  game = new Chess();
+  //game = new Chess();
   //drawSquares(SQUARE_SIZE, WHITE, BLACK);
   begTurn = true;
+  inMenu = true;
   menuScreen();
   
   move = new SoundFile(this, "assets/sounds/move.mp3");
@@ -159,6 +161,19 @@ void drawSquares(int size, color white, color black){
   }
   }
 void mouseClicked(){
+  if(inMenu){
+    int mX = mouseX/100;
+    int mY = mouseY/100;
+    if(game == null && mX == 2 && mY == 1){
+      game = new Chess();
+      inMenu = false;
+    }
+    if(mX == 2 && mY == 2){
+      inMenu = false;
+    }
+    
+  }
+  if(game != null){
   if(promotion){
     
   int mX = mouseX/50;
@@ -260,6 +275,7 @@ void mouseClicked(){
     image(blackCapt.get(i).getImage(true),i*25+100,10,25,25);
   }
      
+  }
   }
 }
 
