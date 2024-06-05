@@ -19,16 +19,27 @@ boolean pressing = false;
 Piece moving = null;
 
 void setup(){
+  
   size(500,500);
   background(150);
   game = new Chess();
-  drawSquares(SQUARE_SIZE, WHITE, BLACK);
+  //drawSquares(SQUARE_SIZE, WHITE, BLACK);
   begTurn = true;
+  menuScreen();
   
   move = new SoundFile(this, "assets/sounds/move.mp3");
   take = new SoundFile(this, "assets/sounds/capture.mp3");
   game_end = new SoundFile(this,"assets/sounds/game_end.mp3");
   check = new SoundFile(this,"assets/sounds/move-check.mp3");
+}
+void menuScreen(){
+  
+  if(game == null){
+    fill(255,0,0);
+    rect(200,100,100,100);
+  }
+  fill(0,255,0);
+  rect(200,200,100,100);
 }
 void mouseDragged(){
   if(!pressing){
