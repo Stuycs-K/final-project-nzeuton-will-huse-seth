@@ -5,6 +5,12 @@ SoundFile take;
 SoundFile game_end;
 SoundFile check;
 
+int whiteTimer;
+int whiteWait = 1000000;
+
+int blackTimer;
+int blackWait = 5000;
+
 boolean begTurn = true;
 Chess game;
 int SQUARE_SIZE = 50;
@@ -19,6 +25,8 @@ boolean pressing = false;
 Piece moving = null;
 
 void setup(){
+  whiteTimer = millis();
+  blackTimer = millis();
   size(500,500);
   background(150);
   game = new Chess();
@@ -45,6 +53,19 @@ void mouseReleased(){
   }
 }
 void draw(){
+  if(game.playerOneTurn()){
+    whiteTimer = millis();
+  }
+  int tLeft = whiteWait - millis();
+  int wMin = tLeft / 60000;
+  int wSec = tLeft / 6000;
+  int wMil = tLeft % 10000;
+  fill(0, 0, 0);
+  rect(150, 0, 100, 50);
+  fill(255, 255, 255);
+  text(wMin + ":" + wSec + ":" + wMil, 150, 30);
+  fill(0, 0, 0);
+  //rect(150, 0, 100, 50);
   if(pressing && moving != null && game.getPiece(x,y) != null && (game.getPiece(x,y).getTeam() == game.playerOneTurn()) && (game.getPiece(x,y) == moving)){
     displayEv();
     
