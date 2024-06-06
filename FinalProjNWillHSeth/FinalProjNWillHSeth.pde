@@ -35,15 +35,22 @@ void setup(){
   check = new SoundFile(this,"assets/sounds/move-check.mp3");
 }
 void menuScreen(){
-  
+  textSize(44);
  
     fill(BLACK);
-    rect(200,100,100,100);
+    rect(150,250,200,100);
+    fill(WHITE);
+    text("New Game",150,315);
   
   if(game != null){
   fill(WHITE);
-  rect(200,200,100,100);
+  rect(150,150,200,100);
+  fill(BLACK);
+  text("Resume",175,215);
+  
   }
+  
+  textSize(12);
 }
 void mouseDragged(){
   if(!pressing){
@@ -164,17 +171,19 @@ void drawSquares(int size, color white, color black){
   }
 void mouseClicked(){
   if(inMenu){
-    int mX = mouseX/100;
-    int mY = mouseY/100;
-    if(mX == 2 && mY == 1){
+
+    if(mouseX > 150 && mouseX < 350 && mouseY > 250 && mouseY < 350){
       game = new Chess();
       inMenu = false;
+      mouseClicked();
     }
-    if(game != null && mX == 2 && mY == 2){
+    if(game != null && mouseX > 150 && mouseX < 350 && mouseY > 150 && mouseY < 250){
       inMenu = false;
+      mouseClicked();
     }
     
   }
+  else{
   if(game != null){
   if(promotion){
     
@@ -277,6 +286,7 @@ void mouseClicked(){
     image(blackCapt.get(i).getImage(true),i*25+100,10,25,25);
   }
      
+  }
   }
   }
 }
