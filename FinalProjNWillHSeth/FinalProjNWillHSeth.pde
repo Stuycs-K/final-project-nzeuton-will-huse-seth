@@ -18,6 +18,7 @@ int prox,proy,x,y;
 boolean pressing = false;
 Piece moving = null;
 boolean inMenu;
+boolean inMenuE;
 
 void setup(){
   
@@ -27,6 +28,7 @@ void setup(){
   //drawSquares(SQUARE_SIZE, WHITE, BLACK);
   begTurn = true;
   inMenu = true;
+  inMenuE = false;
   menuScreen();
   
   move = new SoundFile(this, "assets/sounds/move.mp3");
@@ -35,6 +37,8 @@ void setup(){
   check = new SoundFile(this,"assets/sounds/move-check.mp3");
 }
 void menuScreen(){
+
+  background(150);
   textSize(44);
  
     fill(BLACK);
@@ -171,6 +175,7 @@ void drawSquares(int size, color white, color black){
   }
 void mouseClicked(){
   if(inMenu){
+    menuScreen();
 
     if(mouseX > 150 && mouseX < 350 && mouseY > 250 && mouseY < 350){
       game = new Chess();
@@ -264,7 +269,7 @@ void mouseClicked(){
   else{
     done();
   }
- 
+ if(game != null){
   fill(0,0,0);
   rect(0,0,100, SQUARE_SIZE);
   fill(255, 255, 255);
@@ -285,9 +290,13 @@ void mouseClicked(){
   for(int i = 0; i < blackCapt.size(); i++){
     image(blackCapt.get(i).getImage(true),i*25+100,10,25,25);
   }
-     
+ }
   }
   }
+  }
+  if(inMenuE){
+    inMenu = true;
+    inMenuE = false;
   }
 }
 
@@ -301,9 +310,10 @@ void done(){
     else if(game.playerOneTurn()) text("White Wins!",130,150);
     else text("Black Wins!",130,150);
     textSize(30);
-    text("Press any key",170,200);
-    text("to restart.",180,250);
+    text("Click or press p",155,200);
+    text("to go to menu.",165,250);
     textSize(12);
+    inMenuE = true;
     
     fill(0,0,0);
   rect(0,0,100, SQUARE_SIZE);
@@ -313,9 +323,12 @@ void done(){
   
   text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
   text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
+  
+  game = null;
 }
 
 void keyPressed(){
+  /*
   if(game != null && game.isDone()){
     game = new Chess();
     drawSquares(SQUARE_SIZE, WHITE, BLACK);
@@ -328,7 +341,7 @@ void keyPressed(){
         }
       }
     }
-    /*
+    
     fill(0,0,0);
   square(0,0,SQUARE_SIZE);
   fill(255, 255, 255);
@@ -342,9 +355,11 @@ void keyPressed(){
   
   text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
   text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
-  */
+  
   displayEv();
+  
   }
+  */
   if(key == 'c'){
     game = new Chess(0);
   }
@@ -356,6 +371,7 @@ void keyPressed(){
   }
   if(key == 'p'){
     inMenu = true;
+    inMenuE = false;
     menuScreen();
   }
 }
