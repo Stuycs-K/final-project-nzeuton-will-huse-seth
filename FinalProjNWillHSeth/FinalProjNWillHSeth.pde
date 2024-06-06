@@ -36,12 +36,14 @@ void setup(){
 }
 void menuScreen(){
   
-  if(game == null){
-    fill(255,0,0);
+ 
+    fill(BLACK);
     rect(200,100,100,100);
-  }
-  fill(0,255,0);
+  
+  if(game != null){
+  fill(WHITE);
   rect(200,200,100,100);
+  }
 }
 void mouseDragged(){
   if(!pressing){
@@ -164,11 +166,11 @@ void mouseClicked(){
   if(inMenu){
     int mX = mouseX/100;
     int mY = mouseY/100;
-    if(game == null && mX == 2 && mY == 1){
+    if(mX == 2 && mY == 1){
       game = new Chess();
       inMenu = false;
     }
-    if(mX == 2 && mY == 2){
+    if(game != null && mX == 2 && mY == 2){
       inMenu = false;
     }
     
@@ -341,6 +343,10 @@ void keyPressed(){
   }
   if(key == 't'){
     game = new Chess(2);
+  }
+  if(key == 'p'){
+    inMenu = true;
+    menuScreen();
   }
 }
 
