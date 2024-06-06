@@ -5,11 +5,13 @@ SoundFile take;
 SoundFile game_end;
 SoundFile check;
 
-int whiteTimer;
-int whiteWait = 1000000;
+int whiteStart = 600000;
+int whiteTime;
+int wsec;
+int wmin;
 
-int blackTimer;
-int blackWait = 5000;
+int blackStart = 3600000;
+int blackTime;
 
 boolean begTurn = true;
 Chess game;
@@ -25,8 +27,8 @@ boolean pressing = false;
 Piece moving = null;
 
 void setup(){
-  whiteTimer = millis();
-  blackTimer = millis();
+  whiteTime = millis();
+  blackTime = millis();
   size(500,500);
   background(150);
   game = new Chess();
@@ -54,17 +56,21 @@ void mouseReleased(){
 }
 void draw(){
   if(game.playerOneTurn()){
-    whiteTimer = millis();
+    wsec = (whiteStart / 1000) - (millis() - whiteTime) / 1000;
+    wmin = wsec / 60;
+    if(millis() - whiteTime > whiteStart){
+      done();
+    }
+    
   }
-  int tLeft = whiteWait - millis();
-  int wMin = tLeft / 60000;
-  int wSec = tLeft / 6000;
-  int wMil = tLeft % 10000;
+  String sec = (wsec % 60) < 10 ? "0" + (wsec % 60) : "" + (wsec % 60);
   fill(0, 0, 0);
   rect(150, 0, 100, 50);
   fill(255, 255, 255);
-  text(wMin + ":" + wSec + ":" + wMil, 150, 30);
+  text(wmin + ":" + sec, 150, 30);
   fill(0, 0, 0);
+  
+  
   //rect(150, 0, 100, 50);
   if(pressing && moving != null && game.getPiece(x,y) != null && (game.getPiece(x,y).getTeam() == game.playerOneTurn()) && (game.getPiece(x,y) == moving)){
     displayEv();
