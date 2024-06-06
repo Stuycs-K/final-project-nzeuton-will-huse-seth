@@ -98,3 +98,7 @@ I added a feature that shows all captured pieces on the side that captured them 
 ### 6/4
 
 I fixed a visual bug with moving pieces.
+
+### 6/5
+
+I began working on menu screens for the start and pause features.
