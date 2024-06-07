@@ -37,6 +37,7 @@ void setup(){
   check = new SoundFile(this,"assets/sounds/move-check.mp3");
 }
 void menuScreen(){
+  begTurn = true;
 
   background(150);
   textSize(44);
@@ -71,7 +72,7 @@ void mouseReleased(){
   }
 }
 void draw(){
-  if(pressing && moving != null && game.getPiece(x,y) != null && (game.getPiece(x,y).getTeam() == game.playerOneTurn()) && (game.getPiece(x,y) == moving)){
+  if(pressing && moving != null && game != null && game.getPiece(x,y) != null && (game.getPiece(x,y).getTeam() == game.playerOneTurn()) && (game.getPiece(x,y) == moving)){
     displayEv();
     
     ArrayList<int[]> validPos = game.getPiece(x,y).getValidPositions();
@@ -188,6 +189,13 @@ void mouseClicked(){
     }
     
   }
+  else if(inMenuE){
+    inMenu = true;
+    inMenuE = false;
+    menuScreen();
+    
+  
+  }
   else{
   if(game != null){
   if(promotion){
@@ -294,10 +302,7 @@ void mouseClicked(){
   }
   }
   }
-  if(inMenuE){
-    inMenu = true;
-    inMenuE = false;
-  }
+  
 }
 
 void done(){
@@ -314,6 +319,7 @@ void done(){
     text("to go to menu.",165,250);
     textSize(12);
     inMenuE = true;
+    inMenu = false;
     
     fill(0,0,0);
   rect(0,0,100, SQUARE_SIZE);
