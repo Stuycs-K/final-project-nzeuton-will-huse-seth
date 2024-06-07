@@ -149,6 +149,7 @@ void drawSquares(int size, color white, color black){
         }
       }
     }
+    
     fill(0,0,0);
   rect(0,0,100, SQUARE_SIZE);
   fill(255, 255, 255);
@@ -173,8 +174,17 @@ void drawSquares(int size, color white, color black){
   for(int i = 0; i < blackCapt.size(); i++){
     image(blackCapt.get(i).getImage(true),i*25+100,10,25,25);
   }
+  fill(0,0,0);
+    rect(0,450,100,50);
+    fill(255,255,255);
+    textSize(20);
+    text("Pause (p)",10,482);
+    textSize(12);
   }
 void mouseClicked(){
+  if(mouseX < 100 && mouseY > 450){
+    inMenu = true;
+  }
   if(inMenu){
     menuScreen();
 
@@ -198,6 +208,7 @@ void mouseClicked(){
   }
   else{
   if(game != null){
+    
   if(promotion){
     
   int mX = mouseX/50;
@@ -278,6 +289,13 @@ void mouseClicked(){
     done();
   }
  if(game != null){
+   
+   fill(0,0,0);
+    rect(0,450,100,50);
+    fill(255,255,255);
+    textSize(20);
+    text("Pause (p)",10,482);
+    textSize(12);
   fill(0,0,0);
   rect(0,0,100, SQUARE_SIZE);
   fill(255, 255, 255);
