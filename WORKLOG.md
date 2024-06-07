@@ -106,3 +106,7 @@ I began working on menu screens for the start and pause features.
 ### 6/6
 
 I improved the looks and functionality of the start and pause features.
+
+### 6/7
+
+I added a pause button and created space at the bottom of the screen for the timer feature.
