@@ -22,7 +22,7 @@ boolean inMenuE;
 
 void setup(){
   
-  size(500,500);
+  size(500,550);
   background(150);
   //game = new Chess();
   //drawSquares(SQUARE_SIZE, WHITE, BLACK);
@@ -182,7 +182,7 @@ void drawSquares(int size, color white, color black){
     textSize(12);
   }
 void mouseClicked(){
-  if(mouseX < 100 && mouseY > 450){
+  if(mouseX < 100 && mouseY > 450 && mouseY < 500){
     inMenu = true;
   }
   if(inMenu){
