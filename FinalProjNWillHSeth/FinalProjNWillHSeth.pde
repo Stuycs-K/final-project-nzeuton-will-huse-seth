@@ -7,11 +7,15 @@ SoundFile check;
 
 int whiteStart = 600000;
 int whiteTime;
-int wsec;
-int wmin;
+int whiteRemainingTime;
+int whitePauseStart = 0;
+int whiteTotalPause = 0;
 
-int blackStart = 3600000;
+int blackStart = 600000;
 int blackTime;
+int blackRemainingTime;
+int blackPauseStart = 0;
+int blackTotalPause = 0;
 
 boolean begTurn = true;
 Chess game;
@@ -55,23 +59,47 @@ void mouseReleased(){
   }
 }
 void draw(){
-  if(game.playerOneTurn()){
-    wsec = (whiteStart / 1000) - (millis() - whiteTime) / 1000;
-    wmin = wsec / 60;
-    if(millis() - whiteTime > whiteStart){
-      done();
-    }
+  
+  
+  
     
+  if(game.playerOneTurn()){
+    if(blackPauseStart == 0){
+      blackPauseStart = millis();
+    }
+    int whiteElapsedTime = millis() - whiteTime - whiteTotalPause;
+    if(whitePauseStart != 0){
+        whiteTotalPause += (millis() - whitePauseStart);
+        whitePauseStart = 0;
+      }
+    whiteRemainingTime = whiteStart - whiteElapsedTime;
+  } else{
+    if(whitePauseStart == 0){
+      whitePauseStart = millis();
+    }
+    int blackElapsedTime = millis() - blackTime - blackTotalPause;
+    if(blackPauseStart != 0){
+        blackTotalPause += (millis() - blackPauseStart);
+        blackPauseStart = 0;
+      }
+    blackRemainingTime = blackStart - blackElapsedTime;
   }
-  String sec = (wsec % 60) < 10 ? "0" + (wsec % 60) : "" + (wsec % 60);
-  fill(0, 0, 0);
-  rect(150, 0, 100, 50);
-  fill(255, 255, 255);
-  text(wmin + ":" + sec, 150, 30);
-  fill(0, 0, 0);
   
   
-  //rect(150, 0, 100, 50);
+  int whiteMinutes = (int)(whiteRemainingTime / 60000);
+  int whiteSeconds = (int)((whiteRemainingTime % 60000) / 1000);
+  int whiteMilliseconds = (int)(whiteRemainingTime % 60000 % 1000);
+  
+  int blackMinutes = (int)(blackRemainingTime / 60000);
+  int blackSeconds = (int)((blackRemainingTime % 60000) / 1000);
+  int blackMilliseconds = (int)(blackRemainingTime % 60000 % 1000);
+  
+  drawTimer(100, 20, whiteMinutes, whiteSeconds, whiteMilliseconds);
+  
+  
+  
+  
+ 
   if(pressing && moving != null && game.getPiece(x,y) != null && (game.getPiece(x,y).getTeam() == game.playerOneTurn()) && (game.getPiece(x,y) == moving)){
     displayEv();
     
@@ -93,6 +121,18 @@ void draw(){
       image(moving.getImage(false),mouseX-20,mouseY-20,50,50);
     }
   }
+   drawTimer(100, height - 20, whiteMinutes, whiteSeconds, whiteMilliseconds);
+
+   
+    drawTimer(100, 20, blackMinutes, blackSeconds, blackMilliseconds);
+
+}
+void drawTimer(int x, int y, int min, int sec, int milli){
+  fill(0);
+  rect(x, y - 25, 100, 50);
+  fill(255);
+  String timerText = min + ":" + nf(sec, 2) + ":" + nf(milli, 3);
+  text(timerText, x, y);
 }
 void drawSquares(int size, color white, color black){
   noStroke();
@@ -227,6 +267,7 @@ void mouseClicked(){
     }
     else{
       if(game.turnEnd(x,y)){
+        
         if(game.getPiece(x, y) != null && game.getPiece(x,y).getType().equals("Pawn") && ((y == 0) || (y == 7))){
        //game.getPiece(x,y).promotion(x,y,"Queen"); 
        prox = x;
