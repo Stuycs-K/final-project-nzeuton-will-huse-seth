@@ -316,7 +316,6 @@ void mouseClicked(){
         displayEv();
         if(!promotion){
           if(game.inMate(game.playerOneTurn()) != 0){
-            promotion = true;
             done();
           }
         }
