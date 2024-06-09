@@ -312,7 +312,14 @@ void mouseClicked(){
           game.getPiece(prox,proy).promotion(prox,proy,"Knight");
           promotion = false;
         }
+        
         displayEv();
+        if(!promotion){
+          if(game.inMate(game.playerOneTurn()) != 0){
+            promotion = true;
+            done();
+          }
+        }
       }
       else{
         background(150);
@@ -416,8 +423,8 @@ void done(){
     text("on time", 200, 170);
   } else{
     if(game.inMate(!game.playerOneTurn()) == 1) text("Stalemate",130,150);
-    else if(game.playerOneTurn()) text("White Wins!",130,150);
-    else text("Black Wins!",130,150);
+    else if(game.inMate(true) == 2) text("Black Wins!",130,150);
+    else text("White Wins!",130,150);
   } 
   textSize(30);
   text("Click or press p",155,230);
