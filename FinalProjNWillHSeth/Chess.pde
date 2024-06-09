@@ -246,6 +246,7 @@ class Chess{
            break;
          }
        }
+       
      }
      
      for(int r = 0; r < 8; ++r){

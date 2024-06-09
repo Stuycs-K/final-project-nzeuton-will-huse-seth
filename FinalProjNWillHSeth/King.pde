@@ -19,7 +19,7 @@ class King extends Piece {
     int rY2 = getTeam() ? 7 : 0;
     //if((x == rX1 && x == rX2) && (y == rY1
     Piece potentialRook = getBoard().getPiece(x, y);
-    if(potentialRook != null && potentialRook.getType().equals("Rook") && potentialRook.getSpecial()){
+    if(getSpecial() && potentialRook != null && potentialRook.getType().equals("Rook") && potentialRook.getSpecial() && potentialRook.getTeam() == getTeam()){
       if(potentialRook.withinPieceRange(getX(), getY())){
         return true;
       }

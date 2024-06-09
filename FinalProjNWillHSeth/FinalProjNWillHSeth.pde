@@ -7,13 +7,13 @@ SoundFile game_end;
 SoundFile check;
 
 //Time Variables
-int whiteStart = 3000;
+int whiteStart = 600000;
 int whiteTime;
 int whiteRemainingTime;
 int whitePauseStart = 0;
 int whiteTotalPause = 0;
 
-int blackStart = 3000;
+int blackStart = 600000;
 int blackTime;
 int blackRemainingTime;
 int blackPauseStart = 0;
@@ -261,6 +261,7 @@ void displayEv(){
 void mouseClicked(){
   if(mouseX < 100 && mouseY > 450 && mouseY < 500){
     inMenu = true;
+    menuPause = millis();
   }
   if(inMenu){
     
@@ -275,16 +276,16 @@ void mouseClicked(){
     if(game != null && mouseX > 150 && mouseX < 350 && mouseY > 150 && mouseY < 250){
       inMenu = false;
       System.out.println("Leaving menu");
-      if(game.playerOneTurn()){
+      if(game.playerOneTurn() || (!game.playerOneTurn() && promotion)){
         System.out.println(millis() - menuPause);
         whiteTotalPause += (millis() - menuPause); 
-      } else{
+      } else if (!game.playerOneTurn() || (game.playerOneTurn && promotion)){
         blackTotalPause += (millis() - menuPause);
       }
       mouseClicked();
     }   
   }
-  else if(inMenuE){
+  else if(inMenuE ){
     inMenu = true;
     inMenuE = false;
     menuPause = millis();
@@ -311,8 +312,13 @@ void mouseClicked(){
           game.getPiece(prox,proy).promotion(prox,proy,"Knight");
           promotion = false;
         }
-      
+        
         displayEv();
+        if(!promotion){
+          if(game.inMate(game.playerOneTurn()) != 0){
+            done();
+          }
+        }
       }
       else{
         background(150);
@@ -416,8 +422,8 @@ void done(){
     text("on time", 200, 170);
   } else{
     if(game.inMate(!game.playerOneTurn()) == 1) text("Stalemate",130,150);
-    else if(game.playerOneTurn()) text("White Wins!",130,150);
-    else text("Black Wins!",130,150);
+    else if(game.inMate(true) == 2) text("Black Wins!",130,150);
+    else text("White Wins!",130,150);
   } 
   textSize(30);
   text("Click or press p",155,230);
