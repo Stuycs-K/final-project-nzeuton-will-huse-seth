@@ -273,6 +273,7 @@ void mouseClicked(){
 
     if(mouseX > 150 && mouseX < 350 && mouseY > 250 && mouseY < 350){
       game = new Chess();
+      promotion = false;
       resetTimers();
       inMenu = false;
       mouseClicked();
