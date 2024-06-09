@@ -120,7 +120,7 @@ abstract class Piece{
         //System.out.println("Moved to passantable location? " + getSpecial());
       }
     }
-    if(pieceAtLoc != null && originalPiece.getType().equals("King") && pieceAtLoc.getType().equals("Rook")){
+    if(pieceAtLoc != null && originalPiece.getType().equals("King") && pieceAtLoc.getType().equals("Rook") && pieceAtLoc.getTeam() == originalPiece.getTeam()){
       int kX = pieceAtLoc.getX() == 7 ? 6 : 2;
       int rX = pieceAtLoc.getX() == 7 ? 5 : 3;
       getBoard().setPiece(kX, y, originalPiece);

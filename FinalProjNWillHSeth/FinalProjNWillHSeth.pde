@@ -7,13 +7,13 @@ SoundFile game_end;
 SoundFile check;
 
 //Time Variables
-int whiteStart = 60000;
+int whiteStart = 600000;
 int whiteTime;
 int whiteRemainingTime;
 int whitePauseStart = 0;
 int whiteTotalPause = 0;
 
-int blackStart = 60000;
+int blackStart = 600000;
 int blackTime;
 int blackRemainingTime;
 int blackPauseStart = 0;
