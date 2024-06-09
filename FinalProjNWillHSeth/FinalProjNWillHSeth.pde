@@ -276,16 +276,16 @@ void mouseClicked(){
     if(game != null && mouseX > 150 && mouseX < 350 && mouseY > 150 && mouseY < 250){
       inMenu = false;
       System.out.println("Leaving menu");
-      if(game.playerOneTurn()){
+      if(game.playerOneTurn() || (!game.playerOneTurn() && promotion)){
         System.out.println(millis() - menuPause);
         whiteTotalPause += (millis() - menuPause); 
-      } else{
+      } else if (!game.playerOneTurn() || (game.playerOneTurn && promotion)){
         blackTotalPause += (millis() - menuPause);
       }
       mouseClicked();
     }   
   }
-  else if(inMenuE){
+  else if(inMenuE ){
     inMenu = true;
     inMenuE = false;
     menuPause = millis();
