@@ -41,6 +41,15 @@ I created a castling keybind for the demo. I fixed castling so that players cann
 
 ### 6/3
 I finished castling to adapt it to work with the new aesthetic changes Seth made. I also added stalemate detection.
+
+### 6/4
+I added simple sound effects to the game and reorganized our assets.
+
+### 6/8
+I finally finished the timers I had been working on for a couple of days.
+
+### 6/9
+I merged my timer changes to work with Seth's pause menu.
 ## Seth
 
 ### 5/22
