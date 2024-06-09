@@ -7,13 +7,17 @@ SoundFile game_end;
 SoundFile check;
 
 //Time Variables
+
 int whiteStart = 300000;
+
 int whiteTime;
 int whiteRemainingTime;
 int whitePauseStart = 0;
 int whiteTotalPause = 0;
 
+
 int blackStart = 300000;
+
 int blackTime;
 int blackRemainingTime;
 int blackPauseStart = 0;
@@ -215,8 +219,8 @@ void displayOptions(){
 void displayEv(){
   background(150);
   fill(255, 255, 255);
-  if(game.playerOneTurn()) text("white turn", 0, 20);
-  else text("black turn", 0, 20);
+  if(game.playerOneTurn()) text("white turn", 100, 520);
+  else text("black turn", 100, 520);
   drawSquares(SQUARE_SIZE, WHITE, BLACK);
   for(int i = 0; i < 8; i++){
     for(int j = 0; j < 8; j++){
@@ -228,13 +232,13 @@ void displayEv(){
   }
     
   fill(0,0,0);
-  rect(0,0,100, SQUARE_SIZE);
+  rect(100,500,100, SQUARE_SIZE);
   fill(255, 255, 255);
-  if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 0, 20);
+  if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 100, 520);
   else text("black turn", 0, 20);
   
-  text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
-  text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
+  text(game.inCheck(true) ? "white in check" : "white not in check", 100, 530);
+  text(game.inCheck(false) ? "black in check" : "black not in check", 100, 540);
   
   if(promotion){
     displayOptions();
@@ -261,6 +265,7 @@ void displayEv(){
 void mouseClicked(){
   if(mouseX < 100 && mouseY > 500 && mouseY < 550){
     inMenu = true;
+    menuPause = millis();
   }
   if(inMenu){
     
@@ -274,17 +279,19 @@ void mouseClicked(){
     }
     if(game != null && mouseX > 150 && mouseX < 350 && mouseY > 150 && mouseY < 250){
       inMenu = false;
+
       //System.out.println("Leaving menu");
       if(game.playerOneTurn()){
         //System.out.println(millis() - menuPause);
+
         whiteTotalPause += (millis() - menuPause); 
-      } else{
+      } else if (!game.playerOneTurn() || (game.playerOneTurn && promotion)){
         blackTotalPause += (millis() - menuPause);
       }
       mouseClicked();
     }   
   }
-  else if(inMenuE){
+  else if(inMenuE ){
     inMenu = true;
     inMenuE = false;
     menuPause = millis();
@@ -311,14 +318,19 @@ void mouseClicked(){
           game.getPiece(prox,proy).promotion(prox,proy,"Knight");
           promotion = false;
         }
-      
+        
         displayEv();
+        if(!promotion){
+          if(game.inMate(game.playerOneTurn()) != 0){
+            done();
+          }
+        }
       }
       else{
         background(150);
         fill(255, 255, 255);
-        if(game.playerOneTurn()) text("white turn", 0, 20);
-        else text("black turn", 0, 20);
+        if(game.playerOneTurn()) text("white turn", 100, 520);
+        else text("black turn", 100, 520);
         drawSquares(SQUARE_SIZE, WHITE, BLACK);
 
         if(!game.isDone()){
@@ -375,13 +387,13 @@ void mouseClicked(){
           text("Pause (p)",10,532);
           textSize(12);
           fill(0,0,0);
-          rect(0,0,100, SQUARE_SIZE);
+          rect(100,500,100, SQUARE_SIZE);
           fill(255, 255, 255);
-          if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 0, 20);
-          else text("black turn", 0, 20);
+          if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 100, 520);
+          else text("black turn", 100, 520);
           
-          text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
-          text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
+          text(game.inCheck(true) ? "white in check" : "white not in check", 100, 530);
+          text(game.inCheck(false) ? "black in check" : "black not in check", 100, 540);
           
           ArrayList<Piece> whiteCapt = game.getWhiteCapt();
           
@@ -416,8 +428,8 @@ void done(){
     text("on time", 200, 170);
   } else{
     if(game.inMate(!game.playerOneTurn()) == 1) text("Stalemate",130,150);
-    else if(game.playerOneTurn()) text("White Wins!",130,150);
-    else text("Black Wins!",130,150);
+    else if(game.inMate(true) == 2) text("Black Wins!",130,150);
+    else text("White Wins!",130,150);
   } 
   textSize(30);
   text("Click or press p",155,230);
@@ -428,14 +440,14 @@ void done(){
   inMenu = false;
     
   fill(0,0,0);
-  rect(0,0,100, SQUARE_SIZE);
+  rect(100,500,100, SQUARE_SIZE);
   fill(255, 255, 255);
 
   if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 0, 20);
   else text("black turn", 0, 20);
   
-  text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
-  text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
+  text(game.inCheck(true) ? "white in check" : "white not in check", 100, 530);
+  text(game.inCheck(false) ? "black in check" : "black not in check", 100, 540);
 
   game = null;
 }
