@@ -7,7 +7,7 @@ SoundFile game_end;
 SoundFile check;
 
 //Time Variables
-int whiteStart = 3000;
+int whiteStart = 60000;
 int whiteTime;
 int whiteRemainingTime;
 int whitePauseStart = 0;
@@ -100,7 +100,7 @@ void draw(){
         done();
       }
     }else{
-      if(game.playerOneTurn() && !inMenu){
+      if((game.playerOneTurn() ||(!game.playerOneTurn() && promotion)) && !inMenu){
         if(blackPauseStart == 0){
           blackPauseStart = millis();
         }
@@ -110,7 +110,7 @@ void draw(){
         }
         int whiteElapsedTime = millis() - whiteTime - whiteTotalPause;
         whiteRemainingTime = whiteStart - whiteElapsedTime;
-      } else if(!inMenu){
+      } else if(!inMenu && (!game.playerOneTurn() ||(game.playerOneTurn() && promotion))){
         if(whitePauseStart == 0){
           whitePauseStart = millis();
         }
