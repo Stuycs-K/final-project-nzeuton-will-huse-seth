@@ -1,13 +1,12 @@
 class Rook extends Piece {
 
-
   public Rook(){
     super();
     setSpecial(true);
   }
 
   public Rook(int x, int y, boolean team, Chess board){
-    super(x, y, team, board, "Rook");
+    super(x, y, team, board, "Rook", loadImage("assets/images/Chess_rlt60.png"), loadImage("assets/images/Chess_rdt60.png"));
     setSpecial(true);
   }
   public boolean withinPieceRange(int x, int y){
@@ -38,9 +37,5 @@ class Rook extends Piece {
     else{
       return false;
     }
-  }
-  public PImage getImage(boolean t){
-    PImage piece = t ? loadImage("assets/images/Chess_rlt60.png") : loadImage("assets/images/Chess_rdt60.png");
-    return piece;
   }
 }
