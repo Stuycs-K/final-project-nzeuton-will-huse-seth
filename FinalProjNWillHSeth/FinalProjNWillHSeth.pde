@@ -5,7 +5,7 @@ SoundFile take;
 SoundFile game_end;
 SoundFile check;
 
-int whiteStart = 600000;
+int whiteStart = 10000;
 int whiteTime;
 int whiteRemainingTime;
 int whitePauseStart = 0;
@@ -33,6 +33,8 @@ Piece moving = null;
 void setup(){
   whiteTime = millis();
   blackTime = millis();
+  whiteRemainingTime = whiteStart;
+  blackRemainingTime = blackStart;
   size(500,500);
   background(150);
   game = new Chess();
@@ -62,7 +64,19 @@ void draw(){
   
   
   
+  //boolean running = whiteRemainingTime > 0 && blackRemainingTime > 0 || (whiteRemainingTime == -1);
+  if(whiteRemainingTime <= 0 || blackRemainingTime <= 0){
+    if(whiteRemainingTime <= 0){
+      whiteRemainingTime = 0;
+      whiteTime = -1;
+    } else{
+      whiteRemainingTime = 0;
+     blackTime = -1;
+    }
     
+    
+    done(); 
+  } else{
   if(game.playerOneTurn()){
     if(blackPauseStart == 0){
       blackPauseStart = millis();
@@ -84,7 +98,7 @@ void draw(){
       }
     blackRemainingTime = blackStart - blackElapsedTime;
   }
-  
+  }
   
   int whiteMinutes = (int)(whiteRemainingTime / 60000);
   int whiteSeconds = (int)((whiteRemainingTime % 60000) / 1000);
@@ -326,9 +340,15 @@ void done(){
     rect(100,100,300,200);
     fill(0,0,0);
     textSize(50);
+    if(whiteTime == -1){
+      text("Black Wins", 130, 150);
+    } else if(blackTime == -1){
+      text("White Wins", 130, 150); 
+    } else{
     if(game.inMate(!game.playerOneTurn()) == 1) text("Stalemate",130,150);
     else if(game.playerOneTurn()) text("White Wins!",130,150);
     else text("Black Wins!",130,150);
+    } 
     textSize(30);
     text("Press any key",170,200);
     text("to restart.",180,250);
