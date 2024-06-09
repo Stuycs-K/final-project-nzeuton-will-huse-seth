@@ -1,6 +1,5 @@
 class King extends Piece {
 
-
   public King(){
     super();
     setType("King");
@@ -9,7 +8,7 @@ class King extends Piece {
 
 
   public King(int x, int y, boolean team, Chess board){
-    super(x, y, team, board, "King");
+    super(x, y, team, board, "King", loadImage("assets/images/Chess_klt60.png"), loadImage("assets/images/Chess_kdt60.png"));
     setSpecial(true);
   }
   public boolean withinPieceRange(int x, int y){
@@ -20,15 +19,11 @@ class King extends Piece {
     int rY2 = getTeam() ? 7 : 0;
     //if((x == rX1 && x == rX2) && (y == rY1
     Piece potentialRook = getBoard().getPiece(x, y);
-    if(potentialRook != null && potentialRook.getType().equals("Rook") && potentialRook.getSpecial()){
+    if(getSpecial() && potentialRook != null && potentialRook.getType().equals("Rook") && potentialRook.getSpecial() && potentialRook.getTeam() == getTeam()){
       if(potentialRook.withinPieceRange(getX(), getY())){
         return true;
       }
     }
     return (Math.abs(x - getX()) <= 1 && Math.abs(y - getY()) <= 1);
-  }
-  public PImage getImage(boolean t){
-    PImage piece = t ? loadImage("assets/images/Chess_klt60.png") : loadImage("assets/images/Chess_kdt60.png");
-    return piece;
   }
 }

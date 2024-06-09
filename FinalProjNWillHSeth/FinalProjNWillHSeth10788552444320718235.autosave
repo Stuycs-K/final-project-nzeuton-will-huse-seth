@@ -7,17 +7,13 @@ SoundFile game_end;
 SoundFile check;
 
 //Time Variables
-
 int whiteStart = 300000;
-
 int whiteTime;
 int whiteRemainingTime;
 int whitePauseStart = 0;
 int whiteTotalPause = 0;
 
-
 int blackStart = 300000;
-
 int blackTime;
 int blackRemainingTime;
 int blackPauseStart = 0;
@@ -99,12 +95,12 @@ void draw(){
         whiteTime = -1;
         done();
       }else{
-        blackRemainingTime = 0;
+        whiteRemainingTime = 0;
         blackTime = -1;
         done();
       }
     }else{
-      if((game.playerOneTurn() ||(!game.playerOneTurn() && promotion)) && !inMenu){
+      if(game.playerOneTurn() && !inMenu){
         if(blackPauseStart == 0){
           blackPauseStart = millis();
         }
@@ -114,7 +110,7 @@ void draw(){
         }
         int whiteElapsedTime = millis() - whiteTime - whiteTotalPause;
         whiteRemainingTime = whiteStart - whiteElapsedTime;
-      } else if(!inMenu && (!game.playerOneTurn() ||(game.playerOneTurn() && promotion))){
+      } else if(!inMenu){
         if(whitePauseStart == 0){
           whitePauseStart = millis();
         }
@@ -134,7 +130,7 @@ void draw(){
     int blackSeconds = (int)((blackRemainingTime % 60000) / 1000);
     int blackMilliseconds = (int)(blackRemainingTime % 60000 % 1000);
     
-    //drawTimer(100, 20, whiteMinutes, whiteSeconds, whiteMilliseconds);
+    drawTimer(100, 20, whiteMinutes, whiteSeconds, whiteMilliseconds);
   
     if(game != null && pressing && moving != null && game.getPiece(x,y) != null && (game.getPiece(x,y).getTeam() == game.playerOneTurn()) && (game.getPiece(x,y) == moving)){
       displayEv();
@@ -155,8 +151,8 @@ void draw(){
         image(moving.getImage(false),mouseX-20,mouseY-20,50,50);
       }
     }
-    drawTimer(0, 450, whiteMinutes, whiteSeconds, whiteMilliseconds);
-    drawTimer(0, 0, blackMinutes, blackSeconds, blackMilliseconds);
+    drawTimer(100, height - 20, whiteMinutes, whiteSeconds, whiteMilliseconds);
+    drawTimer(100, 20, blackMinutes, blackSeconds, blackMilliseconds);
   }
 }
 void resetTimers(){
@@ -172,10 +168,10 @@ void resetTimers(){
 }
 void drawTimer(int x, int y, int min, int sec, int milli){
   fill(0);
-  rect(x, y, 100, 50);
+  rect(x, y - 25, 100, 50);
   fill(255);
   String timerText = min + ":" + nf(sec, 2) + ":" + nf(milli, 3);
-  text(timerText, x, y+25);
+  text(timerText, x, y);
 }
 void drawSquares(int size, color white, color black){
   noStroke();
@@ -219,8 +215,8 @@ void displayOptions(){
 void displayEv(){
   background(150);
   fill(255, 255, 255);
-  if(game.playerOneTurn()) text("white turn", 100, 520);
-  else text("black turn", 100, 520);
+  if(game.playerOneTurn()) text("white turn", 0, 20);
+  else text("black turn", 0, 20);
   drawSquares(SQUARE_SIZE, WHITE, BLACK);
   for(int i = 0; i < 8; i++){
     for(int j = 0; j < 8; j++){
@@ -232,13 +228,13 @@ void displayEv(){
   }
     
   fill(0,0,0);
-  rect(100,500,100, SQUARE_SIZE);
+  rect(0,0,100, SQUARE_SIZE);
   fill(255, 255, 255);
-  if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 100, 520);
-  else text("black turn", 100, 520);
+  if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 0, 20);
+  else text("black turn", 0, 20);
   
-  text(game.inCheck(true) ? "white in check" : "white not in check", 100, 530);
-  text(game.inCheck(false) ? "black in check" : "black not in check", 100, 540);
+  text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
+  text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
   
   if(promotion){
     displayOptions();
@@ -256,16 +252,15 @@ void displayEv(){
     image(blackCapt.get(i).getImage(true),i*25+100,10,25,25);
   }
   fill(0,0,0);
-  rect(0,500,100,50);
+  rect(0,450,100,50);
   fill(255,255,255);
   textSize(20);
-  text("Pause (p)",10,532);
+  text("Pause (p)",10,482);
   textSize(12);
 }
 void mouseClicked(){
-  if(mouseX < 100 && mouseY > 500 && mouseY < 550){
+  if(mouseX < 100 && mouseY > 450 && mouseY < 500){
     inMenu = true;
-    menuPause = millis();
   }
   if(inMenu){
     
@@ -279,19 +274,17 @@ void mouseClicked(){
     }
     if(game != null && mouseX > 150 && mouseX < 350 && mouseY > 150 && mouseY < 250){
       inMenu = false;
-
-      //System.out.println("Leaving menu");
+      System.out.println("Leaving menu");
       if(game.playerOneTurn()){
-        //System.out.println(millis() - menuPause);
-
+        System.out.println(millis() - menuPause);
         whiteTotalPause += (millis() - menuPause); 
-      } else if (!game.playerOneTurn() || (game.playerOneTurn && promotion)){
+      } else{
         blackTotalPause += (millis() - menuPause);
       }
       mouseClicked();
     }   
   }
-  else if(inMenuE ){
+  else if(inMenuE){
     inMenu = true;
     inMenuE = false;
     menuPause = millis();
@@ -318,19 +311,14 @@ void mouseClicked(){
           game.getPiece(prox,proy).promotion(prox,proy,"Knight");
           promotion = false;
         }
-        
+      
         displayEv();
-        if(!promotion){
-          if(game.inMate(game.playerOneTurn()) != 0){
-            done();
-          }
-        }
       }
       else{
         background(150);
         fill(255, 255, 255);
-        if(game.playerOneTurn()) text("white turn", 100, 520);
-        else text("black turn", 100, 520);
+        if(game.playerOneTurn()) text("white turn", 0, 20);
+        else text("black turn", 0, 20);
         drawSquares(SQUARE_SIZE, WHITE, BLACK);
 
         if(!game.isDone()){
@@ -381,19 +369,19 @@ void mouseClicked(){
         }
         if(game != null){
           fill(0,0,0);
-          rect(0,500,100,50);
+          rect(0,450,100,50);
           fill(255,255,255);
           textSize(20);
-          text("Pause (p)",10,532);
+          text("Pause (p)",10,482);
           textSize(12);
           fill(0,0,0);
-          rect(100,500,100, SQUARE_SIZE);
+          rect(0,0,100, SQUARE_SIZE);
           fill(255, 255, 255);
-          if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 100, 520);
-          else text("black turn", 100, 520);
+          if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 0, 20);
+          else text("black turn", 0, 20);
           
-          text(game.inCheck(true) ? "white in check" : "white not in check", 100, 530);
-          text(game.inCheck(false) ? "black in check" : "black not in check", 100, 540);
+          text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
+          text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
           
           ArrayList<Piece> whiteCapt = game.getWhiteCapt();
           
@@ -428,8 +416,8 @@ void done(){
     text("on time", 200, 170);
   } else{
     if(game.inMate(!game.playerOneTurn()) == 1) text("Stalemate",130,150);
-    else if(game.inMate(true) == 2) text("Black Wins!",130,150);
-    else text("White Wins!",130,150);
+    else if(game.playerOneTurn()) text("White Wins!",130,150);
+    else text("Black Wins!",130,150);
   } 
   textSize(30);
   text("Click or press p",155,230);
@@ -440,14 +428,14 @@ void done(){
   inMenu = false;
     
   fill(0,0,0);
-  rect(100,500,100, SQUARE_SIZE);
+  rect(0,0,100, SQUARE_SIZE);
   fill(255, 255, 255);
 
-  if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 100, 520);
-  else text("black turn", 100, 520);
+  if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 0, 20);
+  else text("black turn", 0, 20);
   
-  text(game.inCheck(true) ? "white in check" : "white not in check", 100, 530);
-  text(game.inCheck(false) ? "black in check" : "black not in check", 100, 540);
+  text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
+  text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
 
   game = null;
 }

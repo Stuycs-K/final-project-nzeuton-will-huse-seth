@@ -1,12 +1,11 @@
 class Queen extends Piece {
 
-
   public Queen(){
     super();
   }
 
   public Queen(int x, int y, boolean team, Chess board){
-    super(x, y, team, board, "Queen");
+    super(x, y, team, board, "Queen", loadImage("assets/images/Chess_qlt60.png"), loadImage("assets/images/Chess_qdt60.png"));
 
   }
   public boolean withinPieceRange(int x, int y){
@@ -52,9 +51,5 @@ class Queen extends Piece {
       else{
         return false;
       }
-  }
-  public PImage getImage(boolean t){
-    PImage piece = t ? loadImage("assets/images/Chess_qlt60.png") : loadImage("assets/images/Chess_qdt60.png");
-    return piece;
   }
 }

@@ -4,7 +4,9 @@ abstract class Piece{
   private String type;
   public boolean special = false;
   private Chess board;
-
+  
+  PImage whiteImg;
+  PImage blackImg;
   public Piece(){
     xPos = 0;
     yPos = 0;
@@ -13,13 +15,14 @@ abstract class Piece{
   
   
 
-  public Piece(int x, int y, boolean team, Chess board, String type){
+  public Piece(int x, int y, boolean team, Chess board, String type, PImage wImg, PImage bImg){
     xPos = x;
     yPos = y;
     this.team = team;
     this.board = board;
     this.type = type;
-
+    whiteImg = wImg;
+    blackImg = bImg;
   }
   public boolean getTeam(){
     return team;
@@ -117,7 +120,7 @@ abstract class Piece{
         //System.out.println("Moved to passantable location? " + getSpecial());
       }
     }
-    if(pieceAtLoc != null && originalPiece.getType().equals("King") && pieceAtLoc.getType().equals("Rook")){
+    if(pieceAtLoc != null && originalPiece.getType().equals("King") && pieceAtLoc.getType().equals("Rook") && pieceAtLoc.getTeam() == originalPiece.getTeam()){
       int kX = pieceAtLoc.getX() == 7 ? 6 : 2;
       int rX = pieceAtLoc.getX() == 7 ? 5 : 3;
       getBoard().setPiece(kX, y, originalPiece);
@@ -270,7 +273,10 @@ public void promotion(int x, int y, String type){
 }
 
   public abstract boolean withinPieceRange(int x, int y);
-  public abstract PImage getImage(boolean team);
+  public PImage getImage(boolean team){
+    PImage piece = team ? whiteImg : blackImg;
+    return piece;
+  }
   public void setSpecial(boolean passant){
     special = passant;
   }
