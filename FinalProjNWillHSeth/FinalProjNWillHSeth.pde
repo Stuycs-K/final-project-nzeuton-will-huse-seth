@@ -5,17 +5,19 @@ SoundFile take;
 SoundFile game_end;
 SoundFile check;
 
-int whiteStart = 10000;
+int whiteStart = 30000;
 int whiteTime;
 int whiteRemainingTime;
 int whitePauseStart = 0;
 int whiteTotalPause = 0;
 
-int blackStart = 600000;
+int blackStart = 30000;
 int blackTime;
 int blackRemainingTime;
 int blackPauseStart = 0;
 int blackTotalPause = 0;
+
+int menuPause;
 
 boolean begTurn = true;
 Chess game;
@@ -88,7 +90,7 @@ void mouseReleased(){
 }
 void draw(){
   
-  
+  if(game != null){
   
   //boolean running = whiteRemainingTime > 0 && blackRemainingTime > 0 || (whiteRemainingTime == -1);
   if(whiteRemainingTime <= 0 || blackRemainingTime <= 0){
@@ -103,7 +105,7 @@ void draw(){
     
     done(); 
   } else{
-  if(game.playerOneTurn()){
+  if(game.playerOneTurn() && !inMenu){
     if(blackPauseStart == 0){
       blackPauseStart = millis();
     }
@@ -113,7 +115,7 @@ void draw(){
         whitePauseStart = 0;
       }
     whiteRemainingTime = whiteStart - whiteElapsedTime;
-  } else{
+  } else if(!inMenu){
     if(whitePauseStart == 0){
       whitePauseStart = millis();
     }
@@ -165,7 +167,19 @@ void draw(){
 
    
     drawTimer(100, 20, blackMinutes, blackSeconds, blackMilliseconds);
+  }
+}
+void resetTimers(){
+  whiteTime = millis();
+  whiteRemainingTime = whiteStart;
+  whitePauseStart = 0;
+  whiteTotalPause = 0;
+  
 
+  blackTime = millis();
+  blackRemainingTime = blackStart;
+  blackPauseStart = 0;
+  blackTotalPause = 0;
 }
 void drawTimer(int x, int y, int min, int sec, int milli){
   fill(0);
@@ -266,15 +280,24 @@ void mouseClicked(){
     inMenu = true;
   }
   if(inMenu){
+    //menuPause = millis();
     menuScreen();
 
     if(mouseX > 150 && mouseX < 350 && mouseY > 250 && mouseY < 350){
       game = new Chess();
+      resetTimers();
       inMenu = false;
       mouseClicked();
     }
     if(game != null && mouseX > 150 && mouseX < 350 && mouseY > 150 && mouseY < 250){
       inMenu = false;
+      System.out.println("Leaving menu");
+      if(game.playerOneTurn()){
+        System.out.println(millis() - menuPause);
+        whiteTotalPause += (millis() - menuPause); 
+      } else{
+        blackTotalPause += (millis() - menuPause);
+      }
       mouseClicked();
     }
     
@@ -282,6 +305,7 @@ void mouseClicked(){
   else if(inMenuE){
     inMenu = true;
     inMenuE = false;
+    menuPause = millis();
     menuScreen();
     
   
@@ -483,6 +507,7 @@ void keyPressed(){
   if(key == 'p'){
     inMenu = true;
     inMenuE = false;
+    menuPause = millis();
     menuScreen();
   }
 }
