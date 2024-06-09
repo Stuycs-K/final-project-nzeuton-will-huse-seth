@@ -29,22 +29,48 @@ boolean promotion = false;
 int prox,proy,x,y;
 boolean pressing = false;
 Piece moving = null;
+boolean inMenu;
+boolean inMenuE;
 
 void setup(){
   whiteTime = millis();
   blackTime = millis();
   whiteRemainingTime = whiteStart;
   blackRemainingTime = blackStart;
-  size(500,500);
+  size(500,550);
   background(150);
-  game = new Chess();
-  drawSquares(SQUARE_SIZE, WHITE, BLACK);
+  //game = new Chess();
+  //drawSquares(SQUARE_SIZE, WHITE, BLACK);
   begTurn = true;
+  inMenu = true;
+  inMenuE = false;
+  menuScreen();
   
   move = new SoundFile(this, "assets/sounds/move.mp3");
   take = new SoundFile(this, "assets/sounds/capture.mp3");
   game_end = new SoundFile(this,"assets/sounds/game_end.mp3");
   check = new SoundFile(this,"assets/sounds/move-check.mp3");
+}
+void menuScreen(){
+  begTurn = true;
+
+  background(150);
+  textSize(44);
+ 
+    fill(BLACK);
+    rect(150,250,200,100);
+    fill(WHITE);
+    text("New Game",150,315);
+  
+  if(game != null){
+  fill(WHITE);
+  rect(150,150,200,100);
+  fill(BLACK);
+  text("Resume",175,215);
+  
+  }
+  
+  textSize(12);
 }
 void mouseDragged(){
   if(!pressing){
@@ -203,6 +229,7 @@ void drawSquares(int size, color white, color black){
         }
       }
     }
+    
     fill(0,0,0);
   rect(0,0,100, SQUARE_SIZE);
   fill(255, 255, 255);
@@ -227,8 +254,41 @@ void drawSquares(int size, color white, color black){
   for(int i = 0; i < blackCapt.size(); i++){
     image(blackCapt.get(i).getImage(true),i*25+100,10,25,25);
   }
+  fill(0,0,0);
+    rect(0,450,100,50);
+    fill(255,255,255);
+    textSize(20);
+    text("Pause (p)",10,482);
+    textSize(12);
   }
 void mouseClicked(){
+  if(mouseX < 100 && mouseY > 450 && mouseY < 500){
+    inMenu = true;
+  }
+  if(inMenu){
+    menuScreen();
+
+    if(mouseX > 150 && mouseX < 350 && mouseY > 250 && mouseY < 350){
+      game = new Chess();
+      inMenu = false;
+      mouseClicked();
+    }
+    if(game != null && mouseX > 150 && mouseX < 350 && mouseY > 150 && mouseY < 250){
+      inMenu = false;
+      mouseClicked();
+    }
+    
+  }
+  else if(inMenuE){
+    inMenu = true;
+    inMenuE = false;
+    menuScreen();
+    
+  
+  }
+  else{
+  if(game != null){
+    
   if(promotion){
     
   int mX = mouseX/50;
@@ -309,7 +369,14 @@ void mouseClicked(){
   else{
     done();
   }
- 
+ if(game != null){
+   
+   fill(0,0,0);
+    rect(0,450,100,50);
+    fill(255,255,255);
+    textSize(20);
+    text("Pause (p)",10,482);
+    textSize(12);
   fill(0,0,0);
   rect(0,0,100, SQUARE_SIZE);
   fill(255, 255, 255);
@@ -330,8 +397,11 @@ void mouseClicked(){
   for(int i = 0; i < blackCapt.size(); i++){
     image(blackCapt.get(i).getImage(true),i*25+100,10,25,25);
   }
-     
+ }
   }
+  }
+  }
+  
 }
 
 void done(){
@@ -350,9 +420,11 @@ void done(){
     else text("Black Wins!",130,150);
     } 
     textSize(30);
-    text("Press any key",170,200);
-    text("to restart.",180,250);
+    text("Click or press p",155,200);
+    text("to go to menu.",165,250);
     textSize(12);
+    inMenuE = true;
+    inMenu = false;
     
     fill(0,0,0);
   rect(0,0,100, SQUARE_SIZE);
@@ -362,9 +434,12 @@ void done(){
   
   text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
   text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
+  
+  game = null;
 }
 
 void keyPressed(){
+  /*
   if(game != null && game.isDone()){
     game = new Chess();
     drawSquares(SQUARE_SIZE, WHITE, BLACK);
@@ -377,7 +452,7 @@ void keyPressed(){
         }
       }
     }
-    /*
+    
     fill(0,0,0);
   square(0,0,SQUARE_SIZE);
   fill(255, 255, 255);
@@ -391,9 +466,11 @@ void keyPressed(){
   
   text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
   text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
-  */
+  
   displayEv();
+  
   }
+  */
   if(key == 'c'){
     game = new Chess(0);
   }
@@ -402,6 +479,11 @@ void keyPressed(){
   }
   if(key == 't'){
     game = new Chess(2);
+  }
+  if(key == 'p'){
+    inMenu = true;
+    inMenuE = false;
+    menuScreen();
   }
 }
 
