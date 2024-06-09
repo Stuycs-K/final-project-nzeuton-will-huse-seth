@@ -5,13 +5,13 @@ SoundFile take;
 SoundFile game_end;
 SoundFile check;
 
-int whiteStart = 5000;
+int whiteStart = 3000;
 int whiteTime;
 int whiteRemainingTime;
 int whitePauseStart = 0;
 int whiteTotalPause = 0;
 
-int blackStart = 30000;
+int blackStart = 60000;
 int blackTime;
 int blackRemainingTime;
 int blackPauseStart = 0;
@@ -97,33 +97,37 @@ void draw(){
     if(whiteRemainingTime <= 0){
       whiteRemainingTime = 0;
       whiteTime = -1;
+      done();
     } else{
       whiteRemainingTime = 0;
      blackTime = -1;
+     done();
     }
     
     
-    done(); 
+   // done(); 
   } else{
   if(game.playerOneTurn() && !inMenu){
     if(blackPauseStart == 0){
       blackPauseStart = millis();
     }
-    int whiteElapsedTime = millis() - whiteTime - whiteTotalPause;
+    
     if(whitePauseStart != 0){
         whiteTotalPause += (millis() - whitePauseStart);
         whitePauseStart = 0;
       }
+      int whiteElapsedTime = millis() - whiteTime - whiteTotalPause;
     whiteRemainingTime = whiteStart - whiteElapsedTime;
   } else if(!inMenu){
     if(whitePauseStart == 0){
       whitePauseStart = millis();
     }
-    int blackElapsedTime = millis() - blackTime - blackTotalPause;
+    
     if(blackPauseStart != 0){
         blackTotalPause += (millis() - blackPauseStart);
         blackPauseStart = 0;
       }
+      int blackElapsedTime = millis() - blackTime - blackTotalPause;
     blackRemainingTime = blackStart - blackElapsedTime;
   }
   }
@@ -429,6 +433,7 @@ void mouseClicked(){
 }
 
 void done(){
+  
   game_end.play();
   fill(255,255,255);
     rect(100,100,300,200);
@@ -436,15 +441,19 @@ void done(){
     textSize(50);
     if(whiteTime == -1){
       text("Black Wins", 130, 150);
+      textSize(25);
+      text("on time", 200, 170);
     } else if(blackTime == -1){
       text("White Wins", 130, 150); 
+      textSize(25);
+      text("on time", 200, 170);
     } else{
     if(game.inMate(!game.playerOneTurn()) == 1) text("Stalemate",130,150);
     else if(game.playerOneTurn()) text("White Wins!",130,150);
     else text("Black Wins!",130,150);
     } 
     textSize(30);
-    text("Click or press p",155,200);
+    text("Click or press p",155,230);
     text("to go to menu.",165,250);
     textSize(12);
     inMenuE = true;
@@ -458,7 +467,7 @@ void done(){
   
   text(game.inCheck(true) ? "white in check" : "white not in check", 0, 30);
   text(game.inCheck(false) ? "black in check" : "black not in check", 0, 40);
-  
+  //resetTimers();
   game = null;
 }
 
