@@ -104,7 +104,7 @@ void draw(){
         done();
       }
     }else{
-      if((game.playerOneTurn() ||(!game.playerOneTurn() && promotion)) && !inMenu){
+      if(((game.playerOneTurn() && !promotion) ||(!game.playerOneTurn() && promotion)) && !inMenu){
         if(blackPauseStart == 0){
           blackPauseStart = millis();
         }
@@ -114,7 +114,7 @@ void draw(){
         }
         int whiteElapsedTime = millis() - whiteTime - whiteTotalPause;
         whiteRemainingTime = whiteStart - whiteElapsedTime;
-      } else if(!inMenu && (!game.playerOneTurn() ||(game.playerOneTurn() && promotion))){
+      } if(((!game.playerOneTurn() && !promotion) ||(game.playerOneTurn() && promotion)) && !inMenu){
         if(whitePauseStart == 0){
           whitePauseStart = millis();
         }
@@ -281,11 +281,11 @@ void mouseClicked(){
       inMenu = false;
 
       //System.out.println("Leaving menu");
-      if(game.playerOneTurn()){
+      if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)){
         //System.out.println(millis() - menuPause);
 
         whiteTotalPause += (millis() - menuPause); 
-      } else if (!game.playerOneTurn() || (game.playerOneTurn && promotion)){
+      } else if ((!game.playerOneTurn() && !promotion)|| (game.playerOneTurn && promotion)){
         blackTotalPause += (millis() - menuPause);
       }
       mouseClicked();
