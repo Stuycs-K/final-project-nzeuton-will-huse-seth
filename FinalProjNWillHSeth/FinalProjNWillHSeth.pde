@@ -5,6 +5,20 @@ SoundFile take;
 SoundFile game_end;
 SoundFile check;
 
+int whiteStart = 30000;
+int whiteTime;
+int whiteRemainingTime;
+int whitePauseStart = 0;
+int whiteTotalPause = 0;
+
+int blackStart = 30000;
+int blackTime;
+int blackRemainingTime;
+int blackPauseStart = 0;
+int blackTotalPause = 0;
+
+int menuPause;
+
 boolean begTurn = true;
 Chess game;
 int SQUARE_SIZE = 50;
@@ -21,7 +35,10 @@ boolean inMenu;
 boolean inMenuE;
 
 void setup(){
-  
+  whiteTime = millis();
+  blackTime = millis();
+  whiteRemainingTime = whiteStart;
+  blackRemainingTime = blackStart;
   size(500,550);
   background(150);
   //game = new Chess();
@@ -72,7 +89,60 @@ void mouseReleased(){
   }
 }
 void draw(){
-  if(pressing && moving != null && game != null && game.getPiece(x,y) != null && (game.getPiece(x,y).getTeam() == game.playerOneTurn()) && (game.getPiece(x,y) == moving)){
+  
+  if(game != null){
+  
+  //boolean running = whiteRemainingTime > 0 && blackRemainingTime > 0 || (whiteRemainingTime == -1);
+  if(whiteRemainingTime <= 0 || blackRemainingTime <= 0){
+    if(whiteRemainingTime <= 0){
+      whiteRemainingTime = 0;
+      whiteTime = -1;
+    } else{
+      whiteRemainingTime = 0;
+     blackTime = -1;
+    }
+    
+    
+    done(); 
+  } else{
+  if(game.playerOneTurn() && !inMenu){
+    if(blackPauseStart == 0){
+      blackPauseStart = millis();
+    }
+    int whiteElapsedTime = millis() - whiteTime - whiteTotalPause;
+    if(whitePauseStart != 0){
+        whiteTotalPause += (millis() - whitePauseStart);
+        whitePauseStart = 0;
+      }
+    whiteRemainingTime = whiteStart - whiteElapsedTime;
+  } else if(!inMenu){
+    if(whitePauseStart == 0){
+      whitePauseStart = millis();
+    }
+    int blackElapsedTime = millis() - blackTime - blackTotalPause;
+    if(blackPauseStart != 0){
+        blackTotalPause += (millis() - blackPauseStart);
+        blackPauseStart = 0;
+      }
+    blackRemainingTime = blackStart - blackElapsedTime;
+  }
+  }
+  
+  int whiteMinutes = (int)(whiteRemainingTime / 60000);
+  int whiteSeconds = (int)((whiteRemainingTime % 60000) / 1000);
+  int whiteMilliseconds = (int)(whiteRemainingTime % 60000 % 1000);
+  
+  int blackMinutes = (int)(blackRemainingTime / 60000);
+  int blackSeconds = (int)((blackRemainingTime % 60000) / 1000);
+  int blackMilliseconds = (int)(blackRemainingTime % 60000 % 1000);
+  
+  drawTimer(100, 20, whiteMinutes, whiteSeconds, whiteMilliseconds);
+  
+  
+  
+  
+ 
+  if(pressing && moving != null && game.getPiece(x,y) != null && (game.getPiece(x,y).getTeam() == game.playerOneTurn()) && (game.getPiece(x,y) == moving)){
     displayEv();
     
     ArrayList<int[]> validPos = game.getPiece(x,y).getValidPositions();
@@ -93,6 +163,30 @@ void draw(){
       image(moving.getImage(false),mouseX-20,mouseY-20,50,50);
     }
   }
+   drawTimer(100, height - 20, whiteMinutes, whiteSeconds, whiteMilliseconds);
+
+   
+    drawTimer(100, 20, blackMinutes, blackSeconds, blackMilliseconds);
+  }
+}
+void resetTimers(){
+  whiteTime = millis();
+  whiteRemainingTime = whiteStart;
+  whitePauseStart = 0;
+  whiteTotalPause = 0;
+  
+
+  blackTime = millis();
+  blackRemainingTime = blackStart;
+  blackPauseStart = 0;
+  blackTotalPause = 0;
+}
+void drawTimer(int x, int y, int min, int sec, int milli){
+  fill(0);
+  rect(x, y - 25, 100, 50);
+  fill(255);
+  String timerText = min + ":" + nf(sec, 2) + ":" + nf(milli, 3);
+  text(timerText, x, y);
 }
 void drawSquares(int size, color white, color black){
   noStroke();
@@ -186,15 +280,24 @@ void mouseClicked(){
     inMenu = true;
   }
   if(inMenu){
+    //menuPause = millis();
     menuScreen();
 
     if(mouseX > 150 && mouseX < 350 && mouseY > 250 && mouseY < 350){
       game = new Chess();
+      resetTimers();
       inMenu = false;
       mouseClicked();
     }
     if(game != null && mouseX > 150 && mouseX < 350 && mouseY > 150 && mouseY < 250){
       inMenu = false;
+      System.out.println("Leaving menu");
+      if(game.playerOneTurn()){
+        System.out.println(millis() - menuPause);
+        whiteTotalPause += (millis() - menuPause); 
+      } else{
+        blackTotalPause += (millis() - menuPause);
+      }
       mouseClicked();
     }
     
@@ -202,6 +305,7 @@ void mouseClicked(){
   else if(inMenuE){
     inMenu = true;
     inMenuE = false;
+    menuPause = millis();
     menuScreen();
     
   
@@ -261,6 +365,7 @@ void mouseClicked(){
     }
     else{
       if(game.turnEnd(x,y)){
+        
         if(game.getPiece(x, y) != null && game.getPiece(x,y).getType().equals("Pawn") && ((y == 0) || (y == 7))){
        //game.getPiece(x,y).promotion(x,y,"Queen"); 
        prox = x;
@@ -329,9 +434,15 @@ void done(){
     rect(100,100,300,200);
     fill(0,0,0);
     textSize(50);
+    if(whiteTime == -1){
+      text("Black Wins", 130, 150);
+    } else if(blackTime == -1){
+      text("White Wins", 130, 150); 
+    } else{
     if(game.inMate(!game.playerOneTurn()) == 1) text("Stalemate",130,150);
     else if(game.playerOneTurn()) text("White Wins!",130,150);
     else text("Black Wins!",130,150);
+    } 
     textSize(30);
     text("Click or press p",155,200);
     text("to go to menu.",165,250);
@@ -396,6 +507,7 @@ void keyPressed(){
   if(key == 'p'){
     inMenu = true;
     inMenuE = false;
+    menuPause = millis();
     menuScreen();
   }
 }
