@@ -134,7 +134,7 @@ void draw(){
     int blackSeconds = (int)((blackRemainingTime % 60000) / 1000);
     int blackMilliseconds = (int)(blackRemainingTime % 60000 % 1000);
     
-    drawTimer(100, 20, whiteMinutes, whiteSeconds, whiteMilliseconds);
+    //drawTimer(100, 20, whiteMinutes, whiteSeconds, whiteMilliseconds);
   
     if(game != null && pressing && moving != null && game.getPiece(x,y) != null && (game.getPiece(x,y).getTeam() == game.playerOneTurn()) && (game.getPiece(x,y) == moving)){
       displayEv();
@@ -155,8 +155,8 @@ void draw(){
         image(moving.getImage(false),mouseX-20,mouseY-20,50,50);
       }
     }
-    drawTimer(100, height - 20, whiteMinutes, whiteSeconds, whiteMilliseconds);
-    drawTimer(100, 20, blackMinutes, blackSeconds, blackMilliseconds);
+    drawTimer(0, 450, whiteMinutes, whiteSeconds, whiteMilliseconds);
+    drawTimer(0, 0, blackMinutes, blackSeconds, blackMilliseconds);
   }
 }
 void resetTimers(){
@@ -172,10 +172,10 @@ void resetTimers(){
 }
 void drawTimer(int x, int y, int min, int sec, int milli){
   fill(0);
-  rect(x, y - 25, 100, 50);
+  rect(x, y, 100, 50);
   fill(255);
   String timerText = min + ":" + nf(sec, 2) + ":" + nf(milli, 3);
-  text(timerText, x, y);
+  text(timerText, x, y+25);
 }
 void drawSquares(int size, color white, color black){
   noStroke();
@@ -235,7 +235,7 @@ void displayEv(){
   rect(100,500,100, SQUARE_SIZE);
   fill(255, 255, 255);
   if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 100, 520);
-  else text("black turn", 0, 20);
+  else text("black turn", 100, 520);
   
   text(game.inCheck(true) ? "white in check" : "white not in check", 100, 530);
   text(game.inCheck(false) ? "black in check" : "black not in check", 100, 540);
@@ -443,8 +443,8 @@ void done(){
   rect(100,500,100, SQUARE_SIZE);
   fill(255, 255, 255);
 
-  if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 0, 20);
-  else text("black turn", 0, 20);
+  if((game.playerOneTurn() && !promotion) || (!game.playerOneTurn() && promotion)) text("white turn", 100, 520);
+  else text("black turn", 100, 520);
   
   text(game.inCheck(true) ? "white in check" : "white not in check", 100, 530);
   text(game.inCheck(false) ? "black in check" : "black not in check", 100, 540);
