@@ -7,13 +7,13 @@ SoundFile game_end;
 SoundFile check;
 
 //Time Variables
-int whiteStart = 3000;
+int whiteStart = 60000;
 int whiteTime;
 int whiteRemainingTime;
 int whitePauseStart = 0;
 int whiteTotalPause = 0;
 
-int blackStart = 3000;
+int blackStart = 60000;
 int blackTime;
 int blackRemainingTime;
 int blackPauseStart = 0;
@@ -261,6 +261,7 @@ void displayEv(){
 void mouseClicked(){
   if(mouseX < 100 && mouseY > 450 && mouseY < 500){
     inMenu = true;
+    menuPause = millis();
   }
   if(inMenu){
     
@@ -311,7 +312,6 @@ void mouseClicked(){
           game.getPiece(prox,proy).promotion(prox,proy,"Knight");
           promotion = false;
         }
-      
         displayEv();
       }
       else{
