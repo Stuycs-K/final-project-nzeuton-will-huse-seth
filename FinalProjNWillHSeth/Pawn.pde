@@ -1,10 +1,12 @@
 class Pawn extends Piece {
+
   public Pawn(){
     super();
+    setType("Pawn");
   }
 
   public Pawn(int x, int y, boolean team, Chess board){
-    super(x, y, team, board, "Pawn");
+    super(x, y, team, board, "Pawn", loadImage("assets/images/Chess_plt60.png"), loadImage("assets/images/Chess_pdt60.png"));
   }
 
   public boolean withinPieceRange(int x, int y){
@@ -59,10 +61,6 @@ class Pawn extends Piece {
    }
    return false;
      
-  }
-  public PImage getImage(boolean t){
-    PImage piece = t ? loadImage("Chess_plt60.png") : loadImage("Chess_pdt60.png");
-    return piece;
   }
 
 }

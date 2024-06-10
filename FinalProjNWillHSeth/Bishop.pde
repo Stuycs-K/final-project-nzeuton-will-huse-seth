@@ -1,12 +1,11 @@
 class Bishop extends Piece {
 
-
   public Bishop(){
     super();
   }
 
   public Bishop(int x, int y, boolean team, Chess board){
-    super(x, y, team, board, "Bishop");
+    super(x, y, team, board, "Bishop", loadImage("assets/images/Chess_blt60.png"), loadImage("assets/images/Chess_bdt60.png"));
 
   }
   public boolean withinPieceRange(int x, int y){
@@ -31,8 +30,4 @@ class Bishop extends Piece {
       }
   }
   
-  public PImage getImage(boolean t){
-    PImage piece = t ? loadImage("Chess_blt60.png") : loadImage("Chess_bdt60.png");
-    return piece;
-  }
 }

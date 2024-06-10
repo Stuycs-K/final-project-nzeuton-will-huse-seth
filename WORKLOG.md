@@ -29,6 +29,27 @@ I began working on implementing special moves like en passant.
 
 ### 5/29
 I continued to work on en passant and made some progress. En passant still has issues and a new pawn issue was found to do as a result of en passanting.
+
+### 5/30
+I completed en passant. 
+
+### 5/31
+I started working on castling. It works except a player can currently castle themself into a check.
+
+### 6/2
+I created a castling keybind for the demo. I fixed castling so that players cannot castle into or across a check and also cannot castle when in check.
+
+### 6/3
+I finished castling to adapt it to work with the new aesthetic changes Seth made. I also added stalemate detection.
+
+### 6/4
+I added simple sound effects to the game and reorganized our assets.
+
+### 6/8
+I finally finished the timers I had been working on for a couple of days.
+
+### 6/9
+I merged my timer changes to work with Seth's pause menu.
 ## Seth
 
 ### 5/22
@@ -74,3 +95,35 @@ I implemented a bare bones version of pawn promotion. I also pushed the latest w
 ### 6/1
 
 I made pawn promotion mandatory, fixed several bugs with it, and then improved the UI by showing the images of the pieces as options for promotion rather than just text.
+
+### 6/2
+
+Since castling didn't work, I spent a lot of time reverting commits on main. I made some slight UI improvements on my own end and pushed pawn promotion to demo. Castling will not make the demo.
+
+### 6/3
+
+I added a feature that shows all captured pieces on the side that captured them and made it work with all captures, including en pessant captures. I also added a dragging pieces feature that allows players to drag pieces instead of clicking on the squares twice.
+
+### 6/4
+
+I fixed a visual bug with moving pieces.
+
+### 6/5
+
+I began working on menu screens for the start and pause features.
+
+### 6/6
+
+I improved the looks and functionality of the start and pause features.
+
+### 6/7
+
+I added a pause button and created space at the bottom of the screen for the timer feature.
+
+### 6/8
+
+I started updating the README file with our project description and instructions. I also found a bug in checkmate detection.
+
+### 6/9
+
+I bug tested, reorganized the display, and recorded our demo video. I also updated our UML diagrams and README.
