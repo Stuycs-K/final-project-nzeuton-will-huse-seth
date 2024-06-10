@@ -123,3 +123,7 @@ I added a pause button and created space at the bottom of the screen for the tim
 ### 6/8
 
 I started updating the README file with our project description and instructions. I also found a bug in checkmate detection.
+
+### 6/9
+
+I bug tested, reorganized the display, and recorded our demo video. I also updated our UML diagrams and README.
